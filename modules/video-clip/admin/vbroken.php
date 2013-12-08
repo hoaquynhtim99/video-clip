@@ -34,7 +34,7 @@ $xtpl->assign( 'GLANG', $lang_global );
 $xtpl->assign( 'NV_BASE_SITEURL', NV_BASE_SITEURL );
 $xtpl->assign( 'MODULE_URL', NV_BASE_ADMINURL . "index.php?" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE );
 $xtpl->assign( 'NV_ADMIN_THEME', $global_config['module_theme'] );
-$xtpl->assign( 'module', $module_data );
+$xtpl->assign( 'MODULE_FILE', $module_file );
 
 $base_url = NV_BASE_ADMINURL . "index.php?" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $op;
 $page = $nv_Request->get_int( 'page', 'get', 0 );

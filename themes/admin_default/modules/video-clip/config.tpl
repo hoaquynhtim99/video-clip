@@ -1,13 +1,13 @@
 <!-- BEGIN: main -->
 	<form action="{FORM_ACTION}" method="post" id="modConf">
         <table class="tab1" summary="">
+		<col style="width:50%"/>
         <tbody>
             <tr>
-                <td>
-                    <strong>{LANG.NumberOfLinks}</strong>
+                <td><strong>{LANG.NumberOfLinks}</strong>
                 </td>
                 <td>
-                    <select name="otherClipsNum" id="otherClipsNum">
+                    <select name="otherClipsNum" id="otherClipsNum" class="ajvd-input">
                         <!-- BEGIN: otherClipsNum -->
                         <option value="{NUMS.value}"{NUMS.select}>{NUMS.value}</option>
                         <!-- END: otherClipsNum -->
@@ -17,21 +17,15 @@
         </tbody>
         <tbody class="second">
             <tr>
-                <td>
-                    <strong>{LANG.playerAutostart}</strong>
-                </td>
-                <td>
-                    <input type="checkbox" value="1" name="playerAutostart" id="playerAutostart"{CONFIGMODULE.playerAutostart} />
-                </td>
+                <td><strong>{LANG.playerAutostart}</strong></td>
+                <td><input type="checkbox" value="1" name="playerAutostart" id="playerAutostart"{CONFIGMODULE.playerAutostart} /></td>
             </tr>
         </tbody>
         <tbody>
             <tr>
+                <td><strong>{LANG.playerSkin}</strong></td>
                 <td>
-                    <strong>{LANG.playerSkin}</strong>
-                </td>
-                <td>
-                    <select name="playerSkin" id="playerSkin">
+                    <select name="playerSkin" id="playerSkin" class="ajvd-input">
                         <option value="">{LANG.noSkin}</option>
                         <!-- BEGIN: playerSkin -->
                         <option value="{SKIN.value}"{SKIN.select}>{SKIN.value}</option>
@@ -42,9 +36,7 @@
         </tbody>
         <!--tbody>
             <tr>
-                <td>
-                    <strong>{LANG.commnum}</strong>
-                </td>
+                <td><strong>{LANG.commnum}</strong></td>
                 <td>
                     <select name="commNum" id="commNum">
                         <!-- BEGIN: commNum -->
@@ -56,27 +48,20 @@
         </tbody-->
         <tbody class="second">
             <tr>
-                <td>
-                    <strong>{LANG.embedMaxWidth}</strong>
+                <td><strong>{LANG.embedMaxWidth}</strong>
                 </td>
-                <td>
-                    <input style="width: 50px;" type="text" name="playerMaxWidth" id="playerMaxWidth" value="{CONFIGMODULE.playerMaxWidth}" />
-                </td>
+                <td><input style="width: 50px;" type="text" name="playerMaxWidth" id="playerMaxWidth" value="{CONFIGMODULE.playerMaxWidth}" class="ajvd-input"/></td>
             </tr>
         </tbody>
         <!--tbody>
             <tr>
-                <td>
-                    <strong>{LANG.allowUpload}</strong>
-                </td>
-                <td>
-                    <input type="checkbox" value="1" name="allowUpload" id="allowUpload"{CONFIGMODULE.allowUpload} />
-                </td>
+                <td><strong>{LANG.allowUpload}</strong></td>
+                <td><input type="checkbox" value="1" name="allowUpload" id="allowUpload"{CONFIGMODULE.allowUpload} /></td>
             </tr>
         </tbody-->
 	</table>
     <div style="width: 200px; margin: 10px auto; text-align: center;">
-        <input type="submit" name="submit" value="{LANG.save}" style="width: 100px;"/>
+        <input type="submit" name="submit" value="{LANG.save}" class="ajvd-button"/>
     </div>
 	</form>
 <script type="text/javascript">

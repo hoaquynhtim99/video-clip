@@ -31,7 +31,7 @@
 					<a href="{DATA.topicUrl}">{DATA.topicname}</a>
 				</td>
 				<td style="text-align:right">
-					<a href="{DATA.id}" title="{DATA.status}" class="changeStatus"><img style="vertical-align:middle;margin-right:10px" alt="{DATA.status}" title="{DATA.status}" src="{NV_BASE_SITEURL}themes/{NV_ADMIN_THEME}/images/{module}/{DATA.icon}.png" width="12" height="12" /></a>
+					<a href="{DATA.id}" title="{DATA.status}" class="changeStatus"><img style="vertical-align:middle;margin-right:10px" alt="{DATA.status}" title="{DATA.status}" src="{NV_BASE_SITEURL}themes/{NV_ADMIN_THEME}/images/{MODULE_FILE}/{DATA.icon}.png" width="12" height="12" /></a>
 					<a href="{MODULE_URL}=main&edit&id={DATA.id}">{GLANG.edit}</a>
 					|
 					<a class="remove" href="{DATA.id}">{LANG.Remove}</a>

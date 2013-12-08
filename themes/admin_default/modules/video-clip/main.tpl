@@ -1,17 +1,11 @@
 <!-- BEGIN: main -->
 <div id="ablist">
-	<select name="tList">
-		<option value="">
-			{LANG.topicselect}
-		</option>
-		<!-- BEGIN: psopt4 -->
-		<option value="{OPTION4.id}">
-			{OPTION4.name}
-		</option>
-		<!-- END: psopt4 -->
+	<select name="tList" class="ajvd-input">
+		<option value="">{LANG.topicselect}</option>
+		<!-- BEGIN: psopt4 --><option value="{OPTION4.id}">{OPTION4.name}</option><!-- END: psopt4 -->
 	</select>
-	<input style="margin-right:50px" name="ok2" type="button" value="OK" />
-	<input name="addNew" type="button" value="{LANG.addClip}" />
+	<input style="margin-right:50px" name="ok2" type="button" value="OK" class="ajvd-button"/>
+	<input name="addNew" type="button" value="{LANG.addClip}" class="ajvd-button"/>
 </div>
 <div class="myh3">
 	{PTITLE}
@@ -21,32 +15,18 @@
 		<col style="width:120px" />
 		<thead>
 			<tr>
-				<td>
-					{LANG.adddate}
-				</td>
-				<td>
-					{LANG.title}
-				</td>
-				<td>
-					{LANG.topic_parent}
-				</td>
-				<td style="text-align:right">
-					{LANG.feature}
-				</td>
+				<td>{LANG.adddate}</td>
+				<td>{LANG.title}</td>
+				<td>{LANG.topic_parent}</td>
+				<td style="text-align:right">{LANG.feature}</td>
 			</tr>
 		</thead>
 		<!-- BEGIN: loop -->
 		<tbody{CLASS}>
 			<tr>
-				<td>
-					{DATA.adddate}
-				</td>
-				<td>
-					{DATA.title}
-				</td>
-				<td>
-					<a href="{MODULE_URL}=main&tid={DATA.tid}">{DATA.topicname}</a>
-				</td>
+				<td>{DATA.adddate}</td>
+				<td>{DATA.title}</td>
+				<td><a href="{MODULE_URL}=main&tid={DATA.tid}">{DATA.topicname}</a></td>
 				<td style="text-align:right">
 					<a href="{DATA.id}" title="{DATA.status}" class="changeStatus"><img style="vertical-align:middle;margin-right:10px" alt="{DATA.status}" title="{DATA.status}" src="{NV_BASE_SITEURL}themes/{NV_ADMIN_THEME}/images/{module}/{DATA.icon}.png" width="12" height="12" /></a>
 					<a href="{MODULE_URL}=main&edit&id={DATA.id}">{GLANG.edit}</a>
@@ -57,9 +37,7 @@
 			</tbody>
 			<!-- END: loop -->
 	</table>
-	<div id="nv_generate_page">
-		{NV_GENERATE_PAGE}
-	</div>
+	<div id="nv_generate_page">{NV_GENERATE_PAGE}</div>
 </div>
 <script type="text/javascript">
 //<![CDATA[
@@ -69,35 +47,22 @@ $("input[name=ok2]").click(function(){var a=$("select[name=tList]").val();window
 </script>
 <!-- END: main -->
 <!-- BEGIN: add -->
-<h3 class="myh3">
-	{INFO_TITLE}
-</h3>
-<div class="red">
-	{ERROR_INFO}
-</div>
+<h3 class="myh3">{INFO_TITLE}</h3>
+<div class="red">{ERROR_INFO}</div>
 <form id="addInformation" method="post" action="{POST.action}">
 	<table class="tab1">
 		<col style="width:220px" />
 		<tbody class="second">
 			<tr>
-				<td>
-					{LANG.title}
-					<span style="color:red">
-						*
-					</span>
-				</td>
-				<td>
-					<input title="{LANG.title}" type="text" name="title" value="{POST.title}" style="width:400px" maxlength="255" />
-				</td>
+				<td>{LANG.title}<span style="color:red">*</span></td>
+				<td><input title="{LANG.title}" type="text" name="title" value="{POST.title}" class="txt-half ajvd-input" maxlength="255" /></td>
 			</tr>
 		</tbody>
 		<tbody>
 			<tr>
+				<td>{LANG.topic_parent}</td>
 				<td>
-					{LANG.topic_parent}
-				</td>
-				<td>
-					<select name="tid">
+					<select name="tid" class="ajvd-input">
 						<!-- BEGIN: option3 -->
 						<option value="{OPTION3.value}"{OPTION3.selected}>
 							{OPTION3.name}
@@ -109,32 +74,24 @@ $("input[name=ok2]").click(function(){var a=$("select[name=tList]").val();window
 		</tbody>
 		<tbody class="second">
 			<tr>
+				<td>{LANG.internalpath}</td>
 				<td>
-					{LANG.internalpath}
-				</td>
-				<td>
-					<input title="{LANG.internalpath}" type="text" name="internalpath" id="internalpath" value="{POST.internalpath}" style="width:280px" maxlength="255" />
-					<input type="button" value="Browse server" class="selectfile" />
+					<input title="{LANG.internalpath}" type="text" name="internalpath" id="internalpath" value="{POST.internalpath}" class="txt-half ajvd-input" maxlength="255" />
+					<input type="button" value="{LANG.BrowseServer}" class="selectfile ajvd-button-2" />
 				</td>
 			</tr>
 		</tbody>
 		<tbody>
 			<tr>
-				<td>
-					{LANG.externalpath}
-				</td>
-				<td>
-					<input title="{LANG.externalpath}" type="text" name="externalpath" value="{POST.externalpath}" style="width:400px" maxlength="255" />
-				</td>
+				<td>{LANG.externalpath}</td>
+				<td><input title="{LANG.externalpath}" type="text" name="externalpath" value="{POST.externalpath}" class="txt-half ajvd-input" maxlength="255" /></td>
 			</tr>
 		</tbody>
         <tbody class="second" style="display:none">
             <tr>
-                <td style="vertical-align:top">
-                    {LANG.who_view}
-                </td>
+                <td style="vertical-align:top">{LANG.who_view}</td>
                 <td>
-                    <select name="who_view">
+                    <select name="who_view" class="ajvd-input">
                         <!-- BEGIN: who_view -->
                         <option value="{WHO_VIEW.key}"{WHO_VIEW.selected}>{WHO_VIEW.title}</option>
                         <!-- END: who_view -->
@@ -142,66 +99,47 @@ $("input[name=ok2]").click(function(){var a=$("select[name=tList]").val();window
                     <!-- BEGIN: group_view_empty -->
                     <br />
                     {LANG.group_view}<br />
-                        <!-- BEGIN: groups_view -->
-                        <input name="groups_view[]" value="{GROUPS_VIEW.key}" type="checkbox"{GROUPS_VIEW.checked} /> {GROUPS_VIEW.title}<br />
-                        <!-- END: groups_view -->
+					<!-- BEGIN: groups_view -->
+					<input name="groups_view[]" value="{GROUPS_VIEW.key}" type="checkbox"{GROUPS_VIEW.checked} /> {GROUPS_VIEW.title}<br />
+					<!-- END: groups_view -->
                     <!-- END: group_view_empty -->
                 </td>
             </tr>
         </tbody>
         <tbody style="display:none">
 			<tr>
-				<td>
-					{LANG.commAllow}
-				</td>
-				<td>
-					<input name="comm" type="checkbox"{POST.comm} value="1" />
-				</td>
+				<td>{LANG.commAllow}</td>
+				<td><input name="comm" type="checkbox"{POST.comm} value="1" /></td>
 			</tr>
 		</tbody>
 		<tbody class="second">
 			<tr>
+				<td>{LANG.homeImg}</td>
 				<td>
-					{LANG.homeImg}
-				</td>
-				<td>
-					<input title="{LANG.homeImg}" type="text" name="img" id="img" value="{POST.img}" style="width:280px" maxlength="255" />
-					<input type="button" value="Browse server" class="selectimg" />
+					<input title="{LANG.homeImg}" type="text" name="img" id="img" value="{POST.img}" class="txt-half ajvd-input" maxlength="255" />
+					<input type="button" value="{LANG.BrowseServer}" class="selectimg ajvd-button-2" />
 				</td>
 			</tr>
 		</tbody>
 		<tbody>
 			<tr>
 				<td>
-					{LANG.hometext}
-                    <span style="color:red">
-						*
-					</span>
+					{LANG.hometext}<span style="color:red">*</span>
 				</td>
-				<td>
-					<textarea title="{LANG.hometext}" name="hometext" style="width:400px;height:100px">{POST.hometext}</textarea>
-				</td>
+				<td><textarea title="{LANG.hometext}" name="hometext" class="ajvd-input txt-full" rows="5">{POST.hometext}</textarea></td>
 			</tr>
 		</tbody>
 		<tbody class="second">
 			<tr>
-				<td>
-					{LANG.keywords}
-				</td>
-				<td>
-					<input title="{LANG.keywords}" type="text" name="keywords" value="{POST.keywords}" style="width:400px" maxlength="255" />
-				</td>
+				<td>{LANG.keywords}</td>
+				<td><input title="{LANG.keywords}" type="text" name="keywords" value="{POST.keywords}" class="txt-half ajvd-input" maxlength="255" /></td>
 			</tr>
 		</tbody>
 	</table>
-	<div style="display:none">
-		{LANG.bodytext}
-	</div>
-	<div style="display:none">
-		{CONTENT}
-	</div>
+	<div style="display:none">{LANG.bodytext}</div>
+	<div style="display:none">{CONTENT}</div>
     <input name="redirect" type="hidden" value="{POST.redirect}" />
-	<input name="submit" type="submit" value="{LANG.save}" />
+	<input name="submit" type="submit" value="{LANG.save}" class="ajvd-button"/>
 </form>
 <script type="text/javascript">
 //<![CDATA[

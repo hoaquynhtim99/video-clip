@@ -20,7 +20,7 @@ $lang_module['main'] = "Quản lý video-clips";
 $lang_module['add'] = "Thêm video-clip mới";
 $lang_module['topic'] = "Quản lý thể loại";
 $lang_module['config'] = "Cấu hình";
-$lang_module['save'] = "Save";
+$lang_module['save'] = "Lưu lại";
 
 $lang_module['topic_management'] = "Quản lý thể loại";
 $lang_module['addtopic_titlebox'] = "Thêm thể loại mới";
@@ -70,6 +70,7 @@ $lang_module['cpubDate'] = "Ngày đăng";
 $lang_module['videoClip'] = "Video-clip";
 $lang_module['saveAndChecked'] = "Thông qua và lưu";
 $lang_module['Remove'] = "Loại khỏi danh sách";
+$lang_module['BrowseServer'] = "Duyệt trên máy chủ";
 
 $lang_module['error1'] = "Lỗi! Vui lòng điền nội dung vào ô Tiêu đề";
 $lang_module['error2'] = "Lỗi! Thể loại mà bạn chọn không tồn tại!";
