@@ -1,7 +1,7 @@
 <!-- BEGIN: main -->
 	<form action="{FORM_ACTION}" method="post" id="modConf">
         <table class="tab1" summary="">
-        <tbody class="second">
+        <tbody>
             <tr>
                 <td>
                     <strong>{LANG.NumberOfLinks}</strong>
@@ -15,7 +15,7 @@
                 </td>
             </tr>
         </tbody>
-        <tbody>
+        <tbody class="second">
             <tr>
                 <td>
                     <strong>{LANG.playerAutostart}</strong>
@@ -25,7 +25,7 @@
                 </td>
             </tr>
         </tbody>
-        <tbody class="second">
+        <tbody>
             <tr>
                 <td>
                     <strong>{LANG.playerSkin}</strong>
@@ -40,7 +40,7 @@
                 </td>
             </tr>
         </tbody>
-        <tbody>
+        <!--tbody>
             <tr>
                 <td>
                     <strong>{LANG.commnum}</strong>
@@ -53,7 +53,7 @@
                     </select>
                 </td>
             </tr>
-        </tbody>
+        </tbody-->
         <tbody class="second">
             <tr>
                 <td>
@@ -64,12 +64,22 @@
                 </td>
             </tr>
         </tbody>
+        <!--tbody>
+            <tr>
+                <td>
+                    <strong>{LANG.allowUpload}</strong>
+                </td>
+                <td>
+                    <input type="checkbox" value="1" name="allowUpload" id="allowUpload"{CONFIGMODULE.allowUpload} />
+                </td>
+            </tr>
+        </tbody-->
 	</table>
     <div style="width: 200px; margin: 10px auto; text-align: center;">
         <input type="submit" name="submit" value="{LANG.save}" style="width: 100px;"/>
     </div>
 	</form>
 <script type="text/javascript">
-$("#modConf").submit(function(){var a="submit=1&playerMaxWidth="+intval($("#playerMaxWidth").val())+"&commNum="+$("#commNum").val()+"&otherClipsNum="+$("#otherClipsNum").val()+"&playerAutostart="+(1==$("#playerAutostart:checked").length?1:0)+"&playerSkin="+$("#playerSkin").val();return $.ajax({type:"POST",url:window.location.href,data:a,success:function(){return alert("{LANG.successfullySaved}"),!1}}),!1});
+$("#modConf").submit(function(){var a="submit=1&playerMaxWidth="+intval($("#playerMaxWidth").val())+"&allowUpload="+(1==$("#allowUpload:checked").length?1:0)+"&commNum="+$("#commNum").val()+"&otherClipsNum="+$("#otherClipsNum").val()+"&playerAutostart="+(1==$("#playerAutostart:checked").length?1:0)+"&playerSkin="+$("#playerSkin").val();return $.ajax({type:"POST",url:window.location.href,data:a,success:function(){return alert("{LANG.successfullySaved}"),!1}}),!1});
 </script>
 <!-- END: main -->

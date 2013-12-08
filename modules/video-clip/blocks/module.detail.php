@@ -1,15 +1,18 @@
 <?php
 
 /**
- * @Project NUKEVIET 3.0
- * @Author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2010 VINADES.,JSC. All rights reserved
- * @Createdate Thu, 20 Sep 2012 04:05:46 GMT
+ * @Project VIDEO CLIPS AJAX 3.x
+ * @Author PHAN TAN DUNG (phantandung92@gmail.com)
+ * @Copyright (C) 2013 PHAN TAN DUNG. All rights reserved
+ * @Createdate Dec 08, 2013, 09:57:59 PM
  */
 
 if ( ! defined( 'NV_IS_MOD_VIDEOCLIPS' ) ) die( 'Stop!!!' );
 
 global $array_op, $module_name, $module_data, $nv_Request, $VideoData, $db, $lang_module, $user_info, $client_info, $topicList, $module_info, $module_file, $configMods, $my_head, $isDetail;
+
+// Neu chua co video nao
+if( empty( $VideoData ) ) return "";
 
 if( ! function_exists( 'listComm' ) )
 {
@@ -75,7 +78,7 @@ if( ! function_exists( 'commentReload' ) )
 	}
 }
 
-//Kiem tra quyen truy cap
+// Kiem tra quyen truy cap
 if ( ! ( $allow = nv_set_allow( $VideoData['who_view'], $VideoData['groups_view'] ) ) )
 {
 	if ( $nv_Request->isset_request( 'aj', 'post' ) ) die( "access forbidden" );
@@ -86,7 +89,7 @@ if ( ! ( $allow = nv_set_allow( $VideoData['who_view'], $VideoData['groups_view'
 	die();
 }
 
-//Comment broken
+// Comment broken
 if ( $nv_Request->isset_request( 'mbroken', 'post' ) )
 {
 	$mbroken = filter_text_input( 'mbroken', 'post', '', 1 );
@@ -100,7 +103,7 @@ if ( $nv_Request->isset_request( 'mbroken', 'post' ) )
 	die( "OK" );
 }
 
-//Delete Comment
+// Delete Comment
 if ( defined( "NV_IS_MODADMIN" ) and $nv_Request->isset_request( 'delcomm', 'post' ) )
 {
 	$delcomm = $nv_Request->get_int( 'delcomm', 'post', 0 );
@@ -120,7 +123,7 @@ if ( defined( "NV_IS_MODADMIN" ) and $nv_Request->isset_request( 'delcomm', 'pos
 	die( "OK|" . $count . "" );
 }
 
-//AJAX comment
+// AJAX comment
 if ( $nv_Request->isset_request( 'savecomm', 'post' ) )
 {
 	if ( ! defined( "NV_IS_USER" ) ) die( "ERROR|" . $lang_module['error3'] );
@@ -149,7 +152,7 @@ if ( $nv_Request->isset_request( 'savecomm', 'post' ) )
 	die( "OK" );
 }
 
-//Nut like, unlike, broken
+// Nut like, unlike, broken
 if ( $nv_Request->isset_request( 'aj', 'post' ) and in_array( ( $aj = filter_text_input( 'aj', 'post', '', 1 ) ), array(
 	'like',
 	'unlike',
@@ -170,7 +173,7 @@ if ( $nv_Request->isset_request( 'aj', 'post' ) and in_array( ( $aj = filter_tex
 	die( $aj . "_" . $VideoData[$aj] );
 }
 
-//Tang viewHits
+// Tang viewHits
 $listRes = isset( $_SESSION[$module_data . '_ViewList'] ) ? $_SESSION[$module_data . '_ViewList'] : "";
 $listRes = ! empty( $listRes ) ? explode( ",", $listRes ) : array();
 

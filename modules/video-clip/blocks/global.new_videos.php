@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @Project NUKEVIET 3.1
- * @Author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2011 VINADES.,JSC. All rights reserved
- * @Createdate Jul 06, 2011, 06:31:13 AM
+ * @Project VIDEO CLIPS AJAX 3.x
+ * @Author PHAN TAN DUNG (phantandung92@gmail.com)
+ * @Copyright (C) 2013 PHAN TAN DUNG. All rights reserved
+ * @Createdate Dec 08, 2013, 09:57:59 PM
  */
 
 if ( ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );

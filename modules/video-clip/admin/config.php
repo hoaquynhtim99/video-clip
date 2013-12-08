@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @Project NUKEVIET 3.0
- * @Author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2010 VINADES.,JSC. All rights reserved
- * @Createdate Thu, 20 Sep 2012 04:05:46 GMT
+ * @Project VIDEO CLIPS AJAX 3.x
+ * @Author PHAN TAN DUNG (phantandung92@gmail.com)
+ * @Copyright (C) 2013 PHAN TAN DUNG. All rights reserved
+ * @Createdate Dec 08, 2013, 09:57:59 PM
  */
 
 if ( ! defined( 'NV_IS_FILE_ADMIN' ) ) die( 'Stop!!!' );
@@ -23,6 +23,7 @@ if ( $nv_Request->isset_request( 'submit', 'post' ) )
 	$array_config['playerMaxWidth'] = $nv_Request->get_int( 'playerMaxWidth', 'post', 0 );
 	if ( ! in_array( $array_config['playerSkin'] . ".zip", $skins ) ) $array_config['playerSkin'] = "";
 	if ( $array_config['playerMaxWidth'] < 50 or $array_config['playerMaxWidth'] > 1000 ) $array_config['playerMaxWidth'] = 640;
+	// $array_config['allowUpload'] = $nv_Request->get_int( 'allowUpload', 'post', 0 ) ? 1 : 0;
 
 	$content_config = "<?php\n\n";
 	$content_config .= NV_FILEHEAD . "\n\n";
@@ -32,6 +33,7 @@ if ( $nv_Request->isset_request( 'submit', 'post' ) )
 	$content_config .= "\$configMods['playerSkin'] = \"" . nv_htmlspecialchars( $array_config['playerSkin'] ) . "\";\n";
 	$content_config .= "\$configMods['commNum'] = " . $array_config['commNum'] . ";\n";
 	$content_config .= "\$configMods['playerMaxWidth'] = " . $array_config['playerMaxWidth'] . ";\n";
+	// $content_config .= "\$configMods['allowUpload'] = " . $array_config['allowUpload'] . ";\n";
 	$content_config .= "\n";
 	$content_config .= "?>";
 
@@ -40,24 +42,26 @@ if ( $nv_Request->isset_request( 'submit', 'post' ) )
 }
 
 $configMods = array();
-$configMods['otherClipsNum'] = 16; //So video-clip hien thi tren trang chu hoac trang The loai
+$configMods['otherClipsNum'] = 15; //So video-clip hien thi tren trang chu hoac trang The loai
 $configMods['playerAutostart'] = 0; //Co tu dong phat video hay khong
 $configMods['playerSkin'] = ""; //Skin cua player
 $configMods['commNum'] = "20"; //So comment hien thi mac dinh
 $configMods['playerMaxWidth'] = 640; //Chieu rong toi da cua player
+// $configMods['allowUpload'] = 1; // Cho phep dang video hay khong
 if ( file_exists( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php" ) )
 {
 	require ( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php" );
 }
 
 $configMods['playerAutostart'] = $configMods['playerAutostart'] ? " checked=\"checked\"" : "";
+// $configMods['allowUpload'] = $configMods['allowUpload'] ? " checked=\"checked\"" : "";
 
 $xtpl = new XTemplate( $op . ".tpl", NV_ROOTDIR . "/themes/" . $global_config['module_theme'] . "/modules/" . $module_file );
 $xtpl->assign( 'LANG', $lang_module );
 $xtpl->assign( 'FORM_ACTION', NV_BASE_ADMINURL . "index.php?" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $op );
 $xtpl->assign( 'CONFIGMODULE', $configMods );
 
-for ( $i = 10; $i <= 50; ++$i )
+for ( $i = 0; $i <= 60; ++$i )
 {
 	$sel = $i == $configMods['otherClipsNum'] ? " selected=\"selected\"" : "";
 	$xtpl->assign( 'NUMS', array( 'value' => $i, 'select' => $sel ) );

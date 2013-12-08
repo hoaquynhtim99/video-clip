@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @Project NUKEVIET 3.0
- * @Author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2010 VINADES.,JSC. All rights reserved
- * @Createdate Thu, 20 Sep 2012 04:05:46 GMT
+ * @Project VIDEO CLIPS AJAX 3.x
+ * @Author PHAN TAN DUNG (phantandung92@gmail.com)
+ * @Copyright (C) 2013 PHAN TAN DUNG. All rights reserved
+ * @Createdate Dec 08, 2013, 09:57:59 PM
  */
 
 if ( ! defined( 'NV_SYSTEM' ) ) die( 'Stop!!!' );

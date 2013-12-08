@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @Project NUKEVIET 3.0
- * @Author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2010 VINADES.,JSC. All rights reserved
- * @Createdate Thu, 20 Sep 2012 04:05:46 GMT
+ * @Project VIDEO CLIPS AJAX 3.x
+ * @Author PHAN TAN DUNG (phantandung92@gmail.com)
+ * @Copyright (C) 2013 PHAN TAN DUNG. All rights reserved
+ * @Createdate Dec 08, 2013, 09:57:59 PM
  */
 
 if ( ! defined( 'NV_IS_FILE_ADMIN' ) ) die( 'Stop!!!' );
@@ -255,7 +255,7 @@ if ( $nv_Request->isset_request( 'add', 'get' ) or $nv_Request->isset_request( '
 	{
 		$option = array(
 			'value' => $_tid,
-			'name' => $_value['title'],
+			'name' => $_value['name'],
 			'selected' => $_tid == $post['tid'] ? " selected=\"selected\"" : "" );
 		$xtpl->assign( 'OPTION3', $option );
 		$xtpl->parse( 'add.option3' );
@@ -334,7 +334,7 @@ if ( $nv_Request->isset_request( 'del', 'post' ) )
 
 foreach ( $topicList as $id => $name )
 {
-	$option = array( 'id' => $id, 'name' => $name['title'] );
+	$option = array( 'id' => $id, 'name' => $name['name'] );
 	$xtpl->assign( 'OPTION4', $option );
 	$xtpl->parse( 'main.psopt4' );
 }

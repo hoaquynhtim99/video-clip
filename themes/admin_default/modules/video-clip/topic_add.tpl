@@ -41,7 +41,7 @@
                 </td>
             </tr>
         </tbody>
-        <tbody class="second" style="display:none">
+        <tbody class="second">
             <tr>
                 <td>
                     {LANG.topic_parent}
