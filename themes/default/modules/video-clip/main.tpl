@@ -69,7 +69,7 @@ $(function(){
 	});
 });
 $(window).load(function(){
-	var ele = $('.videoMain .col1').children().find('.current');
+	var ele = $('.videoMain .col1').find('.current');
 	ele.trigger('click');
 });
 </script>
