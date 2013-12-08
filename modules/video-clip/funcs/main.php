@@ -16,7 +16,22 @@ if( $topicID )
 	$base_url .= "&amp;" . NV_OP_VARIABLE . "=" . $topicList[$topicID]['alias'];
 }
 
-$sql = "SELECT SQL_CALC_FOUND_ROWS a.*,b.view FROM `" . NV_PREFIXLANG . "_" . $module_data . "_clip` a, `" . NV_PREFIXLANG . "_" . $module_data . "_hit` b WHERE a.id=b.cid AND a.status=1" . ( $topicID ? " AND a.tid=" . $topicID : "" ) . " ORDER BY a.id DESC LIMIT " . $pgnum . "," . $configMods['otherClipsNum'];
+$sqlTopic = "";
+if( $topicID )
+{
+	if( empty( $topicList[$topicID]['subcats'] ) )
+	{
+		$sqlTopic = " AND a.tid=" . $topicID;
+	}
+	else
+	{
+		$sqlTopic = $topicList[$topicID]['subcats'];
+		$sqlTopic[] = $topicID;
+		$sqlTopic = " AND a.tid IN(" . implode( ",", $sqlTopic ) . ")";
+	}
+}
+
+$sql = "SELECT SQL_CALC_FOUND_ROWS a.*,b.view FROM `" . NV_PREFIXLANG . "_" . $module_data . "_clip` a, `" . NV_PREFIXLANG . "_" . $module_data . "_hit` b WHERE a.id=b.cid AND a.status=1" . $sqlTopic . " ORDER BY a.id DESC LIMIT " . $pgnum . "," . $configMods['otherClipsNum'];
 
 $xtpl = new XTemplate( "main.tpl", NV_ROOTDIR . "/themes/" . $module_info['template'] . "/modules/" . $module_file );
 $xtpl->assign( 'LANG', $lang_module );
@@ -42,6 +57,26 @@ if ( ! empty( $topicList ) )
 				'title' => $topic['title'],
 				'current' => $topicID == $topic['id'] ? " current" : "",
 			));
+			
+			// Xuat cap 2
+			if( ! empty( $topic['subcats'] ) )
+			{
+				foreach ( $topicList as $subtopic )
+				{
+					if( in_array( $subtopic['id'], $topic['subcats'] ) )
+					{
+						$xtpl->assign( 'OTHERTOPICSUB', array(
+							'href' => NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $subtopic['alias'] . "&amp;ajax=1",
+							'title' => $subtopic['title'],
+							'current' => $topicID == $subtopic['id'] ? " current" : "",
+						));
+						
+						$xtpl->parse( 'main.topicList.loop.sub.loop' );
+					}
+				}
+				
+				$xtpl->parse( 'main.topicList.loop.sub' );
+			}
 			
 			$xtpl->parse( 'main.topicList.loop' );
 		}

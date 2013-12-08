@@ -44,16 +44,16 @@ function nv_list_topics()
 	$list = array();
 	while ( $row = $db->sql_fetchrow( $result ) )
 	{
-		$list[$row['id']] = array( //
-			'id' => ( int )$row['id'], //
-			'title' => $row['title'], //
-			'alias' => $row['alias'], //
-			'description' => $row['description'], //
-			'parentid' => ( int )$row['parentid'], //
-			'img' => $row['img'], //
-			'subcats' => array(), //
-			'keywords' => $row['keywords'] //
-				);
+		$list[$row['id']] = array(
+			'id' => ( int )$row['id'],
+			'title' => $row['title'],
+			'alias' => $row['alias'],
+			'description' => $row['description'],
+			'parentid' => ( int )$row['parentid'],
+			'img' => $row['img'],
+			'subcats' => array(),
+			'keywords' => $row['keywords']
+		);
 	}
 
 	$list2 = array();
@@ -192,6 +192,24 @@ if( empty( $VideoData ) )
 	$resultVideo = $db->sql_query( $ClipSQL );
 	$VideoData = $db->sql_fetch_assoc( $resultVideo );
 	unset( $ClipSQL, $resultVideo );
+}
+
+// Open Graph
+if( $isDetail === true )
+{
+	$ogImage = NV_MY_DOMAIN . NV_BASE_SITEURL . "themes/" . $module_info['template'] . "/images/" . $module_file . "/video.png";
+	if( ! empty( $VideoData['img'] ) )
+	{
+		$ogImage = NV_MY_DOMAIN . NV_BASE_SITEURL . $VideoData['img'];
+	}
+	
+	$my_head .= "<meta property=\"og:title\" content=\"" . $VideoData['title'] . "\" />" . NV_EOL;
+	$my_head .= "<meta property=\"og:type\" content=\"video.movie\" />" . NV_EOL;
+	$my_head .= "<meta property=\"og:url\" content=\"" . $client_info['selfurl'] . "\" />" . NV_EOL;
+	$my_head .= "<meta property=\"og:image\" content=\"" . $ogImage . "\" />" . NV_EOL;
+	$my_head .= "<meta property=\"og:description\" content=\"" . $VideoData['hometext'] . "\" />" . NV_EOL;
+	
+	unset( $ogImage );
 }
 
 ?>
