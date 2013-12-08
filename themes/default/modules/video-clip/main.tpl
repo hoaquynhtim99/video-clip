@@ -4,6 +4,13 @@
 		<!-- BEGIN: topicList -->
 		<!-- BEGIN: loop -->
 		<a class="topicList{OTHERTOPIC.current}" href="javascript:void(0);" rel="{OTHERTOPIC.href}">{OTHERTOPIC.title}</a>
+		<!-- BEGIN: sub -->
+		<div class="col1-sub">
+			<!-- BEGIN: loop -->
+			<a title="{OTHERTOPICSUB.title}" class="topicList sub{OTHERTOPICSUB.current}" href="javascript:void(0);" rel="{OTHERTOPICSUB.href}">{OTHERTOPICSUB.title}</a>
+			<!-- END: loop -->
+		</div>
+		<!-- END: sub -->
 		<!-- END: loop -->
 		<!-- END: topicList -->
 	</div>
@@ -43,10 +50,27 @@
 <script type="text/javascript">
 $(function(){
 	$('.videoMain .topicList').click(function(){
-		$('.videoMain .topicList').removeClass('current');
-		$(this).addClass('current');
+		if( $(this).hasClass('sub') ){
+			$('.videoMain .topicList.sub').removeClass('current');
+			$(this).addClass('current');
+			$(this).parent().show();
+			$(this).parent().prev().addClass('current');
+		}else{
+			if( ! $(this).hasClass('current') ){
+				$('.videoMain .topicList:not(.sub)').removeClass('current');
+				$(this).addClass('current');
+				$('.col1-sub').hide();
+				if( $(this).next().attr('class') == 'col1-sub' ){
+					$(this).next().show();
+				}
+			}
+		}
 		$('#VideoPageData').load($(this).attr('rel'));
 	});
+});
+$(window).load(function(){
+	var ele = $('.videoMain .col1').children().find('.current');
+	ele.trigger('click');
 });
 </script>
 <!-- END: main -->

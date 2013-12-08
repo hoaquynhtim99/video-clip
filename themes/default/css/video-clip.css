@@ -75,6 +75,9 @@
 .videoMain .col2{padding-left:180px;}
 .videoMain .col1 .topicList{display:block;padding:5px 0;border-bottom:1px #dadada dotted;text-indent:10px}
 .videoMain .col1 .topicList.current{background:url('../images/video-clip/current.png') no-repeat right center;color:#fff}
+.videoMain .col1 .topicList.sub{padding-left:10px}
+.videoMain .col1 .topicList.sub.current{background-image:none;color:inherit;font-weight:bold}
+.videoMain .col1 .col1-sub{display:none}
 
 .video-clip-block{border-bottom:1px #dadada dashed;padding-bottom:10px;margin-bottom:10px}
 .video-clip-block img{float:left;margin-right:10px}
