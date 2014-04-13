@@ -9,6 +9,36 @@
 
 if ( ! defined( 'NV_IS_FILE_ADMIN' ) ) die( 'Stop!!!' );
 
+// Goi cau hinh module
+if ( file_exists( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php" ) )
+{
+	require ( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php" );
+}
+
+// Tao cau truc thu muc upload
+$imageFolder = NV_UPLOADS_DIR . '/' . $module_name . '/images';
+$imageFolderCurrent = NV_UPLOADS_DIR . '/' . $module_name . '/images';
+
+if( isset( $configMods['folderStructureEnable'] ) and ! empty( $configMods['folderStructureEnable'] ) )
+{
+	$imageFolderName = date( "Y_m" );
+	
+	if( ! is_dir( NV_ROOTDIR . '/' . $imageFolderCurrent . '/' . $imageFolderName ) )
+	{
+		$check = nv_mkdir( NV_ROOTDIR . '/' . $imageFolder, $imageFolderName );
+		
+		if( $check[0] == 1 )
+		{
+			$imageFolderCurrent .= '/' . $imageFolderName;
+			call_user_func( "nv_loadUploadDirList", false );
+		}
+	}
+	else
+	{
+		$imageFolderCurrent .= '/' . $imageFolderName;
+	}
+}
+
 $topicList = nv_listTopics( 0 );
 
 if ( empty( $topicList ) )
@@ -35,8 +65,11 @@ $xtpl->assign( 'LANG', $lang_module );
 $xtpl->assign( 'GLANG', $lang_global );
 $xtpl->assign( 'NV_BASE_SITEURL', NV_BASE_SITEURL );
 $xtpl->assign( 'MODULE_URL', NV_BASE_ADMINURL . "index.php?" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE );
-$xtpl->assign( 'UPLOADS_DIR_USER', NV_UPLOADS_DIR . '/' . $module_name );
-$xtpl->assign( 'UPLOAD_CURRENT', NV_UPLOADS_DIR . '/' . $module_name );
+
+$xtpl->assign( 'UPLOAD_IMG_PATH', $imageFolder );
+$xtpl->assign( 'UPLOAD_IMG_CURRENT', $imageFolderCurrent );
+$xtpl->assign( 'UPLOAD_FILE_PATH', NV_UPLOADS_DIR . '/' . $module_name . '/video' );
+
 $xtpl->assign( 'NV_ADMIN_THEME', $global_config['module_theme'] );
 $xtpl->assign( 'module', $module_file );
 

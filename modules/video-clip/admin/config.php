@@ -24,6 +24,7 @@ if ( $nv_Request->isset_request( 'submit', 'post' ) )
 	if ( ! in_array( $array_config['playerSkin'] . ".zip", $skins ) ) $array_config['playerSkin'] = "";
 	if ( $array_config['playerMaxWidth'] < 50 or $array_config['playerMaxWidth'] > 1000 ) $array_config['playerMaxWidth'] = 640;
 	// $array_config['allowUpload'] = $nv_Request->get_int( 'allowUpload', 'post', 0 ) ? 1 : 0;
+	$array_config['folderStructureEnable'] = $nv_Request->get_int( 'folderStructureEnable', 'post', 0 ) ? 1 : 0;
 
 	$content_config = "<?php\n\n";
 	$content_config .= NV_FILEHEAD . "\n\n";
@@ -34,6 +35,7 @@ if ( $nv_Request->isset_request( 'submit', 'post' ) )
 	$content_config .= "\$configMods['commNum'] = " . $array_config['commNum'] . ";\n";
 	$content_config .= "\$configMods['playerMaxWidth'] = " . $array_config['playerMaxWidth'] . ";\n";
 	// $content_config .= "\$configMods['allowUpload'] = " . $array_config['allowUpload'] . ";\n";
+	$content_config .= "\$configMods['folderStructureEnable'] = " . $array_config['folderStructureEnable'] . ";\n";
 	$content_config .= "\n";
 	$content_config .= "?>";
 
@@ -48,6 +50,7 @@ $configMods['playerSkin'] = ""; //Skin cua player
 $configMods['commNum'] = "20"; //So comment hien thi mac dinh
 $configMods['playerMaxWidth'] = 640; //Chieu rong toi da cua player
 // $configMods['allowUpload'] = 1; // Cho phep dang video hay khong
+$configMods['folderStructureEnable'] = 1; // Bat cau truc thu muc upload hay khong
 if ( file_exists( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php" ) )
 {
 	require ( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php" );
@@ -55,6 +58,7 @@ if ( file_exists( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_da
 
 $configMods['playerAutostart'] = $configMods['playerAutostart'] ? " checked=\"checked\"" : "";
 // $configMods['allowUpload'] = $configMods['allowUpload'] ? " checked=\"checked\"" : "";
+$configMods['folderStructureEnable'] = $configMods['folderStructureEnable'] ? " checked=\"checked\"" : "";
 
 $xtpl = new XTemplate( $op . ".tpl", NV_ROOTDIR . "/themes/" . $global_config['module_theme'] . "/modules/" . $module_file );
 $xtpl->assign( 'LANG', $lang_module );

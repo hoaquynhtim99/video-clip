@@ -145,10 +145,31 @@ $("input[name=ok2]").click(function(){var a=$("select[name=tList]").val();window
 </form>
 <script type="text/javascript">
 //<![CDATA[
-$("input.selectfile").click(function(){var a=$(this).prev().attr("id");nv_open_browse_file(script_name+"?"+nv_name_variable+"=upload&popup=1&area="+a+"&path={UPLOAD_CURRENT}/video&type=all&currentpath={UPLOAD_CURRENT}/video","NVImg","850","420","resizable=no,scrollbars=no,toolbar=no,location=no,status=no");return!1});
-$("input.selectimg").click(function(){var a=$(this).prev().attr("id");nv_open_browse_file(script_name+"?"+nv_name_variable+"=upload&popup=1&area="+a+"&path={UPLOAD_CURRENT}/images&type=image&currentpath={UPLOAD_CURRENT}/images","NVImg","850","420","resizable=no,scrollbars=no,toolbar=no,location=no,status=no");return!1});
-$("form#addInformation").submit(function(){var a=trim($("input[name=title]").val());$("input[name=title]").val(a);if(""==a)return alert("{LANG.error1}"),$("input[name=title]").val("").select(),!1;a=trim($("input[name=internalpath]").val());$("input[name=internalpath]").val(a);b=trim($("input[name=externalpath]").val());$("input[name=externalpath]").val(b);if(""==a&&""==b)return alert("{LANG.error5}"),$("input[name=internalpath]").select(),!1;a=trim($("textarea[name=hometext]").val());$("textarea[name=hometext]").val(a);
-if(""==a)return alert("{LANG.error7}"),$("textarea[name=hometext]").val("").select(),!1;$("form#addInformation").submit();return!1});
+$("input.selectfile").click(function(){
+    var a = $(this).prev().attr("id");
+    nv_open_browse_file(script_name + "?" + nv_name_variable + "=upload&popup=1&area=" + a + "&path={UPLOAD_FILE_PATH}&type=all&currentpath={UPLOAD_FILE_PATH}", "NVImg", "850", "420", "resizable=no,scrollbars=no,toolbar=no,location=no,status=no");
+    return !1
+});
+$("input.selectimg").click(function(){
+    var a = $(this).prev().attr("id");
+    nv_open_browse_file(script_name + "?" + nv_name_variable + "=upload&popup=1&area=" + a + "&path={UPLOAD_IMG_PATH}&type=image&currentpath={UPLOAD_IMG_CURRENT}", "NVImg", "850", "420", "resizable=no,scrollbars=no,toolbar=no,location=no,status=no");
+    return !1
+});
+$("form#addInformation").submit(function(){
+    var a = trim($("input[name=title]").val());
+    $("input[name=title]").val(a);
+    if ("" == a) return alert("{LANG.error1}"), $("input[name=title]").val("").select(), !1;
+    a = trim($("input[name=internalpath]").val());
+    $("input[name=internalpath]").val(a);
+    b = trim($("input[name=externalpath]").val());
+    $("input[name=externalpath]").val(b);
+    if ("" == a && "" == b) return alert("{LANG.error5}"), $("input[name=internalpath]").select(), !1;
+    a = trim($("textarea[name=hometext]").val());
+    $("textarea[name=hometext]").val(a);
+    if ("" == a) return alert("{LANG.error7}"), $("textarea[name=hometext]").val("").select(), !1;
+    $("form#addInformation").submit();
+    return !1
+});
 //]]>
 </script>
 <!-- END: add -->
