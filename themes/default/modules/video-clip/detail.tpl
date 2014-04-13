@@ -8,8 +8,22 @@
         <div class="clearfix"></div>
     </div>
 <script type="text/javascript">
-$(function() {
-  videoPlay("{DETAILCONTENT.filepath}", "videoCont")<!-- BEGIN: scrollPlayer -->, $("html,body").animate({scrollTop:$(".detailContent").offset().top}, 500)<!-- END: scrollPlayer -->
+$(document).ready(function(){
+	var playerWidth = {MODULECONFIG.playerMaxWidth};
+	var outerWidth = $('#videoCont').outerWidth();
+	
+	if( ! playerWidth || playerWidth >= outerWidth ){
+		playerWidth = outerWidth;
+	}
+	var playerHeight = Math.ceil(45 * playerWidth / 80) + 4;
+	
+    jwplayer("videoCont").setup({
+        file: "{DETAILCONTENT.filepath}",
+        width: playerWidth,
+        height: playerHeight,
+		autostart: {MODULECONFIG.playerAutostart},
+    });
+	<!-- BEGIN: scrollPlayer -->$("html,body").animate({scrollTop:$(".detailContent").offset().top}, 500)<!-- END: scrollPlayer -->
 });
 </script>
     <div id="otherClipsAj">

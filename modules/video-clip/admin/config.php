@@ -11,7 +11,7 @@ if ( ! defined( 'NV_IS_FILE_ADMIN' ) ) die( 'Stop!!!' );
 
 $page_title = $lang_module['config'];
 
-$skins = nv_scandir( NV_ROOTDIR . "/images/jwplayer/skin/", "/^[a-zA-Z0-9\_\-\.]+\.zip$/", 1 );
+$skins = array();
 
 $array_config = array();
 if ( $nv_Request->isset_request( 'submit', 'post' ) )
