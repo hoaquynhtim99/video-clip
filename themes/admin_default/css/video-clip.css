@@ -18,6 +18,7 @@
 #pageContent label {font:400 12px/20px Tahoma,Arial,Verdana,sans-serif;}
 #pageContent dd {width:150px;}
 #pageContent dd,#pageContent dt {float: left;}
+.ajvd-box{padding:10px 0}
 
 /* TABLE */
 table.tab1{

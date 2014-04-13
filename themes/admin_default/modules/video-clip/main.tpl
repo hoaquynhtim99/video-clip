@@ -136,10 +136,12 @@ $("input[name=ok2]").click(function(){var a=$("select[name=tList]").val();window
 			</tr>
 		</tbody>
 	</table>
-	<div style="display:none">{LANG.bodytext}</div>
-	<div style="display:none">{CONTENT}</div>
-    <input name="redirect" type="hidden" value="{POST.redirect}" />
-	<input name="submit" type="submit" value="{LANG.save}" class="ajvd-button"/>
+	<div class="ajvd-box"><strong>{LANG.bodytext}</strong></div>
+	<div>{CONTENT}</div>
+	<div class="ajvd-box">
+		<input name="redirect" type="hidden" value="{POST.redirect}" />
+		<input name="submit" type="submit" value="{LANG.save}" class="ajvd-button"/>
+	</div>
 </form>
 <script type="text/javascript">
 //<![CDATA[
