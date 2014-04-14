@@ -90,6 +90,7 @@ list( $all_page ) = $db->sql_fetchrow( $res );
 $all_page = intval( $all_page );
 if ( $all_page )
 {
+	$i = 1;
 	while ( $row = $db->sql_fetch_assoc( $result ) )
 	{
 		if ( ! empty( $row['img'] ) )
@@ -102,8 +103,14 @@ if ( $all_page )
 			$row['img'] = NV_BASE_SITEURL . "themes/" . $module_info['template'] . "/images/" . $module_file . "/video.png";
 		}
 		$row['href'] = NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $row['alias'];
-		$row['sortTitle'] = nv_clean60( $row['title'], 20 );
+		$row['sortTitle'] = nv_clean60( $row['title'], $configMods['titleLength'] );
 		$xtpl->assign( 'OTHERCLIPSCONTENT', $row );
+		
+		if( $i ++ % 3 == 0 )
+		{
+			$xtpl->parse( 'main.otherClips.otherClipsContent.clear' );
+		}
+		
 		$xtpl->parse( 'main.otherClips.otherClipsContent' );
 	}
 

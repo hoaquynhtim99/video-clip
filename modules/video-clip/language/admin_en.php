@@ -71,6 +71,7 @@ $lang_module['videoClip'] = "Video-clip";
 $lang_module['saveAndChecked'] = "Adopt and save";
 $lang_module['Remove'] = "Remove from list";
 $lang_module['folderStructureEnable'] = "Enable folder structure";
+$lang_module['titleLength'] = "Video title length";
 
 $lang_module['error1'] = "Error! Please report content in the Title box";
 $lang_module['error2'] = "Error! Your selected topic does not exist!";

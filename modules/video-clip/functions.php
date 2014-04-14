@@ -101,6 +101,7 @@ $configMods['playerAutostart'] = 0; //Co tu dong phat video hay khong
 $configMods['playerSkin'] = ""; //Skin cua player
 $configMods['commNum'] = "20"; //So comment hien thi mac dinh
 $configMods['playerMaxWidth'] = 640; //Chieu rong toi da cua player
+$configMods['titleLength'] = 20; // So ky tu cua tieu de
 if ( file_exists( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php" ) )
 {
 	require ( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php" );

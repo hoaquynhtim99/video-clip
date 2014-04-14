@@ -65,6 +65,12 @@
 	            <td><input type="checkbox" value="1" name="folderStructureEnable" id="folderStructureEnable"{CONFIGMODULE.folderStructureEnable} /></td>
 	        </tr>
 	    </tbody>
+	    <tbody class="second">
+	        <tr>
+	            <td><strong>{LANG.titleLength}</strong></td>
+	            <td><input class="ajvd-input" type="text" value="{CONFIGMODULE.titleLength}" name="titleLength" id="titleLength"/></td>
+	        </tr>
+	    </tbody>
 	</table>
 	<div style="width: 200px; margin: 10px auto; text-align: center;">
 	    <input type="submit" name="submit" value="{LANG.save}" class="ajvd-button"/>
@@ -72,7 +78,7 @@
 </form>
 <script type="text/javascript">
 $("#modConf").submit(function(){
-    var a = "submit=1&playerMaxWidth=" + intval($("#playerMaxWidth").val()) + "&allowUpload=" + (1 == $("#allowUpload:checked").length ? 1 : 0) + "&folderStructureEnable=" + (1 == $("#folderStructureEnable:checked").length ? 1 : 0) + "&commNum=" + $("#commNum").val() + "&otherClipsNum=" + $("#otherClipsNum").val() + "&playerAutostart=" + (1 == $("#playerAutostart:checked").length ? 1 : 0) + "&playerSkin=" + $("#playerSkin").val();
+    var a = "submit=1&playerMaxWidth=" + intval($("#playerMaxWidth").val()) + "&allowUpload=" + (1 == $("#allowUpload:checked").length ? 1 : 0) + "&folderStructureEnable=" + (1 == $("#folderStructureEnable:checked").length ? 1 : 0) + "&commNum=" + $("#commNum").val() + "&otherClipsNum=" + $("#otherClipsNum").val() + "&playerAutostart=" + (1 == $("#playerAutostart:checked").length ? 1 : 0) + "&playerSkin=" + $("#playerSkin").val() + '&titleLength=' + $('#titleLength').val();
     return $.ajax({
         type: "POST",
         url: window.location.href,
