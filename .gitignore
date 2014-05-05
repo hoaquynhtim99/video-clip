@@ -39,3 +39,8 @@
 !/themes/default/images/video-clip/*
 !/themes/default/modules/video-clip
 !/themes/default/modules/video-clip/*
+!/themes/mobile_nukeviet/css/video-clip.css
+!/themes/mobile_nukeviet/images/video-clip
+!/themes/mobile_nukeviet/images/video-clip/*
+!/themes/mobile_nukeviet/modules/video-clip
+!/themes/mobile_nukeviet/modules/video-clip/*

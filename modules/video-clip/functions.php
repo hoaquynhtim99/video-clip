@@ -7,7 +7,7 @@
  * @Createdate Dec 08, 2013, 09:57:59 PM
  */
 
-if ( ! defined( 'NV_SYSTEM' ) ) die( 'Stop!!!' );
+if( ! defined( 'NV_SYSTEM' ) ) die( 'Stop!!!' );
 
 define( 'NV_IS_MOD_VIDEOCLIPS', true );
 
@@ -25,7 +25,7 @@ function nv_settopics( $id, $list, $name )
 
 	$name = $list[$id]['title'] . " &raquo; " . $name;
 	$parentid = $list[$id]['parentid'];
-	if ( $parentid ) $name = nv_settopics( $parentid, $list, $name );
+	if( $parentid ) $name = nv_settopics( $parentid, $list, $name );
 	return $name;
 }
 
@@ -58,16 +58,16 @@ function nv_list_topics()
 
 	$list2 = array();
 
-	if ( ! empty( $list ) )
+	if( ! empty( $list ) )
 	{
-		foreach ( $list as $row )
+		foreach( $list as $row )
 		{
-			if ( ! $row['parentid'] or isset( $list[$row['parentid']] ) )
+			if( ! $row['parentid'] or isset( $list[$row['parentid']] ) )
 			{
 				$list2[$row['id']] = $list[$row['id']];
 				$list2[$row['id']]['name'] = $list[$row['id']]['title'];
 
-				if ( $row['parentid'] )
+				if( $row['parentid'] )
 				{
 					$list2[$row['parentid']]['subcats'][] = $row['id'];
 					$list2[$row['id']]['name'] = nv_settopics( $row['parentid'], $list, $list2[$row['id']]['name'] );
@@ -87,7 +87,7 @@ function nv_list_topics()
  */
 function nv_extKeywords( $keywords )
 {
-	if ( empty( $keywords ) ) return "";
+	if( empty( $keywords ) ) return "";
 	$keywords = explode( ",", $keywords );
 	$keywords = array_map( "trim", $keywords );
 	$keywords = array_unique( $keywords );
@@ -95,6 +95,75 @@ function nv_extKeywords( $keywords )
 	return $keywords;
 }
 
+/**
+ * listComm()
+ * 
+ * @return
+ */
+function listComm()
+{
+	global $xtpl, $cpgnum, $comments, $commNext;
+
+	if( empty( $comments ) ) return "";
+
+	foreach( $comments as $comment )
+	{
+		$xtpl->assign( 'USER', $comment );
+
+		if( ! $comment['ischecked'] )
+		{
+			$xtpl->parse( 'listComm.listComm2.unchecked' );
+		}
+		if( defined( "NV_IS_MODADMIN" ) )
+		{
+			$xtpl->parse( 'listComm.listComm2.delcomm' );
+		}
+		$xtpl->parse( 'listComm.listComm2' );
+	}
+
+	if( $commNext )
+	{
+		$xtpl->assign( 'NEXTID', $cpgnum );
+		$xtpl->parse( 'listComm.ifNext' );
+	}
+	if( defined( "NV_IS_MODADMIN" ) )
+	{
+		$xtpl->parse( 'listComm.ifDelComm' );
+	}
+	$xtpl->parse( 'listComm' );
+	return $xtpl->text( "listComm" );
+}
+
+/**
+ * commentReload()
+ * 
+ * @return
+ */
+function commentReload()
+{
+	global $xtpl, $comments, $VideoData, $lang_module;
+
+	if( ! $VideoData['comm'] ) return "";
+
+	if( defined( "NV_IS_USER" ) )
+	{
+		$xtpl->parse( 'commentList.commentForm' );
+	}
+	else
+	{
+		$pleasLogin = sprintf( $lang_module['pleaseLogin'], NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=users", NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=users/register" );
+		$pleasLogin = nv_url_rewrite( $pleasLogin, 1 );
+		$xtpl->assign( 'PLEASELOGIN', $pleasLogin );
+		$xtpl->parse( 'commentList.ifNotGuest' );
+	}
+
+	$xtpl->assign( 'LISTCOMM', listComm() );
+
+	$xtpl->parse( 'commentList' );
+	return $xtpl->text( "commentList" );
+}
+
+// Cau hinh module
 $configMods = array();
 $configMods['otherClipsNum'] = 16; //So video-clip hien thi tren trang chu hoac trang The loai
 $configMods['playerAutostart'] = 0; //Co tu dong phat video hay khong
@@ -102,20 +171,26 @@ $configMods['playerSkin'] = ""; //Skin cua player
 $configMods['commNum'] = "20"; //So comment hien thi mac dinh
 $configMods['playerMaxWidth'] = 640; //Chieu rong toi da cua player
 $configMods['titleLength'] = 20; // So ky tu cua tieu de
-if ( file_exists( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php" ) )
+
+if( file_exists( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php" ) )
 {
 	require ( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php" );
 }
 
-if ( ! empty( $configMods['playerSkin'] ) )
+if( ! empty( $configMods['playerSkin'] ) )
 {
 	$configMods['playerSkin'] = ",skin:\"" . NV_BASE_SITEURL . "images/jwplayer/skin/" . $configMods['playerSkin'] . ".zip\"";
 }
 
+// Tieu de, meta tag
 $page_title = $module_info['custom_title'];
 $key_words = $module_info['keywords'];
-if ( isset( $module_info['description'] ) ) $description = $module_info['description'];
+if( isset( $module_info['description'] ) )
+{
+	$description = $module_info['description'];
+}
 
+// Cac bien he thong
 $array_mod_title = array();
 $topicList = nv_list_topics();
 $topicList2 = array();
@@ -123,18 +198,18 @@ $topicID = 0;
 $VideoData = array();
 $isDetail = false;
 
-foreach ( $topicList as $key => $_topicList ) $topicList2[ $db->unfixdb( $_topicList['alias'] ) ] = $key;
+foreach( $topicList as $key => $_topicList ) $topicList2[ $db->unfixdb( $_topicList['alias'] ) ] = $key;
 
-if ( isset( $array_op[0] ) and ( $array_op0 = strtolower( $array_op[0] ) ) != $array_op[0] )
+if( isset( $array_op[0] ) and ( $array_op0 = strtolower( $array_op[0] ) ) != $array_op[0] )
 {
 	$_tempUrl = NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $array_op0;
-	if ( isset( $array_op[1] ) ) $_tempUrl .= "/" . strtolower( $array_op[1] );
+	if( isset( $array_op[1] ) ) $_tempUrl .= "/" . strtolower( $array_op[1] );
 	$_tempUrl = nv_url_rewrite( $_tempUrl, 1 );
 	header( 'Location: ' . $_tempUrl, true, 301 );
 	exit;
 }
 
-if ( ! empty( $array_op[0] ) )
+if( ! empty( $array_op[0] ) )
 {
 	// Chi tiet video
 	if( ! isset( $topicList2[$array_op[0]] ) )
@@ -143,7 +218,7 @@ if ( ! empty( $array_op[0] ) )
 		
 		$resultVideo = $db->sql_query( $ClipSQL );
 		$num = $db->sql_numrows( $resultVideo );
-		if ( ! $num )
+		if( ! $num )
 		{
 			$headerStatus = substr( php_sapi_name(), 0, 3 ) == 'cgi' ? "Status:" : $_SERVER['SERVER_PROTOCOL'];
 			header( $headerStatus . " 404 Not Found" );
@@ -159,9 +234,14 @@ if ( ! empty( $array_op[0] ) )
 		$array_mod_title[] = array( 'catid' => 0, 'title' => $topicList[$topicID]['title'], 'link' => NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $topicList[$topicID]['alias'] );
 		$array_mod_title[] = array( 'catid' => 0, 'title' => $VideoData['title'], 'link' => NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $VideoData['alias'] );
 		
-		$page_title = $VideoData['title'] . " - " . $page_title;
-		if ( ! empty( $VideoData['keywords'] ) ) $key_words = nv_extKeywords( $VideoData['keywords'] . ( ! empty( $key_words ) ? "," . $key_words : "" ) );
-		$description = ! empty( $VideoData['hometext'] ) ? $VideoData['hometext'] : $VideoData['title'] . " - " . $module_info['custom_title'];
+		$page_title = $VideoData['title'] . " " . NV_TITLEBAR_DEFIS . " " . $page_title;
+		
+		if( ! empty( $VideoData['keywords'] ) )
+		{
+			$key_words = nv_extKeywords( $VideoData['keywords'] . ( ! empty( $key_words ) ? "," . $key_words : "" ) );
+		}
+		
+		$description = ! empty( $VideoData['hometext'] ) ? $VideoData['hometext'] : $VideoData['title'] . " " . NV_TITLEBAR_DEFIS . " " . $module_info['custom_title'];
 		$isDetail = true;
 	}
 	else
@@ -172,9 +252,9 @@ if ( ! empty( $array_op[0] ) )
 		
 		$topic = $topicList[$topicList2[$array_op[0]]];
 		
-		$page_title = $topic['title'] . " - " . $page_title;
-		if ( ! empty( $topic['keywords'] ) ) $key_words = nv_extKeywords( $topic['keywords'] . ( ! empty( $key_words ) ? "," . $key_words : "" ) );
-		if ( ! empty( $topic['description'] ) ) $description = $topic['description'];
+		$page_title = $topic['title'] . " " . NV_TITLEBAR_DEFIS . " " . $page_title;
+		if( ! empty( $topic['keywords'] ) ) $key_words = nv_extKeywords( $topic['keywords'] . ( ! empty( $key_words ) ? "," . $key_words : "" ) );
+		if( ! empty( $topic['description'] ) ) $description = $topic['description'];
 		
 		unset( $topic );
 		
@@ -195,6 +275,26 @@ if( empty( $VideoData ) )
 	unset( $ClipSQL, $resultVideo );
 }
 
+// Tang viewHits
+if( ! empty( $VideoData ) )
+{
+	$listRes = isset( $_SESSION[$module_data . '_ViewList'] ) ? $_SESSION[$module_data . '_ViewList'] : "";
+	$listRes = ! empty( $listRes ) ? explode( ",", $listRes ) : array();
+	
+	if( empty( $listRes ) or ! in_array( $VideoData['id'], $listRes ) )
+	{
+		$query = "UPDATE `" . NV_PREFIXLANG . "_" . $module_data . "_hit` SET `view`=view+1 WHERE `cid`=" . $VideoData['id'];
+		$db->sql_query( $query );
+		array_unshift( $listRes, $VideoData['id'] );
+		$_SESSION[$module_data . '_ViewList'] = implode( ",", $listRes );
+		++ $VideoData['view'];
+	}
+	
+	$VideoData['filepath'] = ! empty( $VideoData['internalpath'] ) ? NV_BASE_SITEURL . $VideoData['internalpath'] : $VideoData['externalpath'];
+	$VideoData['url'] = nv_url_rewrite( NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $VideoData['alias'], 1 );
+	$VideoData['editUrl'] = nv_url_rewrite( NV_BASE_ADMINURL . "index.php?" . NV_NAME_VARIABLE . "=" . $module_name . "&op=main&edit&id=" . $VideoData['id'] . "&redirect=1", 1 );
+}
+
 // Open Graph
 if( $isDetail === true )
 {
@@ -211,6 +311,100 @@ if( $isDetail === true )
 	$my_head .= "<meta property=\"og:description\" content=\"" . $VideoData['hometext'] . "\" />" . NV_EOL;
 	
 	unset( $ogImage );
+	
+	// Kiem tra quyen truy cap
+	if( ! ( $allow = nv_set_allow( $VideoData['who_view'], $VideoData['groups_view'] ) ) )
+	{
+		if( $nv_Request->isset_request( 'aj', 'post' ) ) die( "access forbidden" );
+	
+		include ( NV_ROOTDIR . "/includes/header.php" );
+		echo nv_site_theme( $lang_module['accessForbidden'] );
+		include ( NV_ROOTDIR . "/includes/footer.php" );
+		die();
+	}
+	
+	// Comment broken
+	if( $nv_Request->isset_request( 'mbroken', 'post' ) )
+	{
+		$mbroken = filter_text_input( 'mbroken', 'post', '', 1 );
+		$sessionName = "mbroken";
+		$session = isset( $_SESSION[$module_data . '_' . $sessionName] ) ? $_SESSION[$module_data . '_' . $sessionName] : "";
+		$session = intval( $session );
+		if( $session > NV_CURRENTTIME - 30 ) die( "ERROR" );
+		$query = "UPDATE `" . NV_PREFIXLANG . "_" . $module_data . "_comm` SET `broken`=`broken`+1 WHERE `id`=" . $mbroken . " AND `ischecked`=0";
+		$db->sql_query( $query );
+		$_SESSION[$module_data . '_' . $sessionName] = NV_CURRENTTIME;
+		die( "OK" );
+	}
+	
+	// Delete Comment
+	if( defined( "NV_IS_MODADMIN" ) and $nv_Request->isset_request( 'delcomm', 'post' ) )
+	{
+		$delcomm = $nv_Request->get_int( 'delcomm', 'post', 0 );
+		$sql = "SELECT `cid` FROM `" . NV_PREFIXLANG . "_" . $module_data . "_comm` WHERE `id`=" . $delcomm;
+		$result = $db->sql_query( $sql );
+		list( $cid ) = $db->sql_fetchrow( $result );
+	
+		$sql = "DELETE FROM `" . NV_PREFIXLANG . "_" . $module_data . "_comm` WHERE `id`=" . $delcomm;
+		$db->sql_query( $sql );
+	
+		$sql = "SELECT COUNT(*) FROM `" . NV_PREFIXLANG . "_" . $module_data . "_comm` WHERE `cid`=" . $cid;
+		$result = $db->sql_query( $sql );
+		list( $count ) = $db->sql_fetchrow( $result );
+	
+		$query = "UPDATE `" . NV_PREFIXLANG . "_" . $module_data . "_hit` SET `comment`=" . $count . " WHERE `cid`=" . $cid;
+		$db->sql_query( $query );
+		die( "OK|" . $count . "" );
+	}
+	
+	// AJAX comment
+	if( $nv_Request->isset_request( 'savecomm', 'post' ) )
+	{
+		if( ! defined( "NV_IS_USER" ) ) die( "ERROR|" . $lang_module['error3'] );
+		if( ! $VideoData['comm'] ) die( "ERROR|" . $lang_module['error4'] );
+	
+		$sql = "SELECT MAX(`posttime`) as `ptime` FROM `" . NV_PREFIXLANG . "_" . $module_data . "_comm` WHERE `userid`=" . $user_info['userid'];
+		$result = $db->sql_query( $sql );
+		list( $ptime ) = $db->sql_fetchrow( $result );
+		$ptime = intval( $ptime );
+		if( $ptime > NV_CURRENTTIME - 60 ) die( "ERROR|" . $lang_module['error2'] );
+	
+		$content = filter_text_input( 'savecomm', 'post', '', 1, 500 );
+		if( empty( $content ) ) die( "ERROR|" . $lang_module['error1'] );
+	
+		$isChecked = defined( "NV_IS_MODADMIN" ) ? 1 : 0;
+	
+		$content = nv_nl2br( $content );
+		$sql = "INSERT INTO `" . NV_PREFIXLANG . "_" . $module_data . "_comm` VALUES 
+	    (NULL , " . $VideoData['id'] . ", " . $db->dbescape( $content ) . ", " . NV_CURRENTTIME . ", 
+	    " . $user_info['userid'] . ", " . $db->dbescape( $client_info['ip'] ) . ", 1, 0, " . $isChecked . ");";
+		$db->sql_query( $sql );
+	
+		$query = "UPDATE `" . NV_PREFIXLANG . "_" . $module_data . "_hit` SET `comment`=comment+1 WHERE `cid`=" . $VideoData['id'];
+		$db->sql_query( $query );
+	
+		die( "OK" );
+	}
+	
+	// Nut like, unlike, broken
+	if( $nv_Request->isset_request( 'aj', 'post' ) and in_array( ( $aj = filter_text_input( 'aj', 'post', '', 1 ) ), array( 'like', 'unlike', 'broken' ) ) )
+	{
+		$sessionName = $aj == "broken" ? "broken" : "like";
+		$listLike = isset( $_SESSION[$module_data . '_' . $sessionName] ) ? $_SESSION[$module_data . '_' . $sessionName] : "";
+		$listLike = ! empty( $listLike ) ? explode( ",", $listLike ) : array();
+		
+		if( empty( $listLike ) or ! in_array( $VideoData['id'], $listLike ) )
+		{
+			$set = $aj == "broken" ? "`" . $aj . "`=1" : "`" . $aj . "`=" . ( $VideoData[$aj] + 1 );
+			$query = "UPDATE `" . NV_PREFIXLANG . "_" . $module_data . "_hit` SET " . $set . " WHERE `cid`=" . $VideoData['id'];
+			$db->sql_query( $query );
+			array_unshift( $listLike, $VideoData['id'] );
+			$_SESSION[$module_data . '_' . $sessionName] = implode( ",", $listLike );
+			++$VideoData[$aj];
+		}
+		
+		die( $aj . "_" . $VideoData[$aj] );
+	}	
 }
 
 ?>
