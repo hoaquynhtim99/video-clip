@@ -1,12 +1,24 @@
-﻿.message{position:absolute;left:-1000px;top:-1000px;display:none;z-index:-1;width:150px;border:1px #51A8FF solid;background:#C4E1FF;padding:6px}
+﻿/**
+ * @Project VIDEO CLIPS AJAX 3.x
+ * @Author PHAN TAN DUNG (phantandung92@gmail.com)
+ * @Copyright (C) 2013 PHAN TAN DUNG. All rights reserved
+ * @Createdate Dec 08, 2013, 09:57:59 PM
+ */
+
+.video-break{float: left;height: 1px;width: 100%;}
+.message{position:absolute;left:-1000px;top:-1000px;display:none;z-index:-1;width:150px;border:1px #51A8FF solid;background:#C4E1FF;padding:6px}
 .marginbottom10{margin-bottom:10px}
 .marginbottom15{margin-bottom:15px}
+
+/* List topic */
 .otherTopic{background:#fff;margin-top:0;border:1px #d6d6d6 solid;padding:1px;position:relative;color:#464646;font:normal 12px/26px Arial}
 .otherTopic a{text-decoration:underline}
 .otherTopic strong{font-weight:700}
 .otherTopic img{width:24px;height:24px;vertical-align:middle;margin-right:2px}
 .otherTopic span{color:#f26d00}
 .otherTopic .otherTopicCont{padding:8px;background:#f1f1f1}
+
+/* List video */
 .otherClips{position:relative;width:100%}
 .otherClips .otherClipsContent{position:relative;width:33%;float:left;margin-bottom:15px}
 .otherClips .ctn1{background:#fff;border:1px #d6d6d6 solid;padding:1px;position:relative;width:124px;margin:0 auto}
@@ -22,6 +34,8 @@
 .detailContent .videoplayer{background:#3f3f3f;position:relative}
 .detailContent .videoplayer .cont{background:#000 url(../images/video-clip/wait.gif) no-repeat center center;margin:0 auto;position:relative}
 .detailContent .videoTitle{font:700 20px Arial;margin-bottom:10px}
+
+/* Detail video */
 .videoInfo{background:#fff;position:relative;border:1px #d6d6d6 solid;padding:1px}
 .videoInfo .cont{background:#f1f1f1;position:relative;padding:2px}
 .videoInfo .cont .cont2{height:56px}
@@ -49,6 +63,8 @@
 .videoInfo div.bodybutton{position:relative;margin-top:10px;text-align:center}
 .videoInfo a.bodybutton{display:inline-block;background:#E1E1E1;font:700 12px Arial;border:1px #d6d6d6 solid;padding:3px;text-decoration:none;color:#5B5B5B}
 .videoInfo .hide{display:none}
+
+/* Comment */
 .commentList{position:relative}
 .commentList .cont{position:relative;padding:4px 0}
 .commentList .commTitle{font:700 11px/2 Tahoma}
@@ -71,6 +87,7 @@
 .commentList .brokenIcon{background:transparent url(../images/video-clip/icons.png) no-repeat left -28px;width:14px;height:14px;vertical-align:middle;margin-left:5px}
 .commentList .delcommIcon{background:transparent url(../images/video-clip/icons.png) no-repeat left -14px;width:14px;height:14px;vertical-align:middle}
 
+/* Main */
 .videoMain .col1{width:170px;float:left}
 .videoMain .col2{padding-left:180px;}
 .videoMain .col1 .topicList{display:block;padding:5px 0;border-bottom:1px #dadada dotted;text-indent:10px}
@@ -79,10 +96,12 @@
 .videoMain .col1 .topicList.sub.current{background-image:none;color:inherit;font-weight:bold}
 .videoMain .col1 .col1-sub{display:none}
 
+/* Block, list video */
 .video-clip-block{border-bottom:1px #dadada dashed;padding-bottom:10px;margin-bottom:10px}
 .video-clip-block img{float:left;margin-right:10px}
 .video-clip-block a{font-weight:bold}
 
+/* Block zing style */
 .zing-clip-big{width:300px;height:180px;position:relative}
 .zing-clip-big a.img{width:300px;height:180px;overflow:hidden;display:block}
 .zing-clip-big a.img img{width:300px;min-height:18px;}
@@ -99,7 +118,7 @@
 .zing-clip-small h1 a{display:block;color:#fff;font-weight:bold}
 .zing-clip-small h1 a:hover{text-decoration:underline}
 
-
-
+/* Block video box */
+.vd-blbox{}
 
 

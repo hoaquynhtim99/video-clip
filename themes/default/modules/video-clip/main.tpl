@@ -34,7 +34,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- BEGIN: clear --><div class="clear"></div><!-- END: clear -->
+		<!-- BEGIN: clear --><div class="video-break"></div><!-- END: clear -->
 		<!-- END: otherClipsContent -->
 		<!-- BEGIN: nv_generate_page -->
 		<div class="clearfix"></div>
