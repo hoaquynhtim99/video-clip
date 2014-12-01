@@ -1,15 +1,16 @@
 <?php
 
 /**
- * @Project VIDEO CLIPS AJAX 3.x
+ * @Project VIDEO CLIPS AJAX 4.x
  * @Author PHAN TAN DUNG (phantandung92@gmail.com)
- * @Copyright (C) 2013 PHAN TAN DUNG. All rights reserved
- * @Createdate Dec 08, 2013, 09:57:59 PM
+ * @Copyright (C) 2014 PHAN TAN DUNG. All rights reserved
+ * @License GNU/GPL version 2 or any later version
+ * @Createdate Dec 01, 2014, 04:33:14 AM
  */
 
-if ( ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
+if( ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
 
-if ( ! nv_function_exists( 'nv_new_videos' ) )
+if( ! nv_function_exists( 'nv_new_videos' ) )
 {
 	function nv_new_videos( $block_config )
 	{
@@ -37,12 +38,12 @@ if ( ! nv_function_exists( 'nv_new_videos' ) )
 		$xtpl = new XTemplate( "block_new_video.tpl", NV_ROOTDIR . "/themes/" . $block_theme . "/modules/" . $file );
 		$xtpl->assign( 'LANG', $lang_block );
 
-		$sql = "SELECT SQL_CALC_FOUND_ROWS a.*,b.view FROM `" . NV_PREFIXLANG . "_" . $data . "_clip` a, `" . NV_PREFIXLANG . "_" . $data . "_hit` b WHERE a.id=b.cid AND a.status=1 ORDER BY a.id DESC LIMIT 0,5";
-		$result = $db->sql_query( $sql );
+		$sql = "SELECT SQL_CALC_FOUND_ROWS a.*,b.view FROM " . NV_PREFIXLANG . "_" . $data . "_clip a, " . NV_PREFIXLANG . "_" . $data . "_hit b WHERE a.id=b.cid AND a.status=1 ORDER BY a.id DESC LIMIT 0,5";
+		$result = $db->query( $sql );
 
-		while( $row = $db->sql_fetchrow( $result ) )
+		while( $row = $result->fetch() )
 		{
-			if ( ! empty( $row['img'] ) )
+			if( ! empty( $row['img'] ) )
 			{
 				$imageinfo = nv_ImageInfo( NV_ROOTDIR . '/' . $row['img'], 120, true, NV_ROOTDIR . '/' . NV_FILES_DIR . '/' . $module );
 				$row['img'] = $imageinfo['src'];
@@ -64,9 +65,7 @@ if ( ! nv_function_exists( 'nv_new_videos' ) )
 	}
 }
 
-if ( defined( 'NV_SYSTEM' ) )
+if( defined( 'NV_SYSTEM' ) )
 {
     $content = nv_new_videos( $block_config );
 }
-
-?>

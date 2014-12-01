@@ -1,15 +1,16 @@
 <?php
 
 /**
- * @Project VIDEO CLIPS AJAX 3.x
+ * @Project VIDEO CLIPS AJAX 4.x
  * @Author PHAN TAN DUNG (phantandung92@gmail.com)
- * @Copyright (C) 2013 PHAN TAN DUNG. All rights reserved
- * @Createdate Dec 08, 2013, 09:57:59 PM
+ * @Copyright (C) 2014 PHAN TAN DUNG. All rights reserved
+ * @License GNU/GPL version 2 or any later version
+ * @Createdate Dec 01, 2014, 04:33:14 AM
  */
 
 if( ! defined( 'NV_IS_MOD_VIDEOCLIPS' ) ) die( 'Stop!!!' );
 
-$pgnum = $nv_Request->get_int( "page", "get", 0 ); // Trang
+$pgnum = $nv_Request->get_int( "page", "get", 1 ); // Trang
 $base_url = NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name;
 if( $topicID )
 {
@@ -31,7 +32,7 @@ if( $topicID )
 	}
 }
 
-$sql = "SELECT SQL_CALC_FOUND_ROWS a.*,b.view FROM `" . NV_PREFIXLANG . "_" . $module_data . "_clip` a, `" . NV_PREFIXLANG . "_" . $module_data . "_hit` b WHERE a.id=b.cid AND a.status=1" . $sqlTopic . " ORDER BY a.id DESC LIMIT " . $pgnum . "," . $configMods['otherClipsNum'];
+$sql = "SELECT SQL_CALC_FOUND_ROWS a.*,b.view FROM " . NV_PREFIXLANG . "_" . $module_data . "_clip a, " . NV_PREFIXLANG . "_" . $module_data . "_hit b WHERE a.id=b.cid AND a.status=1" . $sqlTopic . " ORDER BY a.id DESC LIMIT " . ( ( $pgnum - 1 ) * $configMods['otherClipsNum'] ) . "," . $configMods['otherClipsNum'];
 
 $xtpl = new XTemplate( "main.tpl", NV_ROOTDIR . "/themes/" . $module_info['template'] . "/modules/" . $module_file );
 $xtpl->assign( 'LANG', $lang_module );
@@ -39,14 +40,14 @@ $xtpl->assign( 'NV_BASE_SITEURL', NV_BASE_SITEURL );
 $xtpl->assign( 'MODULECONFIG', $configMods );
 
 // Xuat video
-$result = $db->sql_query( $sql );
-$res = $db->sql_query( "SELECT FOUND_ROWS()" );
-list( $all_page ) = $db->sql_fetchrow( $res );
+$result = $db->query( $sql );
+$res = $db->query( "SELECT FOUND_ROWS()" );
+$all_page = $res->fetchColumn();
 $all_page = intval( $all_page );
 if( $all_page )
 {
 	$i = 1;
-	while ( $row = $db->sql_fetch_assoc( $result ) )
+	while ( $row = $result->fetch() )
 	{
 		if( ! empty( $row['img'] ) )
 		{
@@ -122,7 +123,7 @@ if( ! empty( $topicList ) )
 // Chi tiet video
 if( ! empty( $VideoData ) )
 {
-	if( ! nv_set_allow( $VideoData['who_view'], $VideoData['groups_view'] ) )
+	if( ! nv_user_in_groups( $VideoData['groups_view'] ) )
 	{
 		$xtpl->parse( 'main.clipForbidden' );	
 	}
@@ -148,8 +149,6 @@ if( ! empty( $VideoData ) )
 $xtpl->parse( 'main' );
 $contents = $xtpl->text( "main" );
 
-include ( NV_ROOTDIR . "/includes/header.php" );
+include NV_ROOTDIR . '/includes/header.php';
 echo nv_site_theme( $contents );
-include ( NV_ROOTDIR . "/includes/footer.php" );
-
-?>
+include NV_ROOTDIR . '/includes/footer.php';

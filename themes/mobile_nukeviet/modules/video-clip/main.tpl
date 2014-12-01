@@ -25,8 +25,8 @@ $(document).ready(function(){
 });
 </script>
 <div>
-	<a href="like" class="mvc-bt mb10 likeButton">{LANG.like}: <strong id="ilike">{DETAILCONTENT.like}</strong></a>
-	<a href="unlike" class="mvc-bt mb10 likeButton">{LANG.unlike}: <strong id="iunlike">{DETAILCONTENT.unlike}</strong></a>
+	<a href="likehit" class="mvc-bt mb10 likeButton">{LANG.like}: <strong id="ilikehit">{DETAILCONTENT.likehit}</strong></a>
+	<a href="unlikehit" class="mvc-bt mb10 likeButton">{LANG.unlike}: <strong id="iunlikehit">{DETAILCONTENT.unlikehit}</strong></a>
 	<a href="broken" class="mvc-bt mb10 likeButton">{LANG.broken}</a>
     <!-- BEGIN: isAdmin -->
     <a class="mvc-bt mb10" href="{DETAILCONTENT.editUrl}">{LANG.edit}</a>
@@ -57,7 +57,7 @@ $("a.likeButton").click(function(e){
 		url: '{DETAILCONTENT.url}',
 		data: "aj=" + action,
 		success: function(a){
-			if ("access forbidden" == a){
+			if("access forbidden" == a){
 				alert("{LANG.accessForbidden}");
 			}
 			var a = a.split("_"), b = "like" == a[0] || "unlike" == a[0] ? "{LANG.thank}" : "{LANG.thankBroken}";

@@ -1,31 +1,27 @@
 <!-- BEGIN: main -->
-<form action="{FORM_ACTION}" method="post" id="modConf">
-    <table class="tab1" summary="">
+<form class="form-inline" action="{FORM_ACTION}" method="post" id="modConf">
+    <table class="table table-striped table-bordered table-hover">
 		<col style="width:50%"/>
 	    <tbody>
 	        <tr>
 	            <td><strong>{LANG.NumberOfLinks}</strong>
 	            </td>
 	            <td>
-	                <select name="otherClipsNum" id="otherClipsNum" class="ajvd-input">
+	                <select name="otherClipsNum" id="otherClipsNum" class="form-control ajvd-input">
 	                    <!-- BEGIN: otherClipsNum -->
 	                    <option value="{NUMS.value}"{NUMS.select}>{NUMS.value}</option>
 	                    <!-- END: otherClipsNum -->
 	                </select>
 	            </td>
 	        </tr>
-	    </tbody>
-	    <tbody class="second">
 	        <tr>
 	            <td><strong>{LANG.playerAutostart}</strong></td>
 	            <td><input type="checkbox" value="1" name="playerAutostart" id="playerAutostart"{CONFIGMODULE.playerAutostart} /></td>
 	        </tr>
-	    </tbody>
-	    <tbody>
 	        <tr>
 	            <td><strong>{LANG.playerSkin}</strong></td>
 	            <td>
-	                <select name="playerSkin" id="playerSkin" class="ajvd-input">
+	                <select name="playerSkin" id="playerSkin" class="form-control ajvd-input">
 	                    <option value="">{LANG.noSkin}</option>
 	                    <!-- BEGIN: playerSkin -->
 	                    <option value="{SKIN.value}"{SKIN.select}>{SKIN.value}</option>
@@ -38,7 +34,7 @@
 	        <tr>
 	            <td><strong>{LANG.commnum}</strong></td>
 	            <td>
-	                <select name="commNum" id="commNum">
+	                <select class="form-control" name="commNum" id="commNum">
 	                    <!-- BEGIN: commNum -->
 	                    <option value="{COMMNUM.value}"{COMMNUM.select}>{COMMNUM.value}</option>
 	                    <!-- END: commNum -->
@@ -46,11 +42,11 @@
 	            </td>
 	        </tr>
 	    </tbody-->
-	    <tbody class="second">
+	    <tbody>
 	        <tr>
 	            <td><strong>{LANG.embedMaxWidth}</strong>
 	            </td>
-	            <td><input style="width: 50px;" type="text" name="playerMaxWidth" id="playerMaxWidth" value="{CONFIGMODULE.playerMaxWidth}" class="ajvd-input"/></td>
+	            <td><input style="width: 50px;" type="text" name="playerMaxWidth" id="playerMaxWidth" value="{CONFIGMODULE.playerMaxWidth}" class="form-control ajvd-input"/></td>
 	        </tr>
 	    </tbody>
 	    <!--tbody>
@@ -64,11 +60,9 @@
 	            <td><strong>{LANG.folderStructureEnable}</strong></td>
 	            <td><input type="checkbox" value="1" name="folderStructureEnable" id="folderStructureEnable"{CONFIGMODULE.folderStructureEnable} /></td>
 	        </tr>
-	    </tbody>
-	    <tbody class="second">
 	        <tr>
 	            <td><strong>{LANG.titleLength}</strong></td>
-	            <td><input class="ajvd-input" type="text" value="{CONFIGMODULE.titleLength}" name="titleLength" id="titleLength"/></td>
+	            <td><input class="form-control ajvd-input" type="text" value="{CONFIGMODULE.titleLength}" name="titleLength" id="titleLength"/></td>
 	        </tr>
 	    </tbody>
 	</table>

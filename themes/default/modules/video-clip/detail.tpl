@@ -1,12 +1,12 @@
 <!-- BEGIN: main -->
 <div class="message" id="mesHide"></div>
-    <div class="detailContent clearfix">
-        <div class="videoTitle" id="videoTitle">{DETAILCONTENT.title}</div>
-        <div class="videoplayer">
-            <div class="cont"><div id="videoCont"></div></div>
-        </div>
-        <div class="clearfix"></div>
+<div class="detailContent clearfix">
+    <div class="videoTitle" id="videoTitle">{DETAILCONTENT.title}</div>
+    <div class="videoplayer">
+        <div class="cont"><div id="videoCont"></div></div>
     </div>
+    <div class="clearfix"></div>
+</div>
 <script type="text/javascript">
 $(document).ready(function(){
 	var playerWidth = {MODULECONFIG.playerMaxWidth};
@@ -26,77 +26,128 @@ $(document).ready(function(){
 	<!-- BEGIN: scrollPlayer -->$("html,body").animate({scrollTop:$(".detailContent").offset().top}, 500)<!-- END: scrollPlayer -->
 });
 </script>
-    <div id="otherClipsAj">
-        <div class="videoInfo marginbottom15 clearfix">
-            <div class="cont">
-                <div class="cont2">
-                    <div class="fl">
-                        <div class="shareFeelings">{LANG.shareFeelings}</div>
-                        <a class="likeButton" href="{DETAILCONTENT.url}"><img class="like" src="{NV_BASE_SITEURL}images/pix.gif" alt="" width="15" height="14" /><span>{LANG.like}</span></a>
-                        <a class="likeButton" href="{DETAILCONTENT.url}"><img class="unlike" src="{NV_BASE_SITEURL}images/pix.gif" alt="" width="15" height="14" /><span>{LANG.unlike}</span></a>
-                        <a class="likeButton" href="{DETAILCONTENT.url}"><img class="broken" src="{NV_BASE_SITEURL}images/pix.gif" alt="" width="15" height="14" /><span>{LANG.broken}</span></a>
+<div id="otherClipsAj">
+    <div class="videoInfo marginbottom15 clearfix">
+        <div class="cont">
+            <div class="cont2">
+                <div class="fl">
+                    <div class="shareFeelings">{LANG.shareFeelings}</div>
+                    <a class="likeButton" href="{DETAILCONTENT.url}"><img class="likehit" src="{NV_BASE_SITEURL}images/pix.gif" alt="" width="15" height="14" /><span>{LANG.like}</span></a>
+                    <a class="likeButton" href="{DETAILCONTENT.url}"><img class="unlikehit" src="{NV_BASE_SITEURL}images/pix.gif" alt="" width="15" height="14" /><span>{LANG.unlike}</span></a>
+                    <a class="likeButton" href="{DETAILCONTENT.url}"><img class="broken" src="{NV_BASE_SITEURL}images/pix.gif" alt="" width="15" height="14" /><span>{LANG.broken}</span></a>
+                </div>
+                <div class="fr">
+                    <div class="viewcount">
+                        <!-- BEGIN: isAdmin -->
+                        <a href="{DETAILCONTENT.editUrl}">{LANG.edit}</a>,&nbsp;
+                        <!-- END: isAdmin -->
+                        {LANG.viewHits}: <span>{DETAILCONTENT.view}</span><!-- BEGIN: ifComm -->,&nbsp;{LANG.commHits}: <span id="commHits">{DETAILCONTENT.comment}</span><!-- END: ifComm -->
                     </div>
-                    <div class="fr">
-                        <div class="viewcount">
-                            <!-- BEGIN: isAdmin -->
-                            <a href="{DETAILCONTENT.editUrl}">{LANG.edit}</a>,&nbsp;
-                            <!-- END: isAdmin -->
-                            {LANG.viewHits}: <span>{DETAILCONTENT.view}</span><!-- BEGIN: ifComm -->,&nbsp;{LANG.commHits}: <span id="commHits">{DETAILCONTENT.comment}</span><!-- END: ifComm -->
-                        </div>
-                        <div style="float:right;">
-                            <div class="image image0"><img id="imglike" src="{NV_BASE_SITEURL}images/pix.gif" alt="" width="1" /></div>
-                            <div class="likeDetail">
-                                <div class="likeLeft">{LANG.like}: <span class="strong" id="ilike">{DETAILCONTENT.like}</span><br /><span id="plike"></span></div>
-                                <div class="likeRight">{LANG.unlike}: <span class="strong" id="iunlike">{DETAILCONTENT.unlike}</span><br /><span id="punlike"></span></div>
-                            </div>
+                    <div style="float:right;">
+                        <div class="image image0"><img id="imglike" src="{NV_BASE_SITEURL}images/pix.gif" alt="" width="1" /></div>
+                        <div class="likeDetail">
+                            <div class="likeLeft">{LANG.like}: <span class="strong" id="ilikehit">{DETAILCONTENT.likehit}</span><br /><span id="plike"></span></div>
+                            <div class="likeRight">{LANG.unlike}: <span class="strong" id="iunlikehit">{DETAILCONTENT.unlikehit}</span><br /><span id="punlike"></span></div>
                         </div>
                     </div>
                 </div>
-                <div class="clearfix"></div>
-                <div class="hometext">
-                    {DETAILCONTENT.hometext}
-                    <!-- BEGIN: bodytext -->
-                    <div class="bodytext hide">{DETAILCONTENT.bodytext}</div>
-                    <div class="bodybutton"><a href="open" class="bodybutton">{LANG.moreContent}</a></div>
-                    <!-- END: bodytext -->
-                </div>
             </div>
-        </div>
-<script type="text/javascript">
-function addLikeImage(){var b=intval($("#ilike").text()),c=intval($("#iunlike").text()),d=$(".image").width();if(0==b&&0==c)$(".image").removeClass("imageunlike").addClass("image0"),$("#imglike").removeClass("like").width(1),$("#plike,#punlike").text("");else if($(".image").removeClass("image0").addClass("imageunlike"),0==b)$("#imglike").removeClass("like").width(1),$("#plike").text("0%"),$("#punlike").text("100%");else{var a=intval(100*b/(b+c)),b=intval(a*(d/100)),e=100-a;$("#imglike").addClass("like").animate({width:b},
-1500,function(){$("#plike").text(a+"%");$("#punlike").text(e+"%")})}}$(function(){addLikeImage()});
-$("a.likeButton").click(function(){var b=$(this).attr("href"),c=$("img",this).attr("class"),d=$(this).offset();$.ajax({type:"POST",url:b,data:"aj="+c,success:function(a){if("access forbidden"==a)return alert("{LANG.accessForbidden}"),!1;var a=a.split("_"),b="like"==a[0]||"unlike"==a[0]?"{LANG.thank}":"{LANG.thankBroken}";$("#i"+a[0]).text(a[1]);addLikeImage();$("#mesHide").text(b).css({left:d.left+50+"px",top:d.top-100+"px","z-index":1E4}).show("slow");setTimeout(function(){$("div#mesHide").css({"z-index":"-1"}).hide("slow")},
-3E3)}});return!1});$("a.bodybutton").click(function(){"open"==$(this).attr("href")?($(".bodytext").slideDown("slow"),$(this).attr("href","close").text("{LANG.collapseContent}"),$("html,body").animate({scrollTop:$(".hometext").offset().top},500)):($(".bodytext").slideUp("slow"),$(this).attr("href","open").text("{LANG.moreContent}"),$("html,body").animate({scrollTop:$(".detailContent").offset().top},500));return!1});
-</script>
-
-<!-- BEGIN: otherClips -->
-<div class="otherClips marginbottom15 clearfix">
-<!-- BEGIN: otherClipsContent -->
-<div class="otherClipsContent">
-    <div class="ctn1">
-        <div class="ctn2">
-            <div style="background:transparent url({OTHERCLIPSCONTENT.img}) no-repeat center center">
-                <a class="otcl" href="{OTHERCLIPSCONTENT.href}" title="{OTHERCLIPSCONTENT.title}">
-                <img src="{NV_BASE_SITEURL}images/pix.gif" alt="{OTHERCLIPSCONTENT.title}" width="120" height="80" /></a>
-            </div>
-            <div class="vtitle"><a class="otcl" href="{OTHERCLIPSCONTENT.href}" title="{OTHERCLIPSCONTENT.title}">{OTHERCLIPSCONTENT.sortTitle}</a></div>
-            <div class="viewHits">{LANG.viewHits} <span>{OTHERCLIPSCONTENT.view}</span></div>
-            <div class="play">
-                <a class="otcl" href="{OTHERCLIPSCONTENT.href}" title="{OTHERCLIPSCONTENT.title}">
-                <img src="{NV_BASE_SITEURL}images/pix.gif" alt="{OTHERCLIPSCONTENT.title}" width="120" height="32" /></a>
+            <div class="clearfix"></div>
+            <div class="hometext">
+                {DETAILCONTENT.hometext}
+                <!-- BEGIN: bodytext -->
+                <div class="bodytext" style="display:none">{DETAILCONTENT.bodytext}</div>
+                <div class="bodybutton"><a href="open" class="bodybutton">{LANG.moreContent}</a></div>
+                <!-- END: bodytext -->
             </div>
         </div>
     </div>
-</div>
-<!-- BEGIN: clearfix --><div class="clearfix"></div><!-- END: clearfix -->
-<!-- END: otherClipsContent -->
-</div>
-<script type="text/javascript">
-$("a.otcl").click(function(){var b=$(this).attr("href");return $.ajax({type:"POST",url:b,data:"aj=1",success:function(a){if("access forbidden"==a)return alert("{LANG.accessForbidden}"),!1;$("#videoDetail").html(a)}}),!1});
-</script>
-<!-- END: otherClips -->
+	<script type="text/javascript">
+	function addLikeImage() {
+	    var b = intval($("#ilikehit").text()), c = intval($("#iunlikehit").text()), d = $(".image").width();
+	    if (0 == b && 0 == c) $(".image").removeClass("imageunlike").addClass("image0"), $("#imglike").removeClass("like").width(1), $("#plike,#punlike").text("");
+	    else if ($(".image").removeClass("image0").addClass("imageunlike"), 0 == b) $("#imglike").removeClass("like").width(1), $("#plike").text("0%"), $("#punlike").text("100%");
+	    else {
+	        var a = intval(100 * b / (b + c)),
+	            b = intval(a * (d / 100)),
+	            e = 100 - a;
+	        $("#imglike").addClass("like").animate({
+	                width: b
+	            },
+	            1500,
+	            function() {
+	                $("#plike").text(a + "%");
+	                $("#punlike").text(e + "%")
+	            })
+	    }
+	}
+	$(function() {
+	    addLikeImage()
+	});
+	$("a.likeButton").click(function() {
+	    var b = $(this).attr("href"), c = $("img", this).attr("class"), d = $(this).offset();
+	    $.ajax({
+	        type: "POST",
+	        url: b,
+	        data: "aj=" + c,
+	        success: function(a) {
+	            if ("access forbidden" == a) return alert("{LANG.accessForbidden}"), !1;
+	            var a = a.split("_"), b = "like" == a[0] || "unlike" == a[0] ? "{LANG.thank}" : "{LANG.thankBroken}";
+	            $("#i" + a[0]).text(a[1]);
+	            addLikeImage();
+	            $("#mesHide").text(b).css({
+	                left: d.left + 50 + "px",
+	                top: d.top - 100 + "px",
+	                "z-index": 1E4
+	            }).show("slow");
+	            setTimeout(function() {
+                    $("div#mesHide").css({
+                        "z-index": "-1"
+                    }).hide("slow")
+                },
+                3E3)
+	        }
+	    });
+	    return !1
+	});
+	$("a.bodybutton").click(function() {
+	    "open" == $(this).attr("href") ? ($(".bodytext").slideDown("slow"), $(this).attr("href", "close").text("{LANG.collapseContent}"), $("html,body").animate({
+	        scrollTop: $(".hometext").offset().top
+	    }, 500)) : ($(".bodytext").slideUp("slow"), $(this).attr("href", "open").text("{LANG.moreContent}"), $("html,body").animate({
+	        scrollTop: $(".detailContent").offset().top
+	    }, 500));
+	    return !1
+	});
+	</script>
 
+	<!-- BEGIN: otherClips -->
+	<div class="otherClips marginbottom15 clearfix">
+	<!-- BEGIN: otherClipsContent -->
+	<div class="otherClipsContent">
+	    <div class="ctn1">
+	        <div class="ctn2">
+	            <div style="background:transparent url({OTHERCLIPSCONTENT.img}) no-repeat center center">
+	                <a class="otcl" href="{OTHERCLIPSCONTENT.href}" title="{OTHERCLIPSCONTENT.title}">
+	                <img src="{NV_BASE_SITEURL}images/pix.gif" alt="{OTHERCLIPSCONTENT.title}" width="120" height="80" /></a>
+	            </div>
+	            <div class="vtitle"><a class="otcl" href="{OTHERCLIPSCONTENT.href}" title="{OTHERCLIPSCONTENT.title}">{OTHERCLIPSCONTENT.sortTitle}</a></div>
+	            <div class="viewHits">{LANG.viewHits} <span>{OTHERCLIPSCONTENT.view}</span></div>
+	            <div class="play">
+	                <a class="otcl" href="{OTHERCLIPSCONTENT.href}" title="{OTHERCLIPSCONTENT.title}">
+	                <img src="{NV_BASE_SITEURL}images/pix.gif" alt="{OTHERCLIPSCONTENT.title}" width="120" height="32" /></a>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<!-- BEGIN: clearfix --><div class="clearfix"></div><!-- END: clearfix -->
+	<!-- END: otherClipsContent -->
+	</div>
+	<script type="text/javascript">
+	$("a.otcl").click(function(){var b=$(this).attr("href");return $.ajax({type:"POST",url:b,data:"aj=1",success:function(a){if("access forbidden"==a)return alert("{LANG.accessForbidden}"),!1;$("#videoDetail").html(a)}}),!1});
+	</script>
+	<!-- END: otherClips -->
 </div>
+
 <!-- BEGIN: commentSector -->
 <div id="commentSector">
 {COMMENTSECTOR}
@@ -146,8 +197,7 @@ return!1});
 <!-- END: ifNotGuest -->
 <!-- BEGIN: commentForm -->
 <div class="commentForm marginbottom10">
-<div class="commTextarea">
-<textarea id="myComment" maxlength="500">{LANG.yourComment}. {LANG.characters3}</textarea>
+<div class="commTextarea"><textarea id="myComment" maxlength="500">{LANG.yourComment}. {LANG.characters3}</textarea>
 </div>
 <div class="commSubmit">
 <button id="commSubmit">&nbsp;OK&nbsp;</button>

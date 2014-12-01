@@ -1,17 +1,17 @@
 <!-- BEGIN: main -->
-<div id="ablist">
-	<select name="tList" class="ajvd-input">
+<div id="ablist" class="form-inline">
+	<select name="tList" class="form-control ajvd-input">
 		<option value="">{LANG.topicselect}</option>
 		<!-- BEGIN: psopt4 --><option value="{OPTION4.id}">{OPTION4.name}</option><!-- END: psopt4 -->
 	</select>
-	<input style="margin-right:50px" name="ok2" type="button" value="OK" class="ajvd-button"/>
-	<input name="addNew" type="button" value="{LANG.addClip}" class="ajvd-button"/>
+	<input style="margin-right:50px" name="ok2" type="button" value="OK" class="btn btn-primary"/>
+	<input name="addNew" type="button" value="{LANG.addClip}" class="btn btn-success"/>
 </div>
 <div class="myh3">
 	{PTITLE}
 </div>
 <div id="pageContent">
-	<table class="tab1">
+	<table class="table table-striped table-bordered table-hover">
 		<col style="width:120px" />
 		<thead>
 			<tr>
@@ -21,8 +21,8 @@
 				<td style="text-align:right">{LANG.feature}</td>
 			</tr>
 		</thead>
+		<tbody>
 		<!-- BEGIN: loop -->
-		<tbody{CLASS}>
 			<tr>
 				<td>{DATA.adddate}</td>
 				<td>{DATA.title}</td>
@@ -34,8 +34,8 @@
 					<a class="del" href="{DATA.id}">{GLANG.delete}</a>
 				</td>
 			</tr>
-			</tbody>
 			<!-- END: loop -->
+			<tbody>
 	</table>
 	<div id="nv_generate_page">{NV_GENERATE_PAGE}</div>
 </div>
@@ -49,20 +49,18 @@ $("input[name=ok2]").click(function(){var a=$("select[name=tList]").val();window
 <!-- BEGIN: add -->
 <h3 class="myh3">{INFO_TITLE}</h3>
 <div class="red">{ERROR_INFO}</div>
-<form id="addInformation" method="post" action="{POST.action}">
-	<table class="tab1">
+<form class="form-inline" id="addInformation" method="post" action="{POST.action}">
+	<table class="table table-striped table-bordered table-hover">
 		<col style="width:220px" />
-		<tbody class="second">
+		<tbody>
 			<tr>
 				<td>{LANG.title}<span style="color:red">*</span></td>
-				<td><input title="{LANG.title}" type="text" name="title" value="{POST.title}" class="txt-half ajvd-input" maxlength="255" /></td>
+				<td><input title="{LANG.title}" type="text" name="title" value="{POST.title}" class="form-control txt-half ajvd-input" maxlength="255" /></td>
 			</tr>
-		</tbody>
-		<tbody>
 			<tr>
 				<td>{LANG.topic_parent}</td>
 				<td>
-					<select name="tid" class="ajvd-input">
+					<select name="tid" class="form-control ajvd-input">
 						<!-- BEGIN: option3 -->
 						<option value="{OPTION3.value}"{OPTION3.selected}>
 							{OPTION3.name}
@@ -71,68 +69,45 @@ $("input[name=ok2]").click(function(){var a=$("select[name=tList]").val();window
 					</select>
 				</td>
 			</tr>
-		</tbody>
-		<tbody class="second">
 			<tr>
 				<td>{LANG.internalpath}</td>
 				<td>
-					<input title="{LANG.internalpath}" type="text" name="internalpath" id="internalpath" value="{POST.internalpath}" class="txt-half ajvd-input" maxlength="255" />
-					<input type="button" value="{LANG.BrowseServer}" class="selectfile ajvd-button-2" />
+					<input title="{LANG.internalpath}" type="text" name="internalpath" id="internalpath" value="{POST.internalpath}" class="form-control txt-half ajvd-input" maxlength="255" />
+					<input type="button" value="{LANG.BrowseServer}" class="selectfile btn btn-default" />
 				</td>
 			</tr>
-		</tbody>
-		<tbody>
 			<tr>
 				<td>{LANG.externalpath}</td>
-				<td><input title="{LANG.externalpath}" type="text" name="externalpath" value="{POST.externalpath}" class="txt-half ajvd-input" maxlength="255" /></td>
+				<td><input title="{LANG.externalpath}" type="text" name="externalpath" value="{POST.externalpath}" class="form-control txt-half ajvd-input" maxlength="255" /></td>
 			</tr>
-		</tbody>
-        <tbody class="second" style="display:none">
-            <tr>
+            <tr style="display:none">
                 <td style="vertical-align:top">{LANG.who_view}</td>
                 <td>
-                    <select name="who_view" class="ajvd-input">
-                        <!-- BEGIN: who_view -->
-                        <option value="{WHO_VIEW.key}"{WHO_VIEW.selected}>{WHO_VIEW.title}</option>
-                        <!-- END: who_view -->
-                    </select>
-                    <!-- BEGIN: group_view_empty -->
-                    <br />
-                    {LANG.group_view}<br />
 					<!-- BEGIN: groups_view -->
 					<input name="groups_view[]" value="{GROUPS_VIEW.key}" type="checkbox"{GROUPS_VIEW.checked} /> {GROUPS_VIEW.title}<br />
 					<!-- END: groups_view -->
-                    <!-- END: group_view_empty -->
                 </td>
             </tr>
-        </tbody>
-        <tbody style="display:none">
-			<tr>
+			<tr style="display:none">
 				<td>{LANG.commAllow}</td>
 				<td><input name="comm" type="checkbox"{POST.comm} value="1" /></td>
 			</tr>
-		</tbody>
-		<tbody class="second">
 			<tr>
 				<td>{LANG.homeImg}</td>
 				<td>
-					<input title="{LANG.homeImg}" type="text" name="img" id="img" value="{POST.img}" class="txt-half ajvd-input" maxlength="255" />
-					<input type="button" value="{LANG.BrowseServer}" class="selectimg ajvd-button-2" />
+					<input title="{LANG.homeImg}" type="text" name="img" id="img" value="{POST.img}" class="form-control txt-half ajvd-input" maxlength="255" />
+					<input type="button" value="{LANG.BrowseServer}" class="selectimg btn btn-default" />
 				</td>
 			</tr>
-		</tbody>
-		<tbody>
 			<tr>
 				<td>
 					{LANG.hometext}<span style="color:red">*</span>
 				</td>
 				<td><textarea title="{LANG.hometext}" name="hometext" class="ajvd-input txt-full" rows="5">{POST.hometext}</textarea></td>
 			</tr>
-		</tbody>
-		<tbody class="second">
 			<tr>
 				<td>{LANG.keywords}</td>
-				<td><input title="{LANG.keywords}" type="text" name="keywords" value="{POST.keywords}" class="txt-half ajvd-input" maxlength="255" /></td>
+				<td><input title="{LANG.keywords}" type="text" name="keywords" value="{POST.keywords}" class="form-control txt-half ajvd-input" maxlength="255" /></td>
 			</tr>
 		</tbody>
 	</table>
@@ -147,26 +122,26 @@ $("input[name=ok2]").click(function(){var a=$("select[name=tList]").val();window
 //<![CDATA[
 $("input.selectfile").click(function(){
     var a = $(this).prev().attr("id");
-    nv_open_browse_file(script_name + "?" + nv_name_variable + "=upload&popup=1&area=" + a + "&path={UPLOAD_FILE_PATH}&type=all&currentpath={UPLOAD_FILE_PATH}", "NVImg", "850", "420", "resizable=no,scrollbars=no,toolbar=no,location=no,status=no");
+    nv_open_browse(script_name + "?" + nv_lang_variable + "=" + nv_sitelang + "&" + nv_name_variable + "=upload&popup=1&area=" + a + "&path={UPLOAD_FILE_PATH}&type=all&currentpath={UPLOAD_FILE_PATH}", "NVImg", "850", "420", "resizable=no,scrollbars=no,toolbar=no,location=no,status=no");
     return !1
 });
 $("input.selectimg").click(function(){
     var a = $(this).prev().attr("id");
-    nv_open_browse_file(script_name + "?" + nv_name_variable + "=upload&popup=1&area=" + a + "&path={UPLOAD_IMG_PATH}&type=image&currentpath={UPLOAD_IMG_CURRENT}", "NVImg", "850", "420", "resizable=no,scrollbars=no,toolbar=no,location=no,status=no");
+    nv_open_browse(script_name + "?" + nv_lang_variable + "=" + nv_sitelang + "&" + nv_name_variable + "=upload&popup=1&area=" + a + "&path={UPLOAD_IMG_PATH}&type=image&currentpath={UPLOAD_IMG_CURRENT}", "NVImg", "850", "420", "resizable=no,scrollbars=no,toolbar=no,location=no,status=no");
     return !1
 });
 $("form#addInformation").submit(function(){
     var a = trim($("input[name=title]").val());
     $("input[name=title]").val(a);
-    if ("" == a) return alert("{LANG.error1}"), $("input[name=title]").val("").select(), !1;
+    if("" == a) return alert("{LANG.error1}"), $("input[name=title]").val("").select(), !1;
     a = trim($("input[name=internalpath]").val());
     $("input[name=internalpath]").val(a);
     b = trim($("input[name=externalpath]").val());
     $("input[name=externalpath]").val(b);
-    if ("" == a && "" == b) return alert("{LANG.error5}"), $("input[name=internalpath]").select(), !1;
+    if("" == a && "" == b) return alert("{LANG.error5}"), $("input[name=internalpath]").select(), !1;
     a = trim($("textarea[name=hometext]").val());
     $("textarea[name=hometext]").val(a);
-    if ("" == a) return alert("{LANG.error7}"), $("textarea[name=hometext]").val("").select(), !1;
+    if("" == a) return alert("{LANG.error7}"), $("textarea[name=hometext]").val("").select(), !1;
     $("form#addInformation").submit();
     return !1
 });

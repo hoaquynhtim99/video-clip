@@ -44,8 +44,8 @@
 .videoInfo .cont .fr{position:absolute;top:4px;right:4px;text-align:right}
 .videoInfo .shareFeelings{font:normal 11px Tahoma;margin-bottom:8px;height:12px}
 .videoInfo a.likeButton{display:inline-block;background:#E1E1E1;font:700 12px/30px Arial;border:1px #d6d6d6 solid;padding:0 10px;text-decoration:none;color:#5B5B5B;margin-right:2px}
-.videoInfo a.likeButton img.like{background:transparent url(../images/video-clip/like.png) no-repeat left top;width:15px;height:14px;margin-right:4px}
-.videoInfo a.likeButton img.unlike{background:transparent url(../images/video-clip/like.png) no-repeat left -14px;width:15px;height:14px;margin-right:4px;vertical-align:middle}
+.videoInfo a.likeButton img.likehit{background:transparent url(../images/video-clip/like.png) no-repeat left top;width:15px;height:14px;margin-right:4px}
+.videoInfo a.likeButton img.unlikehit{background:transparent url(../images/video-clip/like.png) no-repeat left -14px;width:15px;height:14px;margin-right:4px;vertical-align:middle}
 .videoInfo a.likeButton img.broken{background:transparent url(../images/video-clip/like.png) no-repeat left -28px;width:15px;height:14px;margin-right:4px;vertical-align:middle}
 .videoInfo a.likeButton:hover{background:#f3f3f3;text-decoration:none}
 .videoInfo div.viewcount{position:relative;font:normal 11px Tahoma;color:#5B5B5B;text-align:right;margin-bottom:8px}
@@ -63,6 +63,7 @@
 .videoInfo div.bodybutton{position:relative;margin-top:10px;text-align:center}
 .videoInfo a.bodybutton{display:inline-block;background:#E1E1E1;font:700 12px Arial;border:1px #d6d6d6 solid;padding:3px;text-decoration:none;color:#5B5B5B}
 .videoInfo .hide{display:none}
+#videoCont_wrapper{margin: 0 auto;}
 
 /* Comment */
 .commentList{position:relative}

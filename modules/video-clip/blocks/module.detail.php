@@ -1,10 +1,11 @@
 <?php
 
 /**
- * @Project VIDEO CLIPS AJAX 3.x
+ * @Project VIDEO CLIPS AJAX 4.x
  * @Author PHAN TAN DUNG (phantandung92@gmail.com)
- * @Copyright (C) 2013 PHAN TAN DUNG. All rights reserved
- * @Createdate Dec 08, 2013, 09:57:59 PM
+ * @Copyright (C) 2014 PHAN TAN DUNG. All rights reserved
+ * @License GNU/GPL version 2 or any later version
+ * @Createdate Dec 01, 2014, 04:33:14 AM
  */
 
 if( ! defined( 'NV_IS_MOD_VIDEOCLIPS' ) ) die( 'Stop!!!' );
@@ -24,12 +25,12 @@ if( $VideoData['comm'] )
 	if( $nv_Request->isset_request( 'cpgnum', 'post' ) ) $cpgnum = $nv_Request->get_int( 'cpgnum', 'post', 0 );
 
 	$sql = "SELECT a.*, b.username, b.email, b.full_name, b.gender, b.photo, b.view_mail, b.md5username 
-    FROM `" . NV_PREFIXLANG . "_" . $module_data . "_comm` a, `" . NV_USERS_GLOBALTABLE . "` b 
+    FROM " . NV_PREFIXLANG . "_" . $module_data . "_comm a, " . NV_USERS_GLOBALTABLE . " b 
     WHERE a.cid=" . $VideoData['id'] . " AND a.status=1 AND a.userid=b.userid 
     ORDER BY a.id DESC LIMIT " . $cpgnum . ", " . ( $configMods['commNum'] + 1 );
-	$result = $db->sql_query( $sql );
+	$result = $db->query( $sql );
 	$i = 0;
-	while ( $row = $db->sql_fetch_assoc( $result ) )
+	while ( $row = $result->fetch() )
 	{
 		if( $i <= $configMods['commNum'] - 1 )
 		{
@@ -87,7 +88,7 @@ if( $isDetail )
 $xtpl->parse( 'main' );
 $content = $xtpl->text( "main" );
 
-if( $nv_Request->isset_request( 'aj', 'post' ) and ( $aj = filter_text_input( 'aj', 'post', '', 0 ) == 1 ) )
+if( $nv_Request->isset_request( 'aj', 'post' ) and ( $aj = $nv_Request->get_title( 'aj', 'post', '', 0 ) == 1 ) )
 {
 	echo $content;
 	exit;
@@ -97,5 +98,3 @@ $content = "<div id=\"videoDetail\">" . $content . "</div>\n";
 
 $my_head .= "<script type=\"text/javascript\" src=\"" . NV_BASE_SITEURL . "modules/" . $module_file . "/js/jquery.autoresize.js\"></script>\n";
 $my_head .= "<script type=\"text/javascript\" src=\"" . NV_BASE_SITEURL . "modules/" . $module_file . "/js/jwplayer.js\"></script>\n";
-
-?>

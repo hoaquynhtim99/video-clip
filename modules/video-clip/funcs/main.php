@@ -1,15 +1,16 @@
 <?php
 
 /**
- * @Project VIDEO CLIPS AJAX 3.x
+ * @Project VIDEO CLIPS AJAX 4.x
  * @Author PHAN TAN DUNG (phantandung92@gmail.com)
- * @Copyright (C) 2013 PHAN TAN DUNG. All rights reserved
- * @Createdate Dec 08, 2013, 09:57:59 PM
+ * @Copyright (C) 2014 PHAN TAN DUNG. All rights reserved
+ * @License GNU/GPL version 2 or any later version
+ * @Createdate Dec 01, 2014, 04:33:14 AM
  */
 
-if ( ! defined( 'NV_IS_MOD_VIDEOCLIPS' ) ) die( 'Stop!!!' );
+if( ! defined( 'NV_IS_MOD_VIDEOCLIPS' ) ) die( 'Stop!!!' );
 
-$pgnum = $nv_Request->get_int( "page", "get", 0 ); // Trang
+$pgnum = $nv_Request->get_int( "page", "get", 1 ); // Trang
 $base_url = NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;ajax=1";
 if( $topicID )
 {
@@ -31,7 +32,7 @@ if( $topicID )
 	}
 }
 
-$sql = "SELECT SQL_CALC_FOUND_ROWS a.*,b.view FROM `" . NV_PREFIXLANG . "_" . $module_data . "_clip` a, `" . NV_PREFIXLANG . "_" . $module_data . "_hit` b WHERE a.id=b.cid AND a.status=1" . $sqlTopic . " ORDER BY a.id DESC LIMIT " . $pgnum . "," . $configMods['otherClipsNum'];
+$sql = "SELECT SQL_CALC_FOUND_ROWS a.*,b.view FROM " . NV_PREFIXLANG . "_" . $module_data . "_clip a, " . NV_PREFIXLANG . "_" . $module_data . "_hit b WHERE a.id=b.cid AND a.status=1" . $sqlTopic . " ORDER BY a.id DESC LIMIT " . ( ( $pgnum - 1 ) * $configMods['otherClipsNum'] ) . "," . $configMods['otherClipsNum'];
 
 $xtpl = new XTemplate( "main.tpl", NV_ROOTDIR . "/themes/" . $module_info['template'] . "/modules/" . $module_file );
 $xtpl->assign( 'LANG', $lang_module );
@@ -39,7 +40,7 @@ $xtpl->assign( 'NV_BASE_SITEURL', NV_BASE_SITEURL );
 $xtpl->assign( 'MODULECONFIG', $configMods );
 
 // Chu de
-if ( ! empty( $topicList ) )
+if( ! empty( $topicList ) )
 {
 	$xtpl->assign( 'OTHERTOPIC', array(
 		'href' => NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;ajax=1",
@@ -84,16 +85,16 @@ if ( ! empty( $topicList ) )
 	$xtpl->parse( 'main.topicList' );
 }
 
-$result = $db->sql_query( $sql );
-$res = $db->sql_query( "SELECT FOUND_ROWS()" );
-list( $all_page ) = $db->sql_fetchrow( $res );
+$result = $db->query( $sql );
+$res = $db->query( "SELECT FOUND_ROWS()" );
+$all_page = $res->fetchColumn();
 $all_page = intval( $all_page );
-if ( $all_page )
+if( $all_page )
 {
 	$i = 1;
-	while ( $row = $db->sql_fetch_assoc( $result ) )
+	while ( $row = $result->fetch() )
 	{
-		if ( ! empty( $row['img'] ) )
+		if( ! empty( $row['img'] ) )
 		{
 			$imageinfo = nv_ImageInfo( NV_ROOTDIR . '/' . $row['img'], 120, true, NV_ROOTDIR . '/' . NV_FILES_DIR . '/' . $module_name );
 			$row['img'] = $imageinfo['src'];
@@ -115,7 +116,7 @@ if ( $all_page )
 	}
 
 	$generate_page = nv_generate_page( $base_url, $all_page, $configMods['otherClipsNum'], $pgnum, true, true, 'nv_urldecode_ajax', 'VideoPageData' );
-	if ( ! empty( $generate_page ) )
+	if( ! empty( $generate_page ) )
 	{
 		$xtpl->assign( 'NV_GENERATE_PAGE', $generate_page );
 		$xtpl->parse( 'main.otherClips.nv_generate_page' );
@@ -127,17 +128,15 @@ if ( $all_page )
 if( $nv_Request->isset_request( "ajax", "get" ) )
 {
 	$contents = $xtpl->text( "main.otherClips" );
-	include ( NV_ROOTDIR . "/includes/header.php" );
+	include NV_ROOTDIR . '/includes/header.php';
 	echo $contents;
-	include ( NV_ROOTDIR . "/includes/footer.php" );
+	include NV_ROOTDIR . '/includes/footer.php';
 	exit();
 }
 
 $xtpl->parse( 'main' );
 $contents = $xtpl->text( "main" );
 
-include ( NV_ROOTDIR . "/includes/header.php" );
+include NV_ROOTDIR . '/includes/header.php';
 echo nv_site_theme( $contents );
-include ( NV_ROOTDIR . "/includes/footer.php" );
-
-?>
+include NV_ROOTDIR . '/includes/footer.php';

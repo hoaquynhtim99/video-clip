@@ -1,13 +1,14 @@
 <?php
 
 /**
- * @Project VIDEO CLIPS AJAX 3.x
+ * @Project VIDEO CLIPS AJAX 4.x
  * @Author PHAN TAN DUNG (phantandung92@gmail.com)
- * @Copyright (C) 2013 PHAN TAN DUNG. All rights reserved
- * @Createdate Dec 08, 2013, 09:57:59 PM
+ * @Copyright (C) 2014 PHAN TAN DUNG. All rights reserved
+ * @License GNU/GPL version 2 or any later version
+ * @Createdate Dec 01, 2014, 04:33:14 AM
  */
 
-if ( ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
+if( ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
 
 $module_version = array(
 	"name" => "Videoclips",
@@ -15,8 +16,8 @@ $module_version = array(
 	"submenu" => "main",
 	"is_sysmod" => 0,
 	"virtual" => 1,
-	"version" => "3.4.07",
-	"date" => "Thu, 20 Sep 2012 04:05:46 GMT",
+	"version" => "4.0.01",
+	"date" => "Mon, 01 Dec 2014 00:00:00 GMT",
 	"author" => "PHAN TAN DUNG (phantandung92@gmail.com)",
 	"uploads_dir" => array( $module_name ),
 	"note" => "Module playback of video-clips",
@@ -28,5 +29,3 @@ $module_version = array(
 	),
 	"files_dir" => array( $module_name ) 
 );
-
-?>

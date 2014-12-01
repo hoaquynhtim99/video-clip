@@ -1,10 +1,11 @@
 <?php
 
 /**
- * @Project VIDEO CLIPS AJAX 3.x
+ * @Project VIDEO CLIPS AJAX 4.x
  * @Author PHAN TAN DUNG (phantandung92@gmail.com)
- * @Copyright (C) 2013 PHAN TAN DUNG. All rights reserved
- * @Createdate Dec 08, 2013, 09:57:59 PM
+ * @Copyright (C) 2014 PHAN TAN DUNG. All rights reserved
+ * @License GNU/GPL version 2 or any later version
+ * @Createdate Dec 01, 2014, 04:33:14 AM
  */
 
 if( ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
@@ -84,7 +85,7 @@ if( ! nv_function_exists( 'nv_box_video' ) )
 		
 		$xtpl = new XTemplate( "block.box_video.tpl", NV_ROOTDIR . "/themes/" . $block_theme . "/modules/" . $file );
 
-		$sql = "SELECT * FROM `" . NV_PREFIXLANG . "_" . $data . "_clip` WHERE `status`=1 ORDER BY `id` DESC LIMIT 0," . $block_config['num_videos'];
+		$sql = "SELECT * FROM " . NV_PREFIXLANG . "_" . $data . "_clip WHERE status=1 ORDER BY id DESC LIMIT 0," . $block_config['num_videos'];
 		$list = nv_db_cache( $sql, '', $module );
 
 		$i = 1;
@@ -118,7 +119,7 @@ if( ! nv_function_exists( 'nv_box_video' ) )
 		$xtpl->assign( 'MODULE_LINK', NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module );
 		
 		// Xuat topic
-		$sql = "SELECT * FROM `" . NV_PREFIXLANG . "_" . $data . "_topic` WHERE `parentid`=0 ORDER BY `weight` ASC";
+		$sql = "SELECT * FROM " . NV_PREFIXLANG . "_" . $data . "_topic WHERE parentid=0 ORDER BY weight ASC";
 		$list = nv_db_cache( $sql, '', $module );
 		
 		$i = 1;
@@ -140,5 +141,3 @@ if( defined( 'NV_SYSTEM' ) )
 {
     $content = nv_box_video( $block_config );
 }
-
-?>

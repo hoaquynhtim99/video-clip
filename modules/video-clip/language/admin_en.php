@@ -1,14 +1,15 @@
 <?php
 
 /**
- * @Project VIDEO CLIPS AJAX 3.x
+ * @Project VIDEO CLIPS AJAX 4.x
  * @Author PHAN TAN DUNG (phantandung92@gmail.com)
- * @Copyright (C) 2013 PHAN TAN DUNG. All rights reserved
+ * @Copyright (C) 2014 PHAN TAN DUNG. All rights reserved
+ * @License GNU/GPL version 2 or any later version
  * @Language English
- * @Createdate Dec 08, 2013, 09:57:59 PM
+ * @Createdate Dec 01, 2014, 04:33:14 AM
  */
 
-if ( ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
+if( ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
 
 $lang_translator['author'] = "VINADES.,JSC (contact@vinades.vn)";
 $lang_translator['createdate'] = "20/09/2012, 04:05";
@@ -81,5 +82,3 @@ $lang_module['error5'] = "Error! Video file was not specified";
 $lang_module['error6'] = "Error! Picture was not specified";
 $lang_module['error7'] = "Error! Please report content in the Description box";
 $lang_module['error8'] = "Error! Please report content in the textarea";
-
-?>
