@@ -122,12 +122,12 @@ $("input[name=ok2]").click(function(){var a=$("select[name=tList]").val();window
 //<![CDATA[
 $("input.selectfile").click(function(){
     var a = $(this).prev().attr("id");
-    nv_open_browse(script_name + "?" + nv_lang_variable + "=" + nv_sitelang + "&" + nv_name_variable + "=upload&popup=1&area=" + a + "&path={UPLOAD_FILE_PATH}&type=all&currentpath={UPLOAD_FILE_PATH}", "NVImg", "850", "420", "resizable=no,scrollbars=no,toolbar=no,location=no,status=no");
+    nv_open_browse(script_name + "?" + nv_lang_variable + "=" + nv_lang_data + "&" + nv_name_variable + "=upload&popup=1&area=" + a + "&path={UPLOAD_FILE_PATH}&type=all&currentpath={UPLOAD_FILE_PATH}", "NVImg", "850", "420", "resizable=no,scrollbars=no,toolbar=no,location=no,status=no");
     return !1
 });
 $("input.selectimg").click(function(){
     var a = $(this).prev().attr("id");
-    nv_open_browse(script_name + "?" + nv_lang_variable + "=" + nv_sitelang + "&" + nv_name_variable + "=upload&popup=1&area=" + a + "&path={UPLOAD_IMG_PATH}&type=image&currentpath={UPLOAD_IMG_CURRENT}", "NVImg", "850", "420", "resizable=no,scrollbars=no,toolbar=no,location=no,status=no");
+    nv_open_browse(script_name + "?" + nv_lang_variable + "=" + nv_lang_data + "&" + nv_name_variable + "=upload&popup=1&area=" + a + "&path={UPLOAD_IMG_PATH}&type=image&currentpath={UPLOAD_IMG_CURRENT}", "NVImg", "850", "420", "resizable=no,scrollbars=no,toolbar=no,location=no,status=no");
     return !1
 });
 $("form#addInformation").submit(function(){

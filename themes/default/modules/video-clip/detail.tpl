@@ -32,9 +32,9 @@ $(document).ready(function(){
             <div class="cont2">
                 <div class="fl">
                     <div class="shareFeelings">{LANG.shareFeelings}</div>
-                    <a class="likeButton" href="{DETAILCONTENT.url}"><img class="likehit" src="{NV_BASE_SITEURL}images/pix.gif" alt="" width="15" height="14" /><span>{LANG.like}</span></a>
-                    <a class="likeButton" href="{DETAILCONTENT.url}"><img class="unlikehit" src="{NV_BASE_SITEURL}images/pix.gif" alt="" width="15" height="14" /><span>{LANG.unlike}</span></a>
-                    <a class="likeButton" href="{DETAILCONTENT.url}"><img class="broken" src="{NV_BASE_SITEURL}images/pix.gif" alt="" width="15" height="14" /><span>{LANG.broken}</span></a>
+                    <a class="likeButton" href="{DETAILCONTENT.url}"><img class="likehit" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/images/pix.gif" alt="" width="15" height="14" /><span>{LANG.like}</span></a>
+                    <a class="likeButton" href="{DETAILCONTENT.url}"><img class="unlikehit" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/images/pix.gif" alt="" width="15" height="14" /><span>{LANG.unlike}</span></a>
+                    <a class="likeButton" href="{DETAILCONTENT.url}"><img class="broken" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/images/pix.gif" alt="" width="15" height="14" /><span>{LANG.broken}</span></a>
                 </div>
                 <div class="fr">
                     <div class="viewcount">
@@ -44,7 +44,7 @@ $(document).ready(function(){
                         {LANG.viewHits}: <span>{DETAILCONTENT.view}</span><!-- BEGIN: ifComm -->,&nbsp;{LANG.commHits}: <span id="commHits">{DETAILCONTENT.comment}</span><!-- END: ifComm -->
                     </div>
                     <div style="float:right;">
-                        <div class="image image0"><img id="imglike" src="{NV_BASE_SITEURL}images/pix.gif" alt="" width="1" /></div>
+                        <div class="image image0"><img id="imglike" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/images/pix.gif" alt="" width="1" /></div>
                         <div class="likeDetail">
                             <div class="likeLeft">{LANG.like}: <span class="strong" id="ilikehit">{DETAILCONTENT.likehit}</span><br /><span id="plike"></span></div>
                             <div class="likeRight">{LANG.unlike}: <span class="strong" id="iunlikehit">{DETAILCONTENT.unlikehit}</span><br /><span id="punlike"></span></div>
@@ -55,11 +55,11 @@ $(document).ready(function(){
             <div class="clearfix"></div>
             <div class="hometext">
                 {DETAILCONTENT.hometext}
-                <!-- BEGIN: bodytext -->
-                <div class="bodytext" style="display:none">{DETAILCONTENT.bodytext}</div>
-                <div class="bodybutton"><a href="open" class="bodybutton">{LANG.moreContent}</a></div>
-                <!-- END: bodytext -->
             </div>
+            <!-- BEGIN: bodytext -->
+            <div class="bodytext" style="display:none">{DETAILCONTENT.bodytext}</div>
+            <div class="bodybutton"><a href="open" class="bodybutton">{LANG.moreContent}</a></div>
+            <!-- END: bodytext -->
         </div>
     </div>
 	<script type="text/javascript">
@@ -128,13 +128,13 @@ $(document).ready(function(){
 	        <div class="ctn2">
 	            <div style="background:transparent url({OTHERCLIPSCONTENT.img}) no-repeat center center">
 	                <a class="otcl" href="{OTHERCLIPSCONTENT.href}" title="{OTHERCLIPSCONTENT.title}">
-	                <img src="{NV_BASE_SITEURL}images/pix.gif" alt="{OTHERCLIPSCONTENT.title}" width="120" height="80" /></a>
+	                <img src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/images/pix.gif" alt="{OTHERCLIPSCONTENT.title}" width="120" height="80" /></a>
 	            </div>
 	            <div class="vtitle"><a class="otcl" href="{OTHERCLIPSCONTENT.href}" title="{OTHERCLIPSCONTENT.title}">{OTHERCLIPSCONTENT.sortTitle}</a></div>
 	            <div class="viewHits">{LANG.viewHits} <span>{OTHERCLIPSCONTENT.view}</span></div>
 	            <div class="play">
 	                <a class="otcl" href="{OTHERCLIPSCONTENT.href}" title="{OTHERCLIPSCONTENT.title}">
-	                <img src="{NV_BASE_SITEURL}images/pix.gif" alt="{OTHERCLIPSCONTENT.title}" width="120" height="32" /></a>
+	                <img src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/images/pix.gif" alt="{OTHERCLIPSCONTENT.title}" width="120" height="32" /></a>
 	            </div>
 	        </div>
 	    </div>

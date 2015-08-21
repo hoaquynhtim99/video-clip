@@ -24,7 +24,7 @@ if( $VideoData['comm'] )
 {
 	if( $nv_Request->isset_request( 'cpgnum', 'post' ) ) $cpgnum = $nv_Request->get_int( 'cpgnum', 'post', 0 );
 
-	$sql = "SELECT a.*, b.username, b.email, b.full_name, b.gender, b.photo, b.view_mail, b.md5username 
+	$sql = "SELECT a.*, b.username, b.email, b.first_name, b.last_name, b.gender, b.photo, b.view_mail, b.md5username 
     FROM " . NV_PREFIXLANG . "_" . $module_data . "_comm a, " . NV_USERS_GLOBALTABLE . " b 
     WHERE a.cid=" . $VideoData['id'] . " AND a.status=1 AND a.userid=b.userid 
     ORDER BY a.id DESC LIMIT " . $cpgnum . ", " . ( $configMods['commNum'] + 1 );
@@ -32,6 +32,8 @@ if( $VideoData['comm'] )
 	$i = 0;
 	while ( $row = $result->fetch() )
 	{
+		$row['full_name'] = trim( $row['first_name'] . ' ' . $row['last_name'] );
+		
 		if( $i <= $configMods['commNum'] - 1 )
 		{
 			$comments[$i] = $row;
