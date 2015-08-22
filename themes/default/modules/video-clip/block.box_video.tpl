@@ -23,7 +23,7 @@
 			<div class="it">
 				<div class="ct">
 					<div class="img">
-						<img src="{ROW.img}" alt="{ROW.title}" width="115"/>
+						<img src="{ROW.img}" alt="{ROW.title}"/>
 						<a href="{ROW.href}" title="{ROW.title}">&nbsp;</a>
 					</div>
 					<h3><a href="{ROW.href}" title="{ROW.title}">{ROW.title}</a></h3>

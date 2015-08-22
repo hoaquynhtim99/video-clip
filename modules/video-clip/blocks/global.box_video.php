@@ -50,7 +50,7 @@ if( ! nv_function_exists( 'nv_box_video' ) )
 		$return = array();
 		$return['error'] = array();
 		$return['config'] = array();
-		$return['config']['num_videos'] = $nv_Request->get_int( 'config_num_videos', 'post', 5 );
+		$return['config']['num_videos'] = $nv_Request->get_int( 'config_num_videos', 'post', 6 );
 		$return['config']['num_topics'] = $nv_Request->get_int( 'config_num_topics', 'post', 5 );
 		return $return;
 	}
