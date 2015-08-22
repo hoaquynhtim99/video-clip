@@ -24,10 +24,10 @@ else
     $result = $db->query( $sql );
     while ( list( $alias, $publtime ) = $result->fetch( 3 ) )
     {
-        $url[] = array( //
-            'link' => NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $alias, //
-            'publtime' => $publtime //
-            );
+        $url[] = array(
+            'link' => NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $alias . $global_config['rewrite_exturl'],
+            'publtime' => $publtime
+        );
     }
     
     $cache = serialize($url);

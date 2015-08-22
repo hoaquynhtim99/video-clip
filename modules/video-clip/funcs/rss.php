@@ -32,13 +32,13 @@ if( $module_info['rss'] )
 		}
 
 		$rimages = ( ! empty( $homeimgfile ) ) ? "<img src=\"" . NV_MY_DOMAIN . NV_BASE_SITEURL . $homeimgfile . "\" width=\"100\" border=\"0\" align=\"left\">" : "";
-		$items[] = array( //
-			'title' => $title, //
-			'link' => NV_MY_DOMAIN . NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $alias, //
-			'guid' => $module_name . '_' . $id, //
-			'description' => $rimages . $hometext, //
-			'pubdate' => $publtime //
-				);
+		$items[] = array(
+			'title' => $title,
+			'link' => NV_MY_DOMAIN . NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $alias . $global_config['rewrite_exturl'],
+			'guid' => $module_name . '_' . $id,
+			'description' => $rimages . $hometext,
+			'pubdate' => $publtime
+		);
 	}
 }
 

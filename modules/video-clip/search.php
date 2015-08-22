@@ -15,25 +15,25 @@ FROM " . NV_PREFIXLANG . "_" . $m_values['module_data'] . "_clip
 WHERE status=1 AND (" . nv_like_logic( 'title', $dbkeyword, $logic ) . " 
 OR " . nv_like_logic( 'hometext', $dbkeyword, $logic ) . " 
 OR " . nv_like_logic( 'bodytext', $dbkeyword, $logic ) . ") 
-LIMIT " . $pages . "," . $limit;
+LIMIT " . ( ( $page - 1 ) * $limit ) . ", " . $limit;
 
 $tmp_re = $db->query( $sql );
 
 $result = $db->query( "SELECT FOUND_ROWS()" );
-$all_page = $result->fetchColumn();
+$num_items = $result->fetchColumn();
 
-if( $all_page )
+if( $num_items )
 {
 	$link = NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $m_values['module_name'] . '&amp;' . NV_OP_VARIABLE . '=';
 
-	while ( list( $tilterow, $alias, $content ) = $tmp_re->fetch( 3 ) )
+	while ( list( $tilterow, $alias, $des ) = $tmp_re->fetch( 3 ) )
 	{
-		$url = $link . $alias;
+		$url = $link . $alias . $global_config['rewrite_exturl'];
 
 		$result_array[] = array(
 			'link' => $url,
 			'title' => BoldKeywordInStr( $tilterow, $key, $logic ),
-			'content' => BoldKeywordInStr( $content, $key, $logic )
+			'content' => BoldKeywordInStr( $des, $key, $logic )
 		);
 	}
 }

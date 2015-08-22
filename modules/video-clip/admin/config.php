@@ -20,11 +20,9 @@ if( $nv_Request->isset_request( 'submit', 'post' ) )
 	$array_config['otherClipsNum'] = $nv_Request->get_int( 'otherClipsNum', 'post', 0 );
 	$array_config['playerAutostart'] = $nv_Request->get_int( 'playerAutostart', 'post', 0 );
 	$array_config['playerSkin'] = $nv_Request->get_title( 'playerSkin', 'post', '', 1 );
-	$array_config['commNum'] = $nv_Request->get_int( 'commNum', 'post', 0 );
 	$array_config['playerMaxWidth'] = $nv_Request->get_int( 'playerMaxWidth', 'post', 0 );
 	if( ! in_array( $array_config['playerSkin'] . ".zip", $skins ) ) $array_config['playerSkin'] = "";
 	if( $array_config['playerMaxWidth'] < 50 or $array_config['playerMaxWidth'] > 1000 ) $array_config['playerMaxWidth'] = 640;
-	// $array_config['allowUpload'] = $nv_Request->get_int( 'allowUpload', 'post', 0 ) ? 1 : 0;
 	$array_config['folderStructureEnable'] = $nv_Request->get_int( 'folderStructureEnable', 'post', 0 ) ? 1 : 0;
 	$array_config['titleLength'] = $nv_Request->get_int( 'titleLength', 'post', 0 );
 
@@ -34,9 +32,7 @@ if( $nv_Request->isset_request( 'submit', 'post' ) )
 	$content_config .= "\$configMods['otherClipsNum'] = " . $array_config['otherClipsNum'] . ";\n";
 	$content_config .= "\$configMods['playerAutostart'] = " . $array_config['playerAutostart'] . ";\n";
 	$content_config .= "\$configMods['playerSkin'] = \"" . nv_htmlspecialchars( $array_config['playerSkin'] ) . "\";\n";
-	$content_config .= "\$configMods['commNum'] = " . $array_config['commNum'] . ";\n";
 	$content_config .= "\$configMods['playerMaxWidth'] = " . $array_config['playerMaxWidth'] . ";\n";
-	// $content_config .= "\$configMods['allowUpload'] = " . $array_config['allowUpload'] . ";\n";
 	$content_config .= "\$configMods['folderStructureEnable'] = " . $array_config['folderStructureEnable'] . ";\n";
 	$content_config .= "\$configMods['titleLength'] = " . $array_config['titleLength'] . ";\n";
 	$content_config .= "\n";
@@ -50,9 +46,7 @@ $configMods = array();
 $configMods['otherClipsNum'] = 15; //So video-clip hien thi tren trang chu hoac trang The loai
 $configMods['playerAutostart'] = 0; //Co tu dong phat video hay khong
 $configMods['playerSkin'] = ""; //Skin cua player
-$configMods['commNum'] = "20"; //So comment hien thi mac dinh
 $configMods['playerMaxWidth'] = 798; //Chieu rong toi da cua player
-// $configMods['allowUpload'] = 1; // Cho phep dang video hay khong
 $configMods['folderStructureEnable'] = 1; // Bat cau truc thu muc upload hay khong
 $configMods['titleLength'] = 20; // 
 if( file_exists( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php" ) )
@@ -61,7 +55,6 @@ if( file_exists( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_dat
 }
 
 $configMods['playerAutostart'] = $configMods['playerAutostart'] ? " checked=\"checked\"" : "";
-// $configMods['allowUpload'] = $configMods['allowUpload'] ? " checked=\"checked\"" : "";
 $configMods['folderStructureEnable'] = $configMods['folderStructureEnable'] ? " checked=\"checked\"" : "";
 
 $xtpl = new XTemplate( $op . ".tpl", NV_ROOTDIR . "/themes/" . $global_config['module_theme'] . "/modules/" . $module_file );
@@ -82,13 +75,6 @@ foreach ( $skins as $skin )
 	$sel = $skin == $configMods['playerSkin'] ? " selected=\"selected\"" : "";
 	$xtpl->assign( 'SKIN', array( 'value' => $skin, 'select' => $sel ) );
 	$xtpl->parse( 'main.playerSkin' );
-}
-
-for ( $i = 1; $i <= 10; ++$i )
-{
-	$sel = $i * 5 == $configMods['commNum'] ? " selected=\"selected\"" : "";
-	$xtpl->assign( 'COMMNUM', array( 'value' => $i * 5, 'select' => $sel ) );
-	$xtpl->parse( 'main.commNum' );
 }
 
 $xtpl->parse( 'main' );

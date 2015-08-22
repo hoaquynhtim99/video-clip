@@ -96,80 +96,11 @@ function nv_extKeywords( $keywords )
 	return $keywords;
 }
 
-/**
- * listComm()
- * 
- * @return
- */
-function listComm()
-{
-	global $xtpl, $cpgnum, $comments, $commNext;
-
-	if( empty( $comments ) ) return "";
-
-	foreach( $comments as $comment )
-	{
-		$xtpl->assign( 'USER', $comment );
-
-		if( ! $comment['ischecked'] )
-		{
-			$xtpl->parse( 'listComm.listComm2.unchecked' );
-		}
-		if( defined( "NV_IS_MODADMIN" ) )
-		{
-			$xtpl->parse( 'listComm.listComm2.delcomm' );
-		}
-		$xtpl->parse( 'listComm.listComm2' );
-	}
-
-	if( $commNext )
-	{
-		$xtpl->assign( 'NEXTID', $cpgnum );
-		$xtpl->parse( 'listComm.ifNext' );
-	}
-	if( defined( "NV_IS_MODADMIN" ) )
-	{
-		$xtpl->parse( 'listComm.ifDelComm' );
-	}
-	$xtpl->parse( 'listComm' );
-	return $xtpl->text( "listComm" );
-}
-
-/**
- * commentReload()
- * 
- * @return
- */
-function commentReload()
-{
-	global $xtpl, $comments, $VideoData, $lang_module;
-
-	if( ! $VideoData['comm'] ) return "";
-
-	if( defined( "NV_IS_USER" ) )
-	{
-		$xtpl->parse( 'commentList.commentForm' );
-	}
-	else
-	{
-		$pleasLogin = sprintf( $lang_module['pleaseLogin'], NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=users", NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=users/register" );
-		$pleasLogin = nv_url_rewrite( $pleasLogin, 1 );
-		$xtpl->assign( 'PLEASELOGIN', $pleasLogin );
-		$xtpl->parse( 'commentList.ifNotGuest' );
-	}
-
-	$xtpl->assign( 'LISTCOMM', listComm() );
-
-	$xtpl->parse( 'commentList' );
-	return $xtpl->text( "commentList" );
-}
-
 // Cau hinh module
 $configMods = array();
 $configMods['otherClipsNum'] = 16; //So video-clip hien thi tren trang chu hoac trang The loai
 $configMods['playerAutostart'] = 0; //Co tu dong phat video hay khong
 $configMods['playerSkin'] = ""; //Skin cua player
-$configMods['commNum'] = "20"; //So comment hien thi mac dinh
 $configMods['playerMaxWidth'] = 798; //Chieu rong toi da cua player
 $configMods['titleLength'] = 20; // So ky tu cua tieu de
 
@@ -189,6 +120,10 @@ $key_words = $module_info['keywords'];
 if( isset( $module_info['description'] ) )
 {
 	$description = $module_info['description'];
+}
+else
+{
+	$description = 'no';
 }
 
 // Cac bien he thong
@@ -299,6 +234,21 @@ if( ! empty( $VideoData ) )
 // Open Graph
 if( $isDetail === true )
 {
+	$base_url_rewrite = nv_url_rewrite( NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $VideoData['alias'] . $global_config['rewrite_exturl'], true );
+	if( $_SERVER['REQUEST_URI'] == $base_url_rewrite )
+	{
+		$canonicalUrl = NV_MAIN_DOMAIN . $base_url_rewrite;
+	}
+	elseif( NV_MAIN_DOMAIN . $_SERVER['REQUEST_URI'] != $base_url_rewrite )
+	{
+		Header( 'Location: ' . $base_url_rewrite );
+		die();
+	}
+	else
+	{
+		$canonicalUrl = $base_url_rewrite;
+	}	
+	
 	$ogImage = NV_MY_DOMAIN . NV_BASE_SITEURL . "themes/" . $module_info['template'] . "/images/" . $module_file . "/video.png";
 	if( ! empty( $VideoData['img'] ) )
 	{
@@ -323,70 +273,7 @@ if( $isDetail === true )
 		include NV_ROOTDIR . '/includes/footer.php';
 		die();
 	}
-	
-	// Comment broken
-	if( $nv_Request->isset_request( 'mbroken', 'post' ) )
-	{
-		$mbroken = $nv_Request->get_title( 'mbroken', 'post', '', 1 );
-		$sessionName = "mbroken";
-		$session = isset( $_SESSION[$module_data . '_' . $sessionName] ) ? $_SESSION[$module_data . '_' . $sessionName] : "";
-		$session = intval( $session );
-		if( $session > NV_CURRENTTIME - 30 ) die( "ERROR" );
-		$query = "UPDATE " . NV_PREFIXLANG . "_" . $module_data . "_comm SET broken=broken+1 WHERE id=" . $mbroken . " AND ischecked=0";
-		$db->query( $query );
-		$_SESSION[$module_data . '_' . $sessionName] = NV_CURRENTTIME;
-		die( 'OK' );
-	}
-	
-	// Delete Comment
-	if( defined( "NV_IS_MODADMIN" ) and $nv_Request->isset_request( 'delcomm', 'post' ) )
-	{
-		$delcomm = $nv_Request->get_int( 'delcomm', 'post', 0 );
-		$sql = "SELECT cid FROM " . NV_PREFIXLANG . "_" . $module_data . "_comm WHERE id=" . $delcomm;
-		$result = $db->query( $sql );
-		$cid = $result->fetchColumn();
-	
-		$sql = "DELETE FROM " . NV_PREFIXLANG . "_" . $module_data . "_comm WHERE id=" . $delcomm;
-		$db->query( $sql );
-	
-		$sql = "SELECT COUNT(*) FROM " . NV_PREFIXLANG . "_" . $module_data . "_comm WHERE cid=" . $cid;
-		$result = $db->query( $sql );
-		$count = $result->fetchColumn();
-	
-		$query = "UPDATE " . NV_PREFIXLANG . "_" . $module_data . "_hit SET comment=" . $count . " WHERE cid=" . $cid;
-		$db->query( $query );
-		die( "OK|" . $count . "" );
-	}
-	
-	// AJAX comment
-	if( $nv_Request->isset_request( 'savecomm', 'post' ) )
-	{
-		if( ! defined( "NV_IS_USER" ) ) die( "ERROR|" . $lang_module['error3'] );
-		if( ! $VideoData['comm'] ) die( "ERROR|" . $lang_module['error4'] );
-	
-		$sql = "SELECT MAX(posttime) as ptime FROM " . NV_PREFIXLANG . "_" . $module_data . "_comm WHERE userid=" . $user_info['userid'];
-		$result = $db->query( $sql );
-		$ptime = $result->fetchColumn();
-		$ptime = intval( $ptime );
-		if( $ptime > NV_CURRENTTIME - 60 ) die( "ERROR|" . $lang_module['error2'] );
-	
-		$content = nv_substr( $nv_Request->get_title( 'savecomm', 'post', '', 1 ), 0, 500);
-		if( empty( $content ) ) die( "ERROR|" . $lang_module['error1'] );
-	
-		$isChecked = defined( "NV_IS_MODADMIN" ) ? 1 : 0;
-	
-		$content = nv_nl2br( $content );
-		$sql = "INSERT INTO " . NV_PREFIXLANG . "_" . $module_data . "_comm VALUES 
-	    (NULL , " . $VideoData['id'] . ", " . $db->quote( $content ) . ", " . NV_CURRENTTIME . ", 
-	    " . $user_info['userid'] . ", " . $db->quote( $client_info['ip'] ) . ", 1, 0, " . $isChecked . ");";
-		$db->query( $sql );
-	
-		$query = "UPDATE " . NV_PREFIXLANG . "_" . $module_data . "_hit SET comment=comment+1 WHERE cid=" . $VideoData['id'];
-		$db->query( $query );
-	
-		die( 'OK' );
-	}
-	
+		
 	// Nut like, unlike, broken
 	if( $nv_Request->isset_request( 'aj', 'post' ) )
 	{

@@ -59,28 +59,9 @@ $xtpl->assign( 'NV_BASE_SITEURL', NV_BASE_SITEURL );
 $xtpl->assign( 'MODULECONFIG', $configMods );
 $xtpl->assign( 'MODULEURL', nv_url_rewrite( NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $VideoData['alias'], 1 ) );
 
-// if( $nv_Request->isset_request( 'cpgnum', 'post' ) )
-// {
-	// echo listComm();
-	// exit;
-// }
-
-// if( $nv_Request->isset_request( 'commentReload', 'post' ) )
-// {
-	// echo commentReload();
-	// exit;
-// }
-
 $xtpl->assign( 'DETAILCONTENT', $VideoData );
 if( defined( 'NV_IS_MODADMIN' ) ) $xtpl->parse( 'main.isAdmin' );
-// if( $VideoData['comm'] ) $xtpl->parse( 'main.ifComm' );
 if( ! empty( $VideoData['bodytext'] ) ) $xtpl->parse( 'main.bodytext' );
-
-// if( $VideoData['comm'] )
-// {
-	// $xtpl->assign( 'COMMENTSECTOR', commentReload() );
-	// $xtpl->parse( 'main.commentSector' );
-// }
 
 if( $isDetail )
 {

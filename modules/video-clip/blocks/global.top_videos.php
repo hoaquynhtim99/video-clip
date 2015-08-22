@@ -14,7 +14,7 @@ if( ! nv_function_exists( 'nv_top_videos' ) )
 {
 	function nv_top_videos( $block_config )
 	{
-		global $module_info, $module_name, $db, $my_head, $site_mods;
+		global $module_info, $module_name, $db, $my_head, $site_mods, $global_config;
 		
 		$module = $block_config['module'];
         $data = $site_mods[$module]['module_data'];
@@ -52,7 +52,7 @@ if( ! nv_function_exists( 'nv_top_videos' ) )
 			{
 				$row['img'] = NV_BASE_SITEURL . "themes/default/images/" . $file . "/video.png";
 			}
-			$row['href'] = NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module . "&amp;" . NV_OP_VARIABLE . "=" . $row['alias'];
+			$row['href'] = NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module . "&amp;" . NV_OP_VARIABLE . "=" . $row['alias'] . $global_config['rewrite_exturl'];
 			$row['sortTitle'] = nv_clean60( $row['title'], 20 );
 			$row['addtime'] = nv_date( "d/m/Y", $row['addtime'] );
 			
