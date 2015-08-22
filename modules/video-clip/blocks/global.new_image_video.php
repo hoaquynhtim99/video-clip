@@ -38,19 +38,28 @@ if( ! nv_function_exists( 'nv_new_videos1' ) )
 		{
 			if( ! empty( $row['img'] ) )
 			{
-				$imageinfo = nv_ImageInfo( NV_ROOTDIR . '/' . $row['img'], 120, true, NV_ROOTDIR . '/' . NV_FILES_DIR . '/' . $module );
-				$row['img'] = $imageinfo['src'];
+				$thumb = str_replace( NV_UPLOADS_DIR . '/', '', $row['img'] );
+				$row['img'] = NV_BASE_SITEURL . $row['img'];
+
+				if( is_file( NV_ROOTDIR . '/' . NV_ASSETS_DIR . '/' . $thumb ) )
+				{
+					$row['thumb'] = NV_BASE_SITEURL . NV_ASSETS_DIR . '/' . $thumb;
+				}
+				else
+				{
+					$row['thumb'] = $row['img'];
+				}
 			}
 			else
 			{
 				$row['img'] = NV_BASE_SITEURL . "themes/default/images/" . $file . "/video.png";
+				$row['thumb'] = NV_BASE_SITEURL . "themes/default/images/" . $file . "/video.png";
 			}
+			
 			$row['href'] = NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module . "&amp;" . NV_OP_VARIABLE . "=" . $row['alias'] . $global_config['rewrite_exturl'];
 			$row['sortTitle'] = nv_clean60( $row['title'], 20 );
 			$row['addtime'] = nv_date( "d/m/Y", $row['addtime'] );
-			
-			$row['last'] = ( $i == 3 or $i == 5 ) ? " last" : ""; 
-			
+						
 			$xtpl->assign( 'ROW', $row );
 			
 			if( $i ++ == 1 )
