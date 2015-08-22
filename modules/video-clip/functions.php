@@ -227,7 +227,7 @@ if( ! empty( $VideoData ) )
 	}
 	
 	$VideoData['filepath'] = ! empty( $VideoData['internalpath'] ) ? NV_BASE_SITEURL . $VideoData['internalpath'] : $VideoData['externalpath'];
-	$VideoData['url'] = nv_url_rewrite( NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $VideoData['alias'], 1 );
+	$VideoData['url'] = nv_url_rewrite( NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $VideoData['alias'] . $global_config['rewrite_exturl'], 1 );
 	$VideoData['editUrl'] = nv_url_rewrite( NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&op=main&edit&id=" . $VideoData['id'] . "&redirect=1", 1 );
 }
 

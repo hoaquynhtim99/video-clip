@@ -9,25 +9,20 @@
 .mb10{
 	margin-bottom: 10px;
 }
+ul.list{
+	margin: 0;
+	padding: 0;
+}
 ul.list li.sub{
 	margin-left: 20px;
 }
 ul.list a.current{
 	font-weight: bold;
 }
-.cbox.err{
-	background: #febbbb;
-	background: -moz-linear-gradient(top,  #febbbb 0%, #fe9090 45%, #ff5c5c 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#febbbb), color-stop(45%,#fe9090), color-stop(100%,#ff5c5c));
-	background: -webkit-linear-gradient(top,  #febbbb 0%,#fe9090 45%,#ff5c5c 100%);
-	background: -o-linear-gradient(top,  #febbbb 0%,#fe9090 45%,#ff5c5c 100%);
-	background: -ms-linear-gradient(top,  #febbbb 0%,#fe9090 45%,#ff5c5c 100%);
-	background: linear-gradient(to bottom,  #febbbb 0%,#fe9090 45%,#ff5c5c 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#febbbb', endColorstr='#ff5c5c',GradientType=0 );
-	border: 1px #FF0000 solid;
-	color: #fff;
+.vc-header{
+	text-transform: uppercase;
+	font-weight: 700;
 }
-
 /* List video clips */
 .mvc-video-list{
 	border-bottom: 2px #dadada solid;
@@ -65,22 +60,9 @@ ul.list a.current{
 .mvc-title{
 	margin-bottom: 10px;
 }
-.mvc-bt{
-	background: rgb(242,245,246);
-	background: -moz-linear-gradient(top,  rgba(242,245,246,1) 0%, rgba(227,234,237,1) 37%, rgba(200,215,220,1) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(242,245,246,1)), color-stop(37%,rgba(227,234,237,1)), color-stop(100%,rgba(200,215,220,1)));
-	background: -webkit-linear-gradient(top,  rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%);
-	background: -o-linear-gradient(top,  rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%);
-	background: -ms-linear-gradient(top,  rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%);
-	background: linear-gradient(to bottom,  rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=0 );
-	display: inline-block;
-	padding: 10px 15px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	box-shadow: 1px 1px 2px rgba(0,0,0,0.175);
-}
 .bodytext{
 	display: none;
+}
+a.btn-default{
+	color: #666;
 }

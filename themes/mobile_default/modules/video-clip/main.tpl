@@ -1,6 +1,6 @@
 <!-- BEGIN: main -->
 <!-- BEGIN: clipForbidden -->
-<div class="cbox err">
+<div class="alert alert-danger">
 	{LANG.accessForbidden}.
 </div>
 <!-- END: clipForbidden -->
@@ -25,11 +25,11 @@ $(document).ready(function(){
 });
 </script>
 <div>
-	<a href="likehit" class="mvc-bt mb10 likeButton">{LANG.like}: <strong id="ilikehit">{DETAILCONTENT.likehit}</strong></a>
-	<a href="unlikehit" class="mvc-bt mb10 likeButton">{LANG.unlike}: <strong id="iunlikehit">{DETAILCONTENT.unlikehit}</strong></a>
-	<a href="broken" class="mvc-bt mb10 likeButton">{LANG.broken}</a>
+	<a href="likehit" class="btn btn-info mb10 likeButton">{LANG.like}: <strong id="ilikehit">{DETAILCONTENT.likehit}</strong></a>
+	<a href="unlikehit" class="btn btn-info mb10 likeButton">{LANG.unlike}: <strong id="iunlikehit">{DETAILCONTENT.unlikehit}</strong></a>
+	<a href="broken" class="btn btn-info mb10 likeButton">{LANG.broken}</a>
     <!-- BEGIN: isAdmin -->
-    <a class="mvc-bt mb10" href="{DETAILCONTENT.editUrl}">{LANG.edit}</a>
+    <a class="btn btn-info mb10" href="{DETAILCONTENT.editUrl}">{LANG.edit}</a>
     <!-- END: isAdmin -->
     <div class="fr">
         {LANG.viewHits}: <span>{DETAILCONTENT.view}</span>
@@ -43,8 +43,8 @@ $(document).ready(function(){
 			{DETAILCONTENT.bodytext}
 		</div>
 	</div>
-    <div class="ac mb10">
-		<a href="open" class="mvc-bt bodybutton">{LANG.moreContent}</a>
+    <div class="ac mb10 text-center">
+		<a href="open" class="btn btn-info bodybutton">{LANG.moreContent}</a>
 	</div>
     <!-- END: bodytext -->
 </div>
@@ -89,17 +89,17 @@ $("a.bodybutton").click(function(e){
 	<div class="mvc-video-list">
 		<div class="img" style="background:transparent url({OTHERCLIPSCONTENT.img}) no-repeat center center">
 			<a href="{OTHERCLIPSCONTENT.href}" title="{OTHERCLIPSCONTENT.title}">
-				<img src="{NV_BASE_SITEURL}images/pix.gif" alt="{OTHERCLIPSCONTENT.title}" width="120" height="80" />
+				<img src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/images/pix.gif" alt="{OTHERCLIPSCONTENT.title}" width="120" height="80" />
 			</a>
 			<div class="play">
 				<a href="{OTHERCLIPSCONTENT.href}" title="{OTHERCLIPSCONTENT.title}">
-					<img src="{NV_BASE_SITEURL}images/pix.gif" alt="{OTHERCLIPSCONTENT.title}" width="120" height="32" />
+					<img src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/images/pix.gif" alt="{OTHERCLIPSCONTENT.title}" width="120" height="32" />
 				</a>
 			</div>
 		</div>
 		<h3><a href="{OTHERCLIPSCONTENT.href}" title="{OTHERCLIPSCONTENT.title}">{OTHERCLIPSCONTENT.title}</a></h3>
 		<div>{LANG.topic}: <a href="{OTHERCLIPSCONTENT.topicLink}" title="{OTHERCLIPSCONTENT.topicTitle}">{OTHERCLIPSCONTENT.topicTitle}</a></div>
-		<div class="viewHits">{LANG.viewHits} <span>{OTHERCLIPSCONTENT.view}</span></div>
+		<div class="viewHits"><span title="{LANG.viewHits} {OTHERCLIPSCONTENT.view}"><i class="fa fa-eye"></i> {OTHERCLIPSCONTENT.view}</span></div>
 		<div class="clear"></div>
 	</div>
 	<!-- END: otherClipsContent -->
@@ -113,15 +113,13 @@ $("a.bodybutton").click(function(e){
 </div>
 <!-- END: nv_generate_page -->
 <!-- BEGIN: topicList -->
-<ul class="hd">
-	<li class="cr">{LANG.topic}</li>
-</ul>
-<div class="clear"></div>
-<div class="cbox">
+<div class="well">
+	<div class="vc-header">{LANG.topic}</div>
+	<hr>
 	<ul class="list">
 		<!-- BEGIN: loop -->
 		<li>
-			<a class="topicList{OTHERTOPIC.current}" href="{OTHERTOPIC.href}">{OTHERTOPIC.title}</a>
+			<a class="topicList{OTHERTOPIC.current}" href="{OTHERTOPIC.href}"><i class="fa fa-angle-double-right"></i> {OTHERTOPIC.title}</a>
 			<!-- BEGIN: sub -->
 			<!-- BEGIN: loop -->
 			<li class="sub"><a title="{OTHERTOPICSUB.title}" class="topicList sub{OTHERTOPICSUB.current}" href="{OTHERTOPICSUB.href}">{OTHERTOPICSUB.title}</a></li>
