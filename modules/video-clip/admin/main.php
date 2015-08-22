@@ -31,7 +31,7 @@ if( isset( $configMods['folderStructureEnable'] ) and ! empty( $configMods['fold
 		if( $check[0] == 1 )
 		{
 			$imageFolderCurrent .= '/' . $imageFolderName;
-			call_user_func( "nv_loadUploadDirList", false );
+			$db->query( "INSERT INTO " . NV_UPLOAD_GLOBALTABLE . "_dir (dirname, time) VALUES ('" . $imageFolderCurrent . "', 0)" );
 		}
 	}
 	else
