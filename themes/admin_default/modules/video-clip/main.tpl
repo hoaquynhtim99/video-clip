@@ -131,6 +131,7 @@ $("input.selectimg").click(function(){
     return !1
 });
 $("form#addInformation").submit(function(){
+	$(window).unbind();
     var a = trim($("input[name=title]").val());
     $("input[name=title]").val(a);
     if("" == a) return alert("{LANG.error1}"), $("input[name=title]").val("").select(), !1;
