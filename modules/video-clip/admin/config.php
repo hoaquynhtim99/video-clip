@@ -39,7 +39,8 @@ if( $nv_Request->isset_request( 'submit', 'post' ) )
 	$content_config .= "?>";
 
 	file_put_contents( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php", $content_config, LOCK_EX );
-	die( 'OK' );
+	
+	$ajaxRespon->reset()->setSuccess()->setMessage( $lang_module['successfullySaved'] )->respon();
 }
 
 $configMods = array();

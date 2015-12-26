@@ -1,86 +1,65 @@
 <!-- BEGIN: main -->
-<form class="form-inline" action="{FORM_ACTION}" method="post" id="modConf">
-    <table class="table table-striped table-bordered table-hover">
-		<col style="width:50%"/>
-	    <tbody>
-	        <tr>
-	            <td><strong>{LANG.NumberOfLinks}</strong>
-	            </td>
-	            <td>
-	                <select name="otherClipsNum" id="otherClipsNum" class="form-control ajvd-input">
-	                    <!-- BEGIN: otherClipsNum -->
-	                    <option value="{NUMS.value}"{NUMS.select}>{NUMS.value}</option>
-	                    <!-- END: otherClipsNum -->
-	                </select>
-	            </td>
-	        </tr>
-	        <tr>
-	            <td><strong>{LANG.playerAutostart}</strong></td>
-	            <td><input type="checkbox" value="1" name="playerAutostart" id="playerAutostart"{CONFIGMODULE.playerAutostart} /></td>
-	        </tr>
-	        <tr>
-	            <td><strong>{LANG.playerSkin}</strong></td>
-	            <td>
-	                <select name="playerSkin" id="playerSkin" class="form-control ajvd-input">
-	                    <option value="">{LANG.noSkin}</option>
-	                    <!-- BEGIN: playerSkin -->
-	                    <option value="{SKIN.value}"{SKIN.select}>{SKIN.value}</option>
-	                    <!-- END: playerSkin -->
-	                </select>
-	            </td>
-	        </tr>
-	    </tbody>
-	    <!--tbody>
-	        <tr>
-	            <td><strong>{LANG.commnum}</strong></td>
-	            <td>
-	                <select class="form-control" name="commNum" id="commNum">
-	                    <!-- BEGIN: commNum -->
-	                    <option value="{COMMNUM.value}"{COMMNUM.select}>{COMMNUM.value}</option>
-	                    <!-- END: commNum -->
-	                </select>
-	            </td>
-	        </tr>
-	    </tbody-->
-	    <tbody>
-	        <tr>
-	            <td><strong>{LANG.embedMaxWidth}</strong>
-	            </td>
-	            <td><input style="width: 50px;" type="text" name="playerMaxWidth" id="playerMaxWidth" value="{CONFIGMODULE.playerMaxWidth}" class="form-control ajvd-input"/></td>
-	        </tr>
-	    </tbody>
-	    <!--tbody>
-	        <tr>
-	            <td><strong>{LANG.allowUpload}</strong></td>
-	            <td><input type="checkbox" value="1" name="allowUpload" id="allowUpload"{CONFIGMODULE.allowUpload} /></td>
-	        </tr>
-	    </tbody-->
-	    <tbody>
-	        <tr>
-	            <td><strong>{LANG.folderStructureEnable}</strong></td>
-	            <td><input type="checkbox" value="1" name="folderStructureEnable" id="folderStructureEnable"{CONFIGMODULE.folderStructureEnable} /></td>
-	        </tr>
-	        <tr>
-	            <td><strong>{LANG.titleLength}</strong></td>
-	            <td><input class="form-control ajvd-input" type="text" value="{CONFIGMODULE.titleLength}" name="titleLength" id="titleLength"/></td>
-	        </tr>
-	    </tbody>
-	</table>
-	<div style="width: 200px; margin: 10px auto; text-align: center;">
-	    <input type="submit" name="submit" value="{LANG.save}" class="ajvd-button"/>
+<form action="{FORM_ACTION}" method="post" id="modConf" role="form" class="form-horizontal" autocomplete="off" data-toggle="validate" data-type="ajax">
+	<div class="form-result"></div>
+	<div class="form-element">
+		<div class="form-group">
+			<label for="otherClipsNum" class="control-label col-sm-8">{LANG.NumberOfLinks}:</label>
+			<div class="col-sm-16 col-lg-6">
+	            <select name="otherClipsNum" id="otherClipsNum" class="form-control">
+	                <!-- BEGIN: otherClipsNum -->
+	                <option value="{NUMS.value}"{NUMS.select}>{NUMS.value}</option>
+	                <!-- END: otherClipsNum -->
+	            </select>
+				<i class="help-block">{LANG.NumberOfLinks1}</i>	
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-8 col-sm-16 col-lg-6">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="playerAutostart" id="playerAutostart" value="1"{CONFIGMODULE.playerAutostart} /> {LANG.playerAutostart}
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="playerSkin" class="control-label col-sm-8">{LANG.playerSkin}:</label>
+			<div class="col-sm-16 col-lg-6">
+	            <select name="playerSkin" id="playerSkin" class="form-control">
+	                <option value="">{LANG.noSkin}</option>
+	                <!-- BEGIN: playerSkin -->
+	                <option value="{SKIN.value}"{SKIN.select}>{SKIN.value}</option>
+	                <!-- END: playerSkin -->
+	            </select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="playerMaxWidth" class="control-label col-sm-8">{LANG.embedMaxWidth}:</label>
+			<div class="col-sm-16 col-lg-6">
+	            <input class="form-control required" type="text" name="playerMaxWidth" id="playerMaxWidth" value="{CONFIGMODULE.playerMaxWidth}"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-8 col-sm-16 col-lg-6">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" value="1" name="folderStructureEnable" id="folderStructureEnable"{CONFIGMODULE.folderStructureEnable} /> {LANG.folderStructureEnable}
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="titleLength" class="control-label col-sm-8">{LANG.titleLength}:</label>
+			<div class="col-sm-16 col-lg-6">
+	            <input class="form-control required" type="text" name="titleLength" id="titleLength" value="{CONFIGMODULE.titleLength}"/>
+			</div>
+		</div>	
+		<div class="form-group">
+			<div class="col-sm-offset-8 col-sm-16">
+				<input type="hidden" name="submit" value="1"/>
+				<input type="submit" value="{LANG.save}" class="btn btn-primary"/>
+			</div>
+		</div>
 	</div>
 </form>
-<script type="text/javascript">
-$("#modConf").submit(function(){
-    var a = "submit=1&playerMaxWidth=" + intval($("#playerMaxWidth").val()) + "&allowUpload=" + (1 == $("#allowUpload:checked").length ? 1 : 0) + "&folderStructureEnable=" + (1 == $("#folderStructureEnable:checked").length ? 1 : 0) + "&commNum=" + $("#commNum").val() + "&otherClipsNum=" + $("#otherClipsNum").val() + "&playerAutostart=" + (1 == $("#playerAutostart:checked").length ? 1 : 0) + "&playerSkin=" + $("#playerSkin").val() + '&titleLength=' + $('#titleLength').val();
-    return $.ajax({
-        type: "POST",
-        url: window.location.href,
-        data: a,
-        success: function(){
-            return alert("{LANG.successfullySaved}"), !1
-        }
-    }), !1
-});
-</script>
 <!-- END: main -->

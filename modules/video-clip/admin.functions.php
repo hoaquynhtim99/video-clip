@@ -104,6 +104,15 @@ function nv_listTopics( $parentid, $m = 0 )
 	return $list2;
 }
 
+/**
+ * nv_myAlias()
+ * 
+ * @param mixed $alias
+ * @param integer $mode
+ * @param integer $id
+ * @param integer $_id
+ * @return
+ */
 function nv_myAlias( $alias, $mode = 0, $id = 0, $_id = 1 )
 {
 	global $db, $module_data;
@@ -144,3 +153,115 @@ function nv_myAlias( $alias, $mode = 0, $id = 0, $_id = 1 )
 
 	return $alias;
 }
+
+/**
+ * ajaxRespon
+ * 
+ * @package VIDEO CLIPS AJAX 4.x
+ * @author PHAN TAN DUNG (phantandung92@gmail.com)
+ * @copyright (C) 2015 PHAN TAN DUNG. All rights reserved
+ * @version 1.0
+ * @access public
+ */
+class ajaxRespon
+{
+	private $jsonDefault = array(
+		'status' => 'error',
+		'message' => '',
+		'input' => '',
+		'redirect' => ''
+	);
+	
+	private $json = array();
+	
+	/**
+	 * ajaxRespon::__construct()
+	 * 
+	 * @return
+	 */
+	public function __construct()
+	{
+		$this->json = $this->jsonDefault;
+	}
+	
+	/**
+	 * ajaxRespon::setMessage()
+	 * 
+	 * @param mixed $message
+	 * @return
+	 */
+	public function setMessage( $message )
+	{
+		$this->json['message'] = $message;
+		return $this;
+	}
+	
+	/**
+	 * ajaxRespon::setInput()
+	 * 
+	 * @param mixed $input
+	 * @return
+	 */
+	public function setInput( $input )
+	{
+		$this->json['input'] = $input;
+		return $this;
+	}
+	
+	/**
+	 * ajaxRespon::setRedirect()
+	 * 
+	 * @param mixed $redirect
+	 * @return
+	 */
+	public function setRedirect( $redirect )
+	{
+		$this->json['redirect'] = $redirect;
+		return $this;
+	}
+	
+	/**
+	 * ajaxRespon::setSuccess()
+	 * 
+	 * @return
+	 */
+	public function setSuccess()
+	{
+		$this->json['status'] = 'ok';
+		return $this;
+	}
+	
+	/**
+	 * ajaxRespon::setError()
+	 * 
+	 * @return
+	 */
+	public function setError()
+	{
+		$this->json['status'] = 'error';
+		return $this;
+	}
+	
+	/**
+	 * ajaxRespon::reset()
+	 * 
+	 * @return
+	 */
+	public function reset()
+	{
+		$this->json = $this->jsonDefault;
+		return $this;
+	}
+	
+	/**
+	 * ajaxRespon::respon()
+	 * 
+	 * @return
+	 */
+	public function respon()
+	{
+		die( json_encode( $this->json ) );
+	}
+}
+
+$ajaxRespon = new ajaxRespon();
