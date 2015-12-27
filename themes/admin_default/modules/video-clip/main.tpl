@@ -1,47 +1,66 @@
 <!-- BEGIN: main -->
-<div id="ablist" class="form-inline">
-	<select name="tList" class="form-control ajvd-input">
-		<option value="">{LANG.topicselect}</option>
-		<!-- BEGIN: psopt4 --><option value="{OPTION4.id}">{OPTION4.name}</option><!-- END: psopt4 -->
-	</select>
-	<input style="margin-right:50px" name="ok2" type="button" value="OK" class="btn btn-primary"/>
-	<input name="addNew" type="button" value="{LANG.addClip}" class="btn btn-success"/>
-</div>
-<div class="myh3">
-	{PTITLE}
-</div>
-<div id="pageContent">
-	<table class="table table-striped table-bordered table-hover">
-		<col style="width:120px" />
-		<thead>
-			<tr>
-				<td>{LANG.adddate}</td>
-				<td>{LANG.title}</td>
-				<td>{LANG.topic_parent}</td>
-				<td style="text-align:right">{LANG.feature}</td>
-			</tr>
-		</thead>
-		<tbody>
+<div class="panel panel-default">
+	<div class="panel-heading form-inline">
+		<select name="tList" class="form-control ajvd-input">
+			<option value="">{LANG.topicselect}</option>
+			<!-- BEGIN: psopt4 --><option value="{OPTION4.id}">{OPTION4.name}</option><!-- END: psopt4 -->
+		</select>
+		<input name="ok2" type="button" value="{LANG.view}" class="btn btn-primary"/>
+		<input name="addNew" type="button" value="{LANG.addClip}" class="btn btn-success"/>
+	</div>
+	<div class="panel-body items">
+		<div class="loop-item item-header">
+			<div class="item-title">
+				{LANG.title}
+			</div>
+			<div class="item-time">
+				{LANG.adddate}
+			</div>
+			<div class="item-description">
+				{LANG.topic_parent}
+			</div>
+			<div class="item-tools">
+				{LANG.feature}
+			</div>
+			<div class="item-status">
+				{LANG.is_active}
+			</div>
+		</div>
 		<!-- BEGIN: loop -->
-			<tr>
-				<td>{DATA.adddate}</td>
-				<td>{DATA.title}</td>
-				<td><a href="{MODULE_URL}=main&tid={DATA.tid}">{DATA.topicname}</a></td>
-				<td style="text-align:right">
-					<a href="{DATA.id}" title="{DATA.status}" class="changeStatus"><img style="vertical-align:middle;margin-right:10px" alt="{DATA.status}" title="{DATA.status}" src="{NV_BASE_SITEURL}themes/{NV_ADMIN_THEME}/images/{module}/{DATA.icon}.png" width="12" height="12" /></a>
-					<a href="{MODULE_URL}=main&edit&id={DATA.id}">{GLANG.edit}</a>
-					|
-					<a class="del" href="{DATA.id}">{GLANG.delete}</a>
-				</td>
-			</tr>
-			<!-- END: loop -->
-			<tbody>
-	</table>
-	<div id="nv_generate_page">{NV_GENERATE_PAGE}</div>
+		<div class="loop-item">
+			<div class="item-title item-title-nowrap">
+				{DATA.title}
+			</div>
+			<div class="item-time">
+				{DATA.adddate}
+			</div>
+			<div class="item-description">
+				<a href="{MODULE_URL}=main&tid={DATA.tid}">{DATA.topicname}</a>
+			</div>
+			<div class="item-tools">
+				<a href="{MODULE_URL}=main&edit&id={DATA.id}">{GLANG.edit}</a>
+				|
+				<a class="del" href="{DATA.id}">{GLANG.delete}</a>
+			</div>
+			<div class="item-status">
+				<a href="{DATA.id}" title="{DATA.status}" class="changeStatus"><img style="vertical-align:middle;margin-right:10px" alt="{DATA.status}" title="{DATA.status}" src="{NV_BASE_SITEURL}themes/{NV_ADMIN_THEME}/images/{module}/{DATA.icon}.png" width="12" height="12" /></a>			</div>
+			</div>
+		<!-- END: loop -->
+	</div>
+	<!-- BEGIN: generate_page -->
+	<div class="panel-footer clearfix">
+		<div class="pull-right">
+			{GENERATE_PAGE}
+		</div>
+	</div>
+	<!-- END: generate_page -->
 </div>
+
 <script type="text/javascript">
 //<![CDATA[
-$("a.del").click(function(){confirm("{LANG.delConfirm} ?")&&$.ajax({type:"POST",url:"{MODULE_URL}",data:"del="+$(this).attr("href"),success:function(a){"OK"==a?window.location.href=window.location.href:alert(a)}});return!1});$("input[name=addNew]").click(function(){window.location.href="{MODULE_URL}&add";return!1});$("a.changeStatus").click(function(){var a=this;$.ajax({type:"POST",url:"{MODULE_URL}",data:"changeStatus="+$(this).attr("href"),success:function(b){$(a).html(b)}});return!1});
+$("a.del").click(function(){confirm("{LANG.delConfirm} ?")&&$.ajax({type:"POST",url:"{MODULE_URL}",data:"del="+$(this).attr("href"),success:function(a){"OK"==a?window.location.href=window.location.href:alert(a)}});return!1});
+$("input[name=addNew]").click(function(){window.location.href="{MODULE_URL}&add";return!1});
+$("a.changeStatus").click(function(){var a=this;$.ajax({type:"POST",url:"{MODULE_URL}",data:"changeStatus="+$(this).attr("href"),success:function(b){$(a).html(b)}});return!1});
 $("input[name=ok2]").click(function(){var a=$("select[name=tList]").val();window.location.href=""!=a?"{MODULE_URL}=main&tid="+a[0]:"{MODULE_URL}=main";return!1});
 //]]>
 </script>

@@ -1,52 +1,57 @@
 <!-- BEGIN: main -->
-<div id="pageContent">
-	<div class="table-responsive">
-		<table class="table table-striped table-bordered table-hover">
-			<col style="width:120px" />
-			<thead>
-				<tr>
-					<th>
-						{LANG.adddate}
-					</th>
-					<th>
-						{LANG.title}
-					</th>
-					<th>
-						{LANG.topic_parent}
-					</th>
-					<th style="text-align:right">
-						{LANG.feature}
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-			<!-- BEGIN: loop -->
-				<tr>
-					<td>
-						{DATA.adddate}
-					</td>
-					<td>
-						{DATA.title}
-					</td>
-					<td>
-						<a href="{DATA.topicUrl}">{DATA.topicname}</a>
-					</td>
-					<td style="text-align:right">
-						<a href="{DATA.id}" title="{DATA.status}" class="changeStatus"><img style="vertical-align:middle;margin-right:10px" alt="{DATA.status}" title="{DATA.status}" src="{NV_BASE_SITEURL}themes/{NV_ADMIN_THEME}/images/{MODULE_FILE}/{DATA.icon}.png" width="12" height="12" /></a>
-						<a href="{MODULE_URL}=main&edit&id={DATA.id}">{GLANG.edit}</a>
-						|
-						<a class="remove" href="{DATA.id}">{LANG.Remove}</a>
-						|
-						<a class="del" href="{DATA.id}">{GLANG.delete}</a>
-					</td>
-				</tr>
-				<!-- END: loop -->
-				<tbody>
-		</table>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2>{LANG.vbroken}</h2>
 	</div>
-	<div id="nv_generate_page">
-		{NV_GENERATE_PAGE}
+	<div class="panel-body items">
+		<div class="loop-item item-header">
+			<div class="item-title">
+				{LANG.title}
+			</div>
+			<div class="item-time">
+				{LANG.adddate}
+			</div>
+			<div class="item-description">
+				{LANG.topic_parent}
+			</div>
+			<div class="item-tools">
+				{LANG.feature}
+			</div>
+			<div class="item-status">
+				{LANG.is_active}
+			</div>
+		</div>
+		<!-- BEGIN: loop -->
+		<div class="loop-item item-danger">
+			<div class="item-title item-title-nowrap">
+				{DATA.title}
+			</div>
+			<div class="item-time">
+				{DATA.adddate}
+			</div>
+			<div class="item-description">
+				<a href="{DATA.topicUrl}">{DATA.topicname}</a> 
+			</div>
+			<div class="item-tools">
+				<a href="{MODULE_URL}=main&edit&id={DATA.id}">{GLANG.edit}</a>
+				|
+				<a class="remove" href="{DATA.id}">{LANG.Remove}</a>
+				|
+				<a class="del" href="{DATA.id}">{GLANG.delete}</a>
+			</div>
+			<div class="item-status">
+				<a href="{DATA.id}" title="{DATA.status}" class="changeStatus"><img style="vertical-align:middle;margin-right:10px" alt="{DATA.status}" title="{DATA.status}" src="{NV_BASE_SITEURL}themes/{NV_ADMIN_THEME}/images/{MODULE_FILE}/{DATA.icon}.png" width="12" height="12" /></a>
+			</div>
+		</div>
+		<!-- END: loop -->
 	</div>
+	<!-- BEGIN: generate_page -->
+	<div class="panel-footer clearfix">
+		<div class="pull-right">
+			{GENERATE_PAGE}
+		</div>
+	</div>
+	<!-- END: generate_page -->
 </div>
 <script type="text/javascript">
 //<![CDATA[

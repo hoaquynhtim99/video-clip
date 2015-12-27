@@ -1,54 +1,41 @@
 <!-- BEGIN: main -->
-<!-- BEGIN: error -->
-<div style="width:98%" class="quote">
-    <blockquote class="error"><span>{ERROR}</span></blockquote>
-</div>
-<div class="clear"></div>
-<!-- END: error -->
-<form class="form-inline" action="{FORM_ACTION}" method="post">
-    <table class="table table-striped table-bordered table-hover">
-		<col style="width:200px"/>
-        <tbody>
-            <tr>
-                <td>{LANG.topic_name}</td>
-                <td><input value="{DATA.title}" name="title" id="title" class="form-control txt-half ajvd-input" maxlength="100" /></td>
-            </tr>
-            <tr>
-                <td>{LANG.description}</td>
-                <td><input type="text" value="{DATA.description}" name="description" class="form-control txt-half ajvd-input" maxlength="255" /></td>
-            </tr>
-            <tr>
-                <td>{LANG.keywords}</td>
-                <td><input type="text" value="{DATA.keywords}" name="keywords" class="form-control txt-half ajvd-input" maxlength="255" /></td>
-            </tr>
-            <tr>
-                <td>{LANG.topic_parent}</td>
-                <td>
-                    <select name="parentid" class="form-control ajvd-input">
-                        <!-- BEGIN: parentid -->
-                        <option value="{LISTCATS.id}"{LISTCATS.selected}>{LISTCATS.name}</option>
-                        <!-- END: parentid -->
-                    </select>
-                </td>
-            </tr>
-			<tr style="display:none">
-				<td>{LANG.homeImg} (24 x 24px)</td>
-				<td>
-					<input class="form-control" title="{LANG.homeImg}" type="text" name="img" id="img" value="{DATA.img}" style="width:280px" maxlength="255" />
-					<input type="button" value="Browse server" class="selectimg" />
-				</td>
-			</tr>
-            <tr>
-                <td colspan="2">
-                    <input type="submit" name="submit" value="{LANG.save}" class="ajvd-button"/>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<form action="{FORM_ACTION}" method="post" role="form" class="form-horizontal" autocomplete="off" data-toggle="validate" data-type="ajax">
+	<div class="form-result"></div>
+	<div class="form-element">
+		<div class="form-group">
+			<label for="title" class="control-label col-sm-8">{LANG.topic_name}:</label>
+			<div class="col-sm-16 col-lg-6">
+	            <input class="form-control required" type="text" name="title" id="title" value="{DATA.title}" maxlength="100" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="description" class="control-label col-sm-8">{LANG.description}:</label>
+			<div class="col-sm-16 col-lg-6">
+	            <input class="form-control" type="text" name="description" id="description" value="{DATA.description}" maxlength="255" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="keywords" class="control-label col-sm-8">{LANG.keywords}:</label>
+			<div class="col-sm-16 col-lg-6">
+	            <input class="form-control" type="text" name="keywords" id="keywords" value="{DATA.keywords}" maxlength="255" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="parentid" class="control-label col-sm-8">{LANG.topic_parent}:</label>
+			<div class="col-sm-16 col-lg-6">
+                <select name="parentid" id="parentid" class="form-control required">
+                    <!-- BEGIN: parentid -->
+                    <option value="{LISTCATS.id}"{LISTCATS.selected}>{LISTCATS.name}</option>
+                    <!-- END: parentid -->
+                </select>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-8 col-sm-16">
+				<input type="hidden" name="submit" value="1"/>
+				<input type="submit" value="{LANG.save}" class="btn btn-primary"/>
+			</div>
+		</div>
+	</div>
 </form>
-<script type="text/javascript">
-//<![CDATA[
-$("input.selectimg").click(function(){var a=$(this).prev().attr("id");nv_open_browse(script_name + "?" + nv_lang_variable + '=' + nv_sitelang + '&' + nv_name_variable+"=upload&popup=1&area="+a+"&path={UPLOAD_CURRENT}/icons&type=image&currentpath={UPLOAD_CURRENT}/icons","NVImg","850","420","resizable=no,scrollbars=no,toolbar=no,location=no,status=no");return!1});
-//]]>
-</script>
 <!-- END: main -->

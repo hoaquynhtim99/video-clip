@@ -1,5 +1,5 @@
 <!-- BEGIN: main -->
-<form action="{FORM_ACTION}" method="post" id="modConf" role="form" class="form-horizontal" autocomplete="off" data-toggle="validate" data-type="ajax">
+<form action="{FORM_ACTION}" method="post" role="form" class="form-horizontal" autocomplete="off" data-toggle="validate" data-type="ajax">
 	<div class="form-result"></div>
 	<div class="form-element">
 		<div class="form-group">

@@ -22,6 +22,7 @@ $lang_module['add'] = "Add new video-clip";
 $lang_module['topic'] = "Topic";
 $lang_module['config'] = "Config";
 $lang_module['save'] = "Save";
+$lang_module['view'] = "View";
 
 $lang_module['topic_management'] = "Management topics";
 $lang_module['addtopic_titlebox'] = "Add new topic";

@@ -363,7 +363,7 @@ foreach ( $topicList as $id => $name )
 
 $where = "";
 $base_url = NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name;
-$ptitle = $lang_module['main'];
+
 if( $nv_Request->isset_request( 'tid', 'get' ) )
 {
 	$top = $nv_Request->get_int( 'tid', 'get', 0 );
@@ -371,11 +371,9 @@ if( $nv_Request->isset_request( 'tid', 'get' ) )
 	{
 		$where .= " WHERE tid=" . $top;
 		$base_url .= "&tid=" . $top;
-		$ptitle = sprintf( $lang_module['listClipByTid'], $topicList[$top]['title'] );
+		$page_title = sprintf( $lang_module['listClipByTid'], $topicList[$top]['title'] );
 	}
 }
-
-$xtpl->assign( 'PTITLE', $ptitle );
 
 $sql = "SELECT COUNT(*) as ccount FROM " . NV_PREFIXLANG . "_" . $module_data . "_clip" . $where;
 $result = $db->query( $sql );
@@ -403,9 +401,11 @@ while ( $row = $result->fetch() )
 }
 
 $generate_page = nv_generate_page( $base_url, $all_page, $per_page, $page );
+
 if( ! empty( $generate_page ) )
 {
-	$xtpl->assign( 'NV_GENERATE_PAGE', $generate_page );
+	$xtpl->assign( 'GENERATE_PAGE', $generate_page );
+	$xtpl->parse( 'main.generate_page' );
 }
 elseif( $page > 1 )
 {

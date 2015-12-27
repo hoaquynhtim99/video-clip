@@ -1,46 +1,53 @@
 <!-- BEGIN: main -->
-<div class="table-responsive">
-	<table class="table table-striped table-bordered table-hover">
-		<caption>{TABLE_CAPTION}</caption>
-		<thead>
-			<tr>
-				<th style="width:100px">{LANG.position}</th>
-				<th>{LANG.topic_name}</th>
-				<th>{LANG.topic_parent}</th>
-				<th style="width:150px;text-align:center">{LANG.is_active}</th>
-				<th style="width:100px;white-space:nowrap;text-align:center">{LANG.feature}</th>
-			</tr>
-		</thead>
-		<tbody>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2>{TABLE_CAPTION}</h2>
+	</div>
+	<div class="panel-body items">
+		<div class="loop-item item-header">
+			<div class="item-order">
+				{LANG.position}
+			</div>
+			<div class="item-title">
+				{LANG.topic_name}
+			</div>
+			<div class="item-description">
+				{LANG.topic_parent}
+			</div>
+			<div class="item-tools">
+				{LANG.feature}
+			</div>
+			<div class="item-status">
+				{LANG.is_active}
+			</div>
+		</div>
 		<!-- BEGIN: row -->
-			<tr>
-				<td>
-					<select name="weight" id="weight{ROW.id}" onchange="nv_chang_weight({ROW.id});" class="form-control ajvd-input">
-						<!-- BEGIN: weight -->
-						<option value="{WEIGHT.pos}"{WEIGHT.selected}>{WEIGHT.pos}</option>
-						<!-- END: weight -->
-					</select>
-				</td>
-				<td>
-					<strong><a href="{ROW.titlelink}">{ROW.title}</a></strong>{ROW.numsub}
-				</td>
-				<td>
-					{ROW.parentid}
-				</td>
-				<td style="white-space:nowrap;text-align:center">
-					<input type="checkbox" name="active" id="change_status{ROW.id}" value="1"{ROW.status} onclick="nv_chang_status({ROW.id});" />
-				</td>
-				<td style="white-space:nowrap;text-align:center">
-					<em class="fa fa-edit fa-lg">&nbsp;</em> <a href="{EDIT_URL}">{GLANG.edit}</a>
-					&nbsp;&nbsp;
-					<em class="fa fa-trash-o fa-lg">&nbsp;</em> <a href="javascript:void(0);" onclick="nv_topic_del({ROW.id});">{GLANG.delete}</a>
-				</td>
-			</tr>
+		<div class="loop-item">
+			<div class="item-order">
+				<select name="weight" id="weight{ROW.id}" onchange="nv_chang_weight({ROW.id});" class="form-control ajvd-input">
+					<!-- BEGIN: weight -->
+					<option value="{WEIGHT.pos}"{WEIGHT.selected}>{WEIGHT.pos}</option>
+					<!-- END: weight -->
+				</select>
+			</div>
+			<div class="item-title">
+				<strong><a href="{ROW.titlelink}">{ROW.title}</a></strong> {ROW.numsub}
+			</div>
+			<div class="item-description">
+				{ROW.parentid}
+			</div>
+			<div class="item-tools">
+				<a href="{EDIT_URL}" title="{GLANG.edit}"><i class="fa fa-edit"></i></a>
+				<a href="javascript:void(0);" onclick="nv_topic_del({ROW.id});" title="{GLANG.delete}"><i class="fa fa-trash-o"></i></a>
+			</div>
+			<div class="item-status">
+				<input type="checkbox" name="active" id="change_status{ROW.id}" value="1"{ROW.status} onclick="nv_chang_status({ROW.id});" />
+			</div>
+		</div>
 		<!-- END: row -->
-		<tbody>
-	</table>
-</div>
-<div style="margin-top:8px;">
-	<a class="btn btn-success" href="{ADD_NEW_TOPIC}"><em class="fa fa-plus">&nbsp;</em>{LANG.addtopic_titlebox}</a>
+	</div>
+	<div class="panel-footer">
+		<a class="btn btn-sm btn-success" href="{ADD_NEW_TOPIC}"><i class="fa fa-plus"></i> {LANG.addtopic_titlebox}</a>
+	</div>
 </div>
 <!-- END: main -->

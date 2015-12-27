@@ -67,7 +67,8 @@ if( $all_page )
 	
 	if( ! empty( $generate_page ) )
 	{
-		$xtpl->assign( 'NV_GENERATE_PAGE', $generate_page );
+		$xtpl->assign( 'GENERATE_PAGE', $generate_page );
+		$xtpl->parse( 'main.generate_page' );
 	}
 	elseif( $page > 1 )
 	{

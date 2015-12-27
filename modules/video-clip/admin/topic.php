@@ -73,14 +73,34 @@ function nv_del_topic( $tid )
 }
 
 $array = array();
-$error = "";
 
-//them the loai
-if( $nv_Request->isset_request( 'add', 'get' ) )
+// Them, sua the loai
+if( $nv_Request->isset_request( 'add', 'get' ) or $nv_Request->isset_request( 'edit', 'get' ) )
 {
-	$page_title = $lang_module['addtopic_titlebox'];
-
-	$is_error = false;
+	$tid = $nv_Request->get_int( 'tid', 'get', 0 );
+	
+	if( empty( $tid ) )
+	{
+		$page_title = $lang_module['addtopic_titlebox'];
+		$form_action = NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $op . "&amp;add=1";
+	}
+	else
+	{
+		$page_title = $lang_module['edittopic_titlebox'];
+		$form_action = NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $op . "&amp;edit=1&amp;tid=" . $tid;
+		
+		$sql = "SELECT * FROM " . NV_PREFIXLANG . "_" . $module_data . "_topic WHERE id=" . $tid;
+		$result = $db->query( $sql );
+		$numcat = $result->rowCount();
+	
+		if( $numcat != 1 )
+		{
+			Header( "Location: " . NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $op );
+			exit();
+		}
+	
+		$row = $result->fetch();
+	}
 
 	if( $nv_Request->isset_request( 'submit', 'post' ) )
 	{
@@ -88,13 +108,15 @@ if( $nv_Request->isset_request( 'add', 'get' ) )
 		$array['title'] = $nv_Request->get_title( 'title', 'post', '', 1 );
 		$array['description'] = $nv_Request->get_title( 'description', 'post', '' );
 		$array['keywords'] = $nv_Request->get_title( 'keywords', 'post', '', 1 );
-
+		
+		$ajaxRespon->reset()->setError();
+		
 		if( empty( $array['title'] ) )
 		{
-			$error = $lang_module['error1'];
-			$is_error = true;
+			$ajaxRespon->setInput('title')->setMessage( $lang_module['error1'] )->respon();
 		}
-		elseif( ! empty( $array['parentid'] ) )
+		
+		if( ! empty( $array['parentid'] ) )
 		{
 			$sql = "SELECT COUNT(*) AS count FROM " . NV_PREFIXLANG . "_" . $module_data . "_topic WHERE id=" . $array['parentid'];
 			$result = $db->query( $sql );
@@ -102,217 +124,23 @@ if( $nv_Request->isset_request( 'add', 'get' ) )
 
 			if( ! $count )
 			{
-				$error = $lang_module['error2'];
-				$is_error = true;
+				$ajaxRespon->setInput('parentid')->setMessage( $lang_module['error2'] )->respon();
 			}
 		}
-
-		if( ! $is_error )
-		{
-			$alias = nv_myAlias( strtolower( change_alias( $array['title'] ) ) );
-
-			$array['img'] = "";
-			$homeimg = $nv_Request->get_title( 'img', 'post' );
-			if( ! empty( $homeimg ) )
-			{
-				$homeimg = preg_replace( "/^" . nv_preg_quote( NV_BASE_SITEURL ) . "(.+)$/", "$1", $homeimg );
-				if( preg_match( "/^([a-z0-9\/\.\-\_]+)\.(jpg|png|gif)$/i", $homeimg ) )
-				{
-					$image = NV_ROOTDIR . "/" . $homeimg;
-					$image = nv_is_image( $image );
-					if( ! empty( $image ) ) $array['img'] = $homeimg;
-				}
-			}
-
-			if( empty( $array['keywords'] ) )
-			{
-				$array['keywords'] = nv_get_keywords( $array['description'] );
-			}
-			else
-			{
-				$array['keywords'] = explode( ",", $array['keywords'] );
-				$array['keywords'] = array_map( "trim", $array['keywords'] );
-				$array['keywords'] = array_unique( $array['keywords'] );
-				$array['keywords'] = implode( ",", $array['keywords'] );
-			}
-
-			$sql = "SELECT MAX(weight) AS new_weight FROM " . NV_PREFIXLANG . "_" . $module_data . "_topic WHERE parentid=" . $array['parentid'];
-			$result = $db->query( $sql );
-			$new_weight = $result->fetchColumn();
-			$new_weight = ( int )$new_weight;
-			++$new_weight;
-
-			$sql = "INSERT INTO " . NV_PREFIXLANG . "_" . $module_data . "_topic VALUES (
-            NULL, 
-            " . $array['parentid'] . ", 
-            " . $db->quote( $array['title'] ) . ", 
-            " . $db->quote( $alias ) . ", 
-            " . $db->quote( $array['description'] ) . ", 
-            " . $new_weight . ", 
-            " . $db->quote( $array['img'] ) . ", 
-            1, 
-            " . $db->quote( $array['keywords'] ) . ")";
-
-			$tid = $db->insert_id( $sql );
-
-			if( ! $tid )
-			{
-				$error = $lang_module['error4'];
-				$is_error = true;
-			}
-			else
-			{
-				nv_insert_logs( NV_LANG_DATA, $module_name, $lang_module['addtopic_titlebox'], "ID " . $tid, $admin_info['userid'] );
-				Header( "Location: " . NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $op );
-				exit();
-			}
-		}
-	}
-	else
-	{
-		$array['parentid'] = 0;
-		$array['title'] = "";
-		$array['description'] = "";
-		$array['keywords'] = "";
-		$array['img'] = "";
-	}
-
-	if( ! empty( $array['img'] ) ) $array['img'] = NV_BASE_SITEURL . $array['img'];
-
-	$listTopics = array(
-		array(
-			'id' => 0,
-			'name' => $lang_module['is_maintopic'],
-			'selected' => ""
-		) 
-	);
-	$listTopics = $listTopics + nv_listTopics( $array['parentid'] );
-
-	$xtpl = new XTemplate( "topic_add.tpl", NV_ROOTDIR . "/themes/" . $global_config['module_theme'] . "/modules/" . $module_file );
-	$xtpl->assign( 'FORM_ACTION', NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $op . "&amp;add=1" );
-	$xtpl->assign( 'LANG', $lang_module );
-	$xtpl->assign( 'UPLOADS_DIR_USER', NV_UPLOADS_DIR . '/' . $module_name );
-	$xtpl->assign( 'UPLOAD_CURRENT', NV_UPLOADS_DIR . '/' . $module_name );
-	$xtpl->assign( 'DATA', $array );
-
-	if( ! empty( $error ) )
-	{
-		$xtpl->assign( 'ERROR', $error );
-		$xtpl->parse( 'main.error' );
-	}
-
-	foreach ( $listTopics as $cat )
-	{
-		$xtpl->assign( 'LISTCATS', $cat );
-		$xtpl->parse( 'main.parentid' );
-	}
-
-	$xtpl->parse( 'main' );
-	$contents = $xtpl->text( 'main' );
-
-	include NV_ROOTDIR . '/includes/header.php';
-	echo nv_admin_theme( $contents );
-	include NV_ROOTDIR . '/includes/footer.php';
-
-	exit;
-}
-
-//Sua the loai
-if( $nv_Request->isset_request( 'edit', 'get' ) )
-{
-	$page_title = $lang_module['edittopic_titlebox'];
-
-	$tid = $nv_Request->get_int( 'tid', 'get', 0 );
-
-	if( empty( $tid ) )
-	{
-		Header( "Location: " . NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $op );
-		exit();
-	}
-
-	$sql = "SELECT * FROM " . NV_PREFIXLANG . "_" . $module_data . "_topic WHERE id=" . $tid;
-	$result = $db->query( $sql );
-	$numcat = $result->rowCount();
-
-	if( $numcat != 1 )
-	{
-		Header( "Location: " . NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $op );
-		exit();
-	}
-
-	$row = $result->fetch();
-
-	$is_error = false;
-
-	if( $nv_Request->isset_request( 'submit', 'post' ) )
-	{
-		$array['parentid'] = $nv_Request->get_int( 'parentid', 'post', 0 );
-		$array['title'] = $nv_Request->get_title( 'title', 'post', '', 1 );
-		$array['description'] = $nv_Request->get_title( 'description', 'post', '' );
-		$array['keywords'] = $nv_Request->get_title( 'keywords', 'post', '', 1 );
-
-		if( empty( $array['title'] ) )
-		{
-			$error = $lang_module['error1'];
-			$is_error = true;
-		}
-		else
-		{
-			if( ! empty( $array['parentid'] ) )
-			{
-				$sql = "SELECT COUNT(*) AS count FROM " . NV_PREFIXLANG . "_" . $module_data . "_topic WHERE id=" . $array['parentid'];
-				$result = $db->query( $sql );
-				$count = $result->fetchColumn();
-
-				if( ! $count )
-				{
-					$error = $lang_module['error2'];
-					$is_error = true;
-				}
-			}
-
-			if( ! $is_error )
-			{
-				$sql = "SELECT COUNT(*) AS count FROM " . NV_PREFIXLANG . "_" . $module_data . "_topic WHERE id!=" . $tid . " AND alias=" . $db->quote( $alias ) . " AND parentid=" . $array['parentid'];
-				$result = $db->query( $sql );
-				$count = $result->fetchColumn();
-
-				if( $count )
-				{
-					$error = $lang_module['error3'];
-					$is_error = true;
-				}
-			}
-		}
-
-		if( ! $is_error )
+		
+		if( $tid )
 		{
 			$alias = nv_myAlias( strtolower( change_alias( $array['title'] ) ), 1, $tid );
+			
+			$sql = "SELECT COUNT(*) AS count FROM " . NV_PREFIXLANG . "_" . $module_data . "_topic WHERE id!=" . $tid . " AND alias=" . $db->quote( $alias ) . " AND parentid=" . $array['parentid'];
+			$result = $db->query( $sql );
+			$count = $result->fetchColumn();
 
-			$array['img'] = "";
-			$homeimg = $nv_Request->get_title( 'img', 'post' );
-			if( ! empty( $homeimg ) )
+			if( $count )
 			{
-				$homeimg = preg_replace( "/^" . nv_preg_quote( NV_BASE_SITEURL ) . "(.+)$/", "$1", $homeimg );
-				if( preg_match( "/^([a-z0-9\/\.\-\_]+)\.(jpg|png|gif)$/i", $homeimg ) )
-				{
-					$image = NV_ROOTDIR . "/" . $homeimg;
-					$image = nv_is_image( $image );
-					if( ! empty( $image ) ) $array['img'] = $homeimg;
-				}
+				$ajaxRespon->setInput('title')->setMessage( $lang_module['error3'] )->respon();
 			}
-			if( empty( $array['keywords'] ) )
-			{
-				$array['keywords'] = nv_get_keywords( $array['description'] );
-			}
-			else
-			{
-				$array['keywords'] = explode( ",", $array['keywords'] );
-				$array['keywords'] = array_map( "trim", $array['keywords'] );
-				$array['keywords'] = array_unique( $array['keywords'] );
-				$array['keywords'] = implode( ",", $array['keywords'] );
-			}
-
+			
 			if( $array['parentid'] != $row['parentid'] )
 			{
 				$sql = "SELECT MAX(weight) AS new_weight FROM " . NV_PREFIXLANG . "_" . $module_data . "_topic WHERE parentid=" . $array['parentid'];
@@ -325,22 +153,60 @@ if( $nv_Request->isset_request( 'edit', 'get' ) )
 			{
 				$new_weight = $row['weight'];
 			}
+		}
+		else
+		{
+			$alias = nv_myAlias( strtolower( change_alias( $array['title'] ) ) );
+			
+			$sql = "SELECT MAX(weight) AS new_weight FROM " . NV_PREFIXLANG . "_" . $module_data . "_topic WHERE parentid=" . $array['parentid'];
+			$result = $db->query( $sql );
+			$new_weight = $result->fetchColumn();
+			$new_weight = ( int )$new_weight;
+			++$new_weight;
+		}		
 
+		$array['img'] = "";
+		$homeimg = $nv_Request->get_title( 'img', 'post' );
+		if( ! empty( $homeimg ) )
+		{
+			$homeimg = preg_replace( "/^" . nv_preg_quote( NV_BASE_SITEURL ) . "(.+)$/", "$1", $homeimg );
+			if( preg_match( "/^([a-z0-9\/\.\-\_]+)\.(jpg|png|gif)$/i", $homeimg ) )
+			{
+				$image = NV_ROOTDIR . "/" . $homeimg;
+				$image = nv_is_image( $image );
+				if( ! empty( $image ) ) $array['img'] = $homeimg;
+			}
+		}
+
+		if( empty( $array['keywords'] ) )
+		{
+			$array['keywords'] = nv_get_keywords( $array['description'] );
+		}
+		else
+		{
+			$array['keywords'] = explode( ",", $array['keywords'] );
+			$array['keywords'] = array_map( "trim", $array['keywords'] );
+			$array['keywords'] = array_unique( $array['keywords'] );
+			$array['keywords'] = implode( ",", $array['keywords'] );
+		}
+
+		if( $tid )
+		{
 			$sql = "UPDATE " . NV_PREFIXLANG . "_" . $module_data . "_topic SET 
-            parentid=" . $array['parentid'] . ", 
-            title=" . $db->quote( $array['title'] ) . ", 
-            alias=" . $db->quote( $alias ) . ", 
-            description=" . $db->quote( $array['description'] ) . ", 
-            keywords=" . $db->quote( $array['keywords'] ) . ", 
-            img=" . $db->quote( $array['img'] ) . ", 
-            weight=" . $new_weight . " 
+	            parentid=" . $array['parentid'] . ", 
+	            title=" . $db->quote( $array['title'] ) . ", 
+	            alias=" . $db->quote( $alias ) . ", 
+	            description=" . $db->quote( $array['description'] ) . ", 
+	            keywords=" . $db->quote( $array['keywords'] ) . ", 
+	            img=" . $db->quote( $array['img'] ) . ", 
+	            weight=" . $new_weight . " 
             WHERE id=" . $tid;
+            
 			$result = $db->query( $sql );
 
 			if( ! $result )
 			{
-				$error = $lang_module['error4'];
-				$is_error = true;
+				$ajaxRespon->setMessage( $lang_module['error4'] )->respon();
 			}
 			else
 			{
@@ -350,10 +216,44 @@ if( $nv_Request->isset_request( 'edit', 'get' ) )
 				}
 
 				nv_insert_logs( NV_LANG_DATA, $module_name, $lang_module['edittopic_titlebox'], "ID " . $tid, $admin_info['userid'] );
-				Header( "Location: " . NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $op );
-				exit();
 			}
 		}
+		else
+		{
+			$sql = "INSERT INTO " . NV_PREFIXLANG . "_" . $module_data . "_topic VALUES (
+		        NULL, 
+		        " . $array['parentid'] . ", 
+		        " . $db->quote( $array['title'] ) . ", 
+		        " . $db->quote( $alias ) . ", 
+		        " . $db->quote( $array['description'] ) . ", 
+		        " . $new_weight . ", 
+		        " . $db->quote( $array['img'] ) . ", 
+		        1, 
+		        " . $db->quote( $array['keywords'] ) . "
+			)";
+	
+			$tid = $db->insert_id( $sql );
+	
+			if( ! $tid )
+			{
+				$ajaxRespon->setMessage( $lang_module['error4'] )->respon();
+			}
+	
+			nv_insert_logs( NV_LANG_DATA, $module_name, $lang_module['addtopic_titlebox'], "ID " . $tid, $admin_info['userid'] );	
+		}
+		
+		nv_del_moduleCache( $module_name );
+		
+		$redirect = NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $op;
+		$ajaxRespon->setSuccess()->setMessage( $lang_module['successfullySaved'] )->setRedirect( $redirect )->respon();	
+	}
+	elseif( ! $tid )
+	{
+		$array['parentid'] = 0;
+		$array['title'] = "";
+		$array['description'] = "";
+		$array['keywords'] = "";
+		$array['img'] = "";
 	}
 	else
 	{
@@ -366,24 +266,21 @@ if( $nv_Request->isset_request( 'edit', 'get' ) )
 
 	if( ! empty( $array['img'] ) ) $array['img'] = NV_BASE_SITEURL . $array['img'];
 
-	$listTopics = array( array(
+	$listTopics = array(
+		array(
 			'id' => 0,
 			'name' => $lang_module['is_maintopic'],
-			'selected' => "" ) );
+			'selected' => ""
+		) 
+	);
 	$listTopics = $listTopics + nv_listTopics( $array['parentid'], $tid );
 
 	$xtpl = new XTemplate( "topic_add.tpl", NV_ROOTDIR . "/themes/" . $global_config['module_theme'] . "/modules/" . $module_file );
-	$xtpl->assign( 'FORM_ACTION', NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $op . "&amp;edit=1&amp;tid=" . $tid );
+	$xtpl->assign( 'FORM_ACTION', $form_action );
 	$xtpl->assign( 'LANG', $lang_module );
 	$xtpl->assign( 'UPLOADS_DIR_USER', NV_UPLOADS_DIR . '/' . $module_name );
 	$xtpl->assign( 'UPLOAD_CURRENT', NV_UPLOADS_DIR . '/' . $module_name );
 	$xtpl->assign( 'DATA', $array );
-
-	if( ! empty( $error ) )
-	{
-		$xtpl->assign( 'ERROR', $error );
-		$xtpl->parse( 'main.error' );
-	}
 
 	foreach ( $listTopics as $cat )
 	{
@@ -397,8 +294,6 @@ if( $nv_Request->isset_request( 'edit', 'get' ) )
 	include NV_ROOTDIR . '/includes/header.php';
 	echo nv_admin_theme( $contents );
 	include NV_ROOTDIR . '/includes/footer.php';
-
-	exit;
 }
 
 // Xoa chu de
@@ -424,11 +319,13 @@ if( $nv_Request->isset_request( 'del', 'post' ) )
 	
 	nv_del_topic( $tid );
 	nv_FixWeightTopic( $parentid );
-
+	
+	nv_del_moduleCache( $module_name );
+	
 	die( 'OK' );
 }
 
-//Chinh thu tu chu de
+// Chinh thu tu chu de
 if( $nv_Request->isset_request( 'changeweight', 'post' ) )
 {
 	if( ! defined( 'NV_IS_AJAX' ) ) die( 'Wrong URL' );
@@ -456,10 +353,13 @@ if( $nv_Request->isset_request( 'changeweight', 'post' ) )
 	}
 	$sql = "UPDATE " . NV_PREFIXLANG . "_" . $module_data . "_topic SET weight=" . $new . " WHERE id=" . $tid;
 	$db->query( $sql );
+	
+	nv_del_moduleCache( $module_name );
+	
 	die( 'OK' );
 }
 
-//Kich hoat - dinh chi
+// Kich hoat - dinh chi
 if( $nv_Request->isset_request( 'changestatus', 'post' ) )
 {
 	if( ! defined( 'NV_IS_AJAX' ) ) die( 'Wrong URL' );
@@ -478,10 +378,13 @@ if( $nv_Request->isset_request( 'changestatus', 'post' ) )
 
 	$sql = "UPDATE " . NV_PREFIXLANG . "_" . $module_data . "_topic SET status=" . $status . " WHERE id=" . $tid;
 	$db->query( $sql );
+	
+	nv_del_moduleCache( $module_name );
+	
 	die( 'OK' );
 }
 
-//Danh sach chu de
+// Danh sach chu de
 $page_title = $lang_module['topic_management'];
 
 $pid = $nv_Request->get_int( 'pid', 'get', 0 );

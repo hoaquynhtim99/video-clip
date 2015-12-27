@@ -22,6 +22,7 @@ $lang_module['add'] = "Thêm video-clip mới";
 $lang_module['topic'] = "Quản lý thể loại";
 $lang_module['config'] = "Cấu hình";
 $lang_module['save'] = "Lưu lại";
+$lang_module['view'] = "Xem";
 
 $lang_module['topic_management'] = "Quản lý thể loại";
 $lang_module['addtopic_titlebox'] = "Thêm thể loại mới";
@@ -37,7 +38,7 @@ $lang_module['group_view'] = "Cho phép các nhóm";
 $lang_module['listSubTopic'] = "Danh sách thể loại con của thể loại &ldquo;<strong>%s</strong>&rdquo;";
 $lang_module['listMainTopic'] = "Danh sách các thể loại chính";
 $lang_module['position'] = "Vị trí";
-$lang_module['is_active'] = "Đang hoạt động";
+$lang_module['is_active'] = "Hoạt động";
 $lang_module['feature'] = "Chức năng";
 $lang_module['addClip'] = "Thêm video-clip";
 $lang_module['editClip'] = "Sửa video-clip";
