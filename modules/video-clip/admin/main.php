@@ -105,6 +105,9 @@ if( $nv_Request->isset_request( 'add', 'get' ) or $nv_Request->isset_request( 'e
 
 	if( $nv_Request->isset_request( 'submit', 'post' ) )
 	{
+		// Reset lỗi
+		$ajaxRespon->reset();
+		
 		$post['tid'] = $nv_Request->get_int( 'tid', 'post', 0 );
 		$post['title'] = $nv_Request->get_title( 'title', 'post', '', 1 );
 		$post['hometext'] = $nv_Request->get_title( 'hometext', 'post', '', 1 );
@@ -133,18 +136,17 @@ if( $nv_Request->isset_request( 'add', 'get' ) or $nv_Request->isset_request( 'e
 
 		if( empty( $post['title'] ) )
 		{
-			$info = $lang_module['error1'];
-			$is_error = true;
+			$ajaxRespon->setInput('title')->setMessage( $lang_module['error1'] )->respon();
 		}
-		elseif( empty( $post['hometext'] ) )
+		
+		if( empty( $post['hometext'] ) )
 		{
-			$info = $lang_module['error7'];
-			$is_error = true;
+			$ajaxRespon->setInput('hometext')->setMessage( $lang_module['error7'] )->respon();
 		}
-		elseif( empty( $post['internalpath'] ) and empty( $post['externalpath'] ) )
+		
+		if( empty( $post['internalpath'] ) and empty( $post['externalpath'] ) )
 		{
-			$info = $lang_module['error5'];
-			$is_error = true;
+			$ajaxRespon->setInput('internalpath')->setMessage( $lang_module['error5'] )->respon();
 		}
 
 		$post['img'] = "";
@@ -161,81 +163,79 @@ if( $nv_Request->isset_request( 'add', 'get' ) or $nv_Request->isset_request( 'e
 
 			if( empty( $post['img'] ) )
 			{
-				$info = $lang_module['error6'];
-				$is_error = true;
+				$ajaxRespon->setInput('img')->setMessage( $lang_module['error6'] )->respon();
 			}
 		}
 
-		if( ! $is_error )
+		$test_content = strip_tags( $post['bodytext'] );
+		$test_content = trim( $test_content );
+		$post['bodytext'] = ! empty( $test_content ) ? nv_editor_nl2br( $post['bodytext'] ) : "";
+
+		if( empty( $post['keywords'] ) )
 		{
-			$test_content = strip_tags( $post['bodytext'] );
-			$test_content = trim( $test_content );
-			$post['bodytext'] = ! empty( $test_content ) ? nv_editor_nl2br( $post['bodytext'] ) : "";
-
-			if( empty( $post['keywords'] ) )
-			{
-				$post['keywords'] = nv_get_keywords( $post['hometext'] . " " . $post['bodytext'] );
-			}
-			else
-			{
-				$post['keywords'] = explode( ",", $post['keywords'] );
-				$post['keywords'] = array_map( "trim", $post['keywords'] );
-				$post['keywords'] = array_unique( $post['keywords'] );
-				$post['keywords'] = implode( ",", $post['keywords'] );
-			}
-
-			if( isset( $post['id'] ) )
-			{
-				$alias = nv_myAlias( strtolower( change_alias( $post['title'] ) ), 2, $post['id'] );
-
-				$query = "UPDATE " . NV_PREFIXLANG . "_" . $module_data . "_clip SET 
-	                tid=" . $post['tid'] . ", 
-	                alias=" . $db->quote( $alias ) . ", 
-	                title=" . $db->quote( $post['title'] ) . ", 
-	                img=" . $db->quote( $post['img'] ) . ", 
-	                hometext=" . $db->quote( $post['hometext'] ) . ", 
-	                bodytext=" . $db->quote( $post['bodytext'] ) . ", 
-	                keywords=" . $db->quote( $post['keywords'] ) . ", 
-	                internalpath=" . $db->quote( $post['internalpath'] ) . ",
-	                externalpath=" . $db->quote( $post['externalpath'] ) . ", 
-	                groups_view=" . $db->quote( $post['groups_view'] ) . ",
-                 	comm=" . $post['comm'] . " 
-                WHERE id=" . $post['id'];
-
-				$db->query( $query );
-
-				nv_insert_logs( NV_LANG_DATA, $module_name, $lang_module['editClip'], "Id: " . $post['id'], $admin_info['userid'] );
-			}
-			else
-			{
-				$alias = nv_myAlias( strtolower( change_alias( $post['title'] ) ) );
-
-				$query = "INSERT INTO " . NV_PREFIXLANG . "_" . $module_data . "_clip VALUES 
-                (NULL, " . $post['tid'] . ", " . $db->quote( $post['title'] ) . ", " . $db->quote( $alias ) . ", 
-                " . $db->quote( $post['hometext'] ) . ", " . $db->quote( $post['bodytext'] ) . ", 
-                " . $db->quote( $post['keywords'] ) . ", " . $db->quote( $post['img'] ) . ", 
-                " . $db->quote( $post['internalpath'] ) . ", " . $db->quote( $post['externalpath'] ) . ", 
-                " . $db->quote( $post['groups_view'] ) . ", " . $post['comm'] . ", 
-                1, " . NV_CURRENTTIME . ");";
-				$_id = $db->insert_id( $query );
-
-				$query = "INSERT INTO " . NV_PREFIXLANG . "_" . $module_data . "_hit VALUES (" . $_id . ", 0, 0, 0, 0, 0);";
-				$db->query( $query );
-
-				nv_insert_logs( NV_LANG_DATA, $module_name, $lang_module['addClip'], "Id: " . $_id, $admin_info['userid'] );
-			}
-			
-			nv_del_moduleCache( $module_name );
-			
-			if( $post['redirect'] )
-			{
-				Header( "Location: " . NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $alias );
-				die();
-			}
-			
-			Header( 'Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name );
-			die();
+			$post['keywords'] = nv_get_keywords( $post['hometext'] . " " . $post['bodytext'] );
 		}
+		else
+		{
+			$post['keywords'] = explode( ",", $post['keywords'] );
+			$post['keywords'] = array_map( "trim", $post['keywords'] );
+			$post['keywords'] = array_unique( $post['keywords'] );
+			$post['keywords'] = implode( ",", $post['keywords'] );
+		}
+
+		if( isset( $post['id'] ) )
+		{
+			$alias = nv_myAlias( strtolower( change_alias( $post['title'] ) ), 2, $post['id'] );
+
+			$query = "UPDATE " . NV_PREFIXLANG . "_" . $module_data . "_clip SET 
+                tid=" . $post['tid'] . ", 
+                alias=" . $db->quote( $alias ) . ", 
+                title=" . $db->quote( $post['title'] ) . ", 
+                img=" . $db->quote( $post['img'] ) . ", 
+                hometext=" . $db->quote( $post['hometext'] ) . ", 
+                bodytext=" . $db->quote( $post['bodytext'] ) . ", 
+                keywords=" . $db->quote( $post['keywords'] ) . ", 
+                internalpath=" . $db->quote( $post['internalpath'] ) . ",
+                externalpath=" . $db->quote( $post['externalpath'] ) . ", 
+                groups_view=" . $db->quote( $post['groups_view'] ) . ",
+             	comm=" . $post['comm'] . " 
+            WHERE id=" . $post['id'];
+
+			$db->query( $query );
+
+			nv_insert_logs( NV_LANG_DATA, $module_name, $lang_module['editClip'], "Id: " . $post['id'], $admin_info['userid'] );
+		}
+		else
+		{
+			$alias = nv_myAlias( strtolower( change_alias( $post['title'] ) ) );
+
+			$query = "INSERT INTO " . NV_PREFIXLANG . "_" . $module_data . "_clip VALUES 
+            (NULL, " . $post['tid'] . ", " . $db->quote( $post['title'] ) . ", " . $db->quote( $alias ) . ", 
+            " . $db->quote( $post['hometext'] ) . ", " . $db->quote( $post['bodytext'] ) . ", 
+            " . $db->quote( $post['keywords'] ) . ", " . $db->quote( $post['img'] ) . ", 
+            " . $db->quote( $post['internalpath'] ) . ", " . $db->quote( $post['externalpath'] ) . ", 
+            " . $db->quote( $post['groups_view'] ) . ", " . $post['comm'] . ", 
+            1, " . NV_CURRENTTIME . ");";
+			$_id = $db->insert_id( $query );
+
+			$query = "INSERT INTO " . NV_PREFIXLANG . "_" . $module_data . "_hit VALUES (" . $_id . ", 0, 0, 0, 0, 0);";
+			$db->query( $query );
+
+			nv_insert_logs( NV_LANG_DATA, $module_name, $lang_module['addClip'], "Id: " . $_id, $admin_info['userid'] );
+		}
+		
+		nv_del_moduleCache( $module_name );
+		
+		if( $post['redirect'] )
+		{
+			$redirect = NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $alias;
+		}
+		else
+		{
+			$redirect = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name;
+		}
+		
+		$ajaxRespon->setSuccess()->setMessage( $lang_module['successfullySaved'] )->setRedirect( $redirect )->respon();
 	}
 	elseif( isset( $post['id'] ) )
 	{

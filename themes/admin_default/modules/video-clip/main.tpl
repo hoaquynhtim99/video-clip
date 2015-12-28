@@ -65,87 +65,100 @@ $("input[name=ok2]").click(function(){var a=$("select[name=tList]").val();window
 //]]>
 </script>
 <!-- END: main -->
+
 <!-- BEGIN: add -->
-<h3 class="myh3">{INFO_TITLE}</h3>
-<div class="red">{ERROR_INFO}</div>
-<form class="form-inline" id="addInformation" method="post" action="{POST.action}">
-	<table class="table table-striped table-bordered table-hover">
-		<col style="width:220px" />
-		<tbody>
-			<tr>
-				<td>{LANG.title}<span style="color:red">*</span></td>
-				<td><input title="{LANG.title}" type="text" name="title" value="{POST.title}" class="form-control txt-half ajvd-input" maxlength="255" /></td>
-			</tr>
-			<tr>
-				<td>{LANG.topic_parent}</td>
-				<td>
-					<select name="tid" class="form-control ajvd-input">
-						<!-- BEGIN: option3 -->
-						<option value="{OPTION3.value}"{OPTION3.selected}>
-							{OPTION3.name}
-						</option>
-						<!-- END: option3 -->
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>{LANG.internalpath}</td>
-				<td>
-					<input title="{LANG.internalpath}" type="text" name="internalpath" id="internalpath" value="{POST.internalpath}" class="form-control txt-half ajvd-input" maxlength="255" />
-					<input type="button" value="{LANG.BrowseServer}" class="selectfile btn btn-default" />
-				</td>
-			</tr>
-			<tr>
-				<td>{LANG.externalpath}</td>
-				<td><input title="{LANG.externalpath}" type="text" name="externalpath" value="{POST.externalpath}" class="form-control txt-half ajvd-input" maxlength="255" /></td>
-			</tr>
-            <tr style="display:none">
-                <td style="vertical-align:top">{LANG.who_view}</td>
-                <td>
-					<!-- BEGIN: groups_view -->
-					<input name="groups_view[]" value="{GROUPS_VIEW.key}" type="checkbox"{GROUPS_VIEW.checked} /> {GROUPS_VIEW.title}<br />
-					<!-- END: groups_view -->
-                </td>
-            </tr>
-			<tr style="display:none">
-				<td>{LANG.commAllow}</td>
-				<td><input name="comm" type="checkbox"{POST.comm} value="1" /></td>
-			</tr>
-			<tr>
-				<td>{LANG.homeImg}</td>
-				<td>
-					<input title="{LANG.homeImg}" type="text" name="img" id="img" value="{POST.img}" class="form-control txt-half ajvd-input" maxlength="255" />
-					<input type="button" value="{LANG.BrowseServer}" class="selectimg btn btn-default" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					{LANG.hometext}<span style="color:red">*</span>
-				</td>
-				<td><textarea title="{LANG.hometext}" name="hometext" class="ajvd-input txt-full" rows="5">{POST.hometext}</textarea></td>
-			</tr>
-			<tr>
-				<td>{LANG.keywords}</td>
-				<td><input title="{LANG.keywords}" type="text" name="keywords" value="{POST.keywords}" class="form-control txt-half ajvd-input" maxlength="255" /></td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="ajvd-box"><strong>{LANG.bodytext}</strong></div>
-	<div>{CONTENT}</div>
-	<div class="ajvd-box">
-		<input name="redirect" type="hidden" value="{POST.redirect}" />
-		<input name="submit" type="submit" value="{LANG.save}" class="ajvd-button"/>
+<div class="page-title">
+	<h2>{INFO_TITLE}</h2>
+</div>
+<form action="{POST.action}" method="post" role="form" class="form-horizontal" autocomplete="off" data-toggle="validate" data-type="ajax">
+	<div class="form-result"></div>
+	<div class="form-element">
+		<div class="form-group">
+			<label for="title" class="control-label col-sm-8">{LANG.title}:</label>
+			<div class="col-sm-16 col-lg-6">
+	            <input class="form-control required" type="text" name="title" id="title" value="{POST.title}" maxlength="255" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="tid" class="control-label col-sm-8">{LANG.topic_parent}:</label>
+			<div class="col-sm-16 col-lg-6">
+				<select class="form-control" name="tid" id="tid">
+					<!-- BEGIN: option3 -->
+					<option value="{OPTION3.value}"{OPTION3.selected}>
+						{OPTION3.name}
+					</option>
+					<!-- END: option3 -->
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="internalpath" class="control-label col-sm-8">{LANG.internalpath}:</label>
+			<div class="col-sm-16 col-lg-6">
+				<div class="input-group">
+					<input class="form-control" type="text" name="internalpath" id="internalpath" value="{POST.internalpath}" maxlength="255" />
+					<span class="input-group-btn">
+				        <button class="btn btn-success selectfile" type="button">{LANG.BrowseServer}</button>
+				      </span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="externalpath" class="control-label col-sm-8">{LANG.externalpath}:</label>
+			<div class="col-sm-16 col-lg-6">
+	            <input class="form-control" type="text" name="externalpath" id="externalpath" value="{POST.externalpath}" maxlength="255" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="img" class="control-label col-sm-8">{LANG.homeImg}:</label>
+			<div class="col-sm-16 col-lg-6">
+				<div class="input-group">
+					<input class="form-control" type="text" name="img" id="img" value="{POST.img}" maxlength="255" />
+					<span class="input-group-btn">
+				        <button class="btn btn-success selectimg" type="button">{LANG.BrowseServer}</button>
+				      </span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="hometext" class="control-label col-sm-8">{LANG.hometext}:</label>
+			<div class="col-sm-16 col-lg-6">
+	            <textarea class="form-control required" name="hometext" id="hometext" rows="5">{POST.hometext}</textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="keywords" class="control-label col-sm-8">{LANG.keywords}:</label>
+			<div class="col-sm-16 col-lg-6">
+	            <input class="form-control" type="text" name="keywords" id="keywords" value="{POST.keywords}" maxlength="255" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-xs-24">
+				<div class="ckeditor required">
+					<label>{LANG.bodytext}</label>
+					<div class="clearfix">{CONTENT}</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-8 col-sm-16">
+				<input type="hidden" name="submit" value="1"/>
+				<input name="redirect" type="hidden" value="{POST.redirect}" />
+				<input type="submit" value="{LANG.save}" class="btn btn-primary"/>
+			</div>
+		</div>
 	</div>
 </form>
+
+
 <script type="text/javascript">
 //<![CDATA[
-$("input.selectfile").click(function(){
-    var a = $(this).prev().attr("id");
+$(".selectfile").click(function(){
+    var a = $(this).parent().prev().attr("id");
     nv_open_browse(script_name + "?" + nv_lang_variable + "=" + nv_lang_data + "&" + nv_name_variable + "=upload&popup=1&area=" + a + "&path={UPLOAD_FILE_PATH}&type=all&currentpath={UPLOAD_FILE_PATH}", "NVImg", "850", "420", "resizable=no,scrollbars=no,toolbar=no,location=no,status=no");
     return !1
 });
-$("input.selectimg").click(function(){
-    var a = $(this).prev().attr("id");
+$(".selectimg").click(function(){
+    var a = $(this).parent().prev().attr("id");
     nv_open_browse(script_name + "?" + nv_lang_variable + "=" + nv_lang_data + "&" + nv_name_variable + "=upload&popup=1&area=" + a + "&path={UPLOAD_IMG_PATH}&type=image&currentpath={UPLOAD_IMG_CURRENT}", "NVImg", "850", "420", "resizable=no,scrollbars=no,toolbar=no,location=no,status=no");
     return !1
 });

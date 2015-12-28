@@ -43,7 +43,9 @@ function nv_chang_status(a) {
 	'use strict';
 	
 	var Validate = function(element, options) {
-		var self = this
+		var self    = this,
+			editor  = false
+
 		this.$element = $(element)
 		this.options = options
 		
@@ -53,23 +55,33 @@ function nv_chang_status(a) {
 		
 		this.$element.on('submit.bs.validate', $.proxy(this.onSubmit, this))
 		
-		this.$element.find("div.required,div.checkbox,div.radio,input:not(:button,:submit,:reset),select,textarea").each(function() {
-			var tagName = $(this).prop('tagName')
+		this.$element.find("div.required,div.checkbox,div.radio,div.ckeditor,input:not(:button,:submit,:reset),select,textarea").each(function() {
+			var element   = this,
+				tagName   = $(this).prop('tagName'),
+				name
 			
 			if( tagName == 'DIV' ){
-				$(this).on('click.bs.validate', function(e) {
-					self.hideError(this)
-				})
+				if( $(element).is('.ckeditor') ){
+					if( typeof CKEDITOR == 'object' && ( name = $(element).find('textarea:first').prop('id') ) && CKEDITOR.instances[name] ){
+						CKEDITOR.instances[name].on('change', function(){
+							self.hideError(element)
+						})
+					}
+				}else{
+					$(element).on('click.bs.validate', function(e) {
+						self.hideError(element)
+					})			
+				}
 			}else if( tagName == 'SELECT' ){
-				$(this).on('click.bs.validate change.bs.validate', function(e) {
+				$(element).on('click.bs.validate change.bs.validate', function(e) {
 					if( e.which != 13 ){
-						self.hideError(this)
+						self.hideError(element)
 					}
 				})
 			}else{
-				$(this).on('keydown.bs.validate', function(e) {
+				$(element).on('keydown.bs.validate', function(e) {
 					if( e.which != 13 ){
-						self.hideError(this)
+						self.hideError(element)
 					}
 				})
 			}
@@ -89,6 +101,8 @@ function nv_chang_status(a) {
 			e.preventDefault()
 			return
 		}
+		
+		this.updateElement()
 		
 		if( this.options.type == 'ajax' ){
 			e.preventDefault()
@@ -141,12 +155,24 @@ function nv_chang_status(a) {
 	}
 	
 	Validate.prototype.hideError = function( element ){
-		$(element).tooltip("destroy");
-		$(element).parent().parent().removeClass("has-error")
+		$(element).tooltip("destroy")
+		
+		if( $(element).parent().is('.input-group') ){
+			$(element).parent().parent().parent().removeClass("has-error")
+		}else{
+			$(element).parent().parent().removeClass("has-error");
+		}
 	}
 	
 	Validate.prototype.showError = function( element, order ){
-		$(element).parent().parent().addClass("has-error");
+		var name
+		
+		if( $(element).parent().is('.input-group') ){
+			$(element).parent().parent().parent().addClass("has-error")
+		}else{
+			$(element).parent().parent().addClass("has-error");
+		}
+		
 		$(element).tooltip({
 			placement: "bottom",
 			title: function() {
@@ -157,7 +183,17 @@ function nv_chang_status(a) {
 		
 		$(element).tooltip("show")
 		if( order == 1 ){
-			"DIV" == $(element).prop("tagName") ? $("input", element)[0].focus() : $(element).focus()
+			if( $(element).prop("tagName") == 'DIV' ){
+				if( $(element).is('.ckeditor') ){
+					if( typeof CKEDITOR == 'object' && ( name = $(element).find('textarea:first').prop('id') ) && CKEDITOR.instances[name] ){
+						CKEDITOR.instances[name].focus()
+					}
+				}else{
+					$("input", element)[0].focus()
+				}
+			}else{
+				$(element).focus()
+			}
 		}
 	}
 	
@@ -165,7 +201,8 @@ function nv_chang_status(a) {
 		var pattern = $(element).data('pattern'),
 			value   = $(element).val(),
 		 	tagName = $(element).prop('tagName'),
-		 	type    = $(element).prop('type')
+		 	type    = $(element).prop('type'),
+		 	name, text
 				
 		if ("INPUT" == tagName && "email" == type) {
 			if (!Validate.MAIL_FILTER.test(value)) return false
@@ -175,6 +212,16 @@ function nv_chang_status(a) {
 			if (!$("[type=radio]:checked", element).length) return false
 		} else if ("DIV" == tagName && $(element).is(".checkbox")) {
 			if (!$("[type=checkbox]:checked", element).length) return false
+		} else if ("DIV" == tagName && $(element).is(".ckeditor")) {
+			if( typeof CKEDITOR == 'object' && ( name = $(element).find('textarea:first').prop('id') ) && CKEDITOR.instances[name] ){
+				text = CKEDITOR.instances[name].getData()
+				text = this.trim( text )
+				
+				if( text != '' ){
+					return true
+				}
+			}
+			return false
 		} else if ("INPUT" == tagName || "TEXTAREA" == tagName)
 			if ("undefined" == typeof pattern || "" == pattern) {
 				if ("" == value) return false
@@ -198,7 +245,7 @@ function nv_chang_status(a) {
 		if( action == '' ){
 			action = window.location.href
 		}
-		
+
 		this.hideAllError()
 		this.$element.find("input,button,select,textarea").prop("disabled", true)
 		
@@ -220,7 +267,7 @@ function nv_chang_status(a) {
 						$this = $('[name="' + res.input + '"]:first', self.$element)
 						type = $this.prop('type')
 						
-						if( type == 'checkbox' || type == 'radio' ){
+						if( type == 'checkbox' || type == 'radio' || $this.parent().parent().is('.ckeditor') ){
 							$this = $this.parent().parent();
 						}
 						
@@ -246,6 +293,18 @@ function nv_chang_status(a) {
 				})
 			}
 		})
+	}
+	
+	Validate.prototype.updateElement = function(){
+		var name
+
+		if( typeof CKEDITOR == 'object' ){
+			$('.ckeditor' , this.$element).each(function(){
+				if( ( name = $(this).find('textarea:first').prop('id') ) && CKEDITOR.instances[name] ){
+					CKEDITOR.instances[name].updateElement()
+				}
+			})
+		}
 	}
 	
 	Validate.prototype.stripTags = function(str, allowed_tags) {

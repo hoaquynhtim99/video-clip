@@ -121,3 +121,16 @@ div.tooltip.bottom div.tooltip-arrow{
 .items .loop-item .item-tools .fa-edit:before{
 	top: 2px;
 }
+
+/*--- CAPTION ---*/
+.page-title{
+	padding: 0 0 15px 0;
+}
+.page-title h1,
+.page-title h2,
+.page-title h3,
+.page-title h4,
+.page-title h5,
+.page-title h6{
+	margin: 0;
+}
