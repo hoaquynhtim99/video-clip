@@ -3,7 +3,7 @@
 	<div class="form-result"></div>
 	<div class="form-element">
 		<div class="form-group">
-			<label for="title" class="control-label col-sm-8">{LANG.topic_name}:</label>
+			<label for="title" class="control-label col-sm-8"><i class="fa fa-asterisk"></i> {LANG.topic_name}:</label>
 			<div class="col-sm-16 col-lg-6">
 	            <input class="form-control required" type="text" name="title" id="title" value="{DATA.title}" maxlength="100" />
 			</div>
@@ -21,7 +21,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="parentid" class="control-label col-sm-8">{LANG.topic_parent}:</label>
+			<label for="parentid" class="control-label col-sm-8"><i class="fa fa-asterisk"></i> {LANG.topic_parent}:</label>
 			<div class="col-sm-16 col-lg-6">
                 <select name="parentid" id="parentid" class="form-control required">
                     <!-- BEGIN: parentid -->

@@ -74,7 +74,7 @@ $("input[name=ok2]").click(function(){var a=$("select[name=tList]").val();window
 	<div class="form-result"></div>
 	<div class="form-element">
 		<div class="form-group">
-			<label for="title" class="control-label col-sm-8">{LANG.title}:</label>
+			<label for="title" class="control-label col-sm-8"><i class="fa fa-asterisk"></i> {LANG.title}:</label>
 			<div class="col-sm-16 col-lg-6">
 	            <input class="form-control required" type="text" name="title" id="title" value="{POST.title}" maxlength="255" />
 			</div>
@@ -120,7 +120,7 @@ $("input[name=ok2]").click(function(){var a=$("select[name=tList]").val();window
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="hometext" class="control-label col-sm-8">{LANG.hometext}:</label>
+			<label for="hometext" class="control-label col-sm-8"><i class="fa fa-asterisk"></i> {LANG.hometext}:</label>
 			<div class="col-sm-16 col-lg-6">
 	            <textarea class="form-control required" name="hometext" id="hometext" rows="5">{POST.hometext}</textarea>
 			</div>
@@ -134,7 +134,7 @@ $("input[name=ok2]").click(function(){var a=$("select[name=tList]").val();window
 		<div class="form-group">
 			<div class="col-xs-24">
 				<div class="ckeditor required">
-					<label>{LANG.bodytext}</label>
+					<label class="control-label">{LANG.bodytext} <i class="fa fa-asterisk"></i></label>
 					<div class="clearfix">{CONTENT}</div>
 				</div>
 			</div>

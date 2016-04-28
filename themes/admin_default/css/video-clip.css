@@ -9,6 +9,19 @@
 .form-horizontal .control-label{
 	font-weight: 700;
 }
+.form-horizontal .control-label .fa{
+	color: #B0171F;
+	font-weight: normal;
+	font-size: 10px;
+}
+.form-horizontal .ckeditor .control-label{
+	padding-top: 0;
+	margin-bottom: 7px;
+}
+.form-horizontal .ckeditor .control-label .fa{
+	position: relative;
+	top: -1px;
+}
 .form-horizontal .checkbox input[type="checkbox"]{
 	margin-top: 1px;
 }
