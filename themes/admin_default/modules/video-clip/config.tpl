@@ -34,6 +34,16 @@
 			</div>
 		</div>
 		<div class="form-group">
+			<label for="aspectratio" class="control-label col-sm-8">{LANG.cfg_aspectratio}:</label>
+			<div class="col-sm-16 col-lg-6">
+	            <select name="aspectratio" id="aspectratio" class="form-control">
+	                <!-- BEGIN: aspectratio -->
+	                <option value="{ASPECTRATIO.value}"{ASPECTRATIO.select}>{ASPECTRATIO.value}</option>
+	                <!-- END: aspectratio -->
+	            </select>
+			</div>
+		</div>
+		<div class="form-group">
 			<div class="col-sm-offset-8 col-sm-16 col-lg-6">
 				<div class="checkbox">
 					<label>

@@ -32,7 +32,11 @@ if( $topicID )
 	}
 }
 
-$sql = "SELECT SQL_CALC_FOUND_ROWS a.*,b.view FROM " . NV_PREFIXLANG . "_" . $module_data . "_clip a, " . NV_PREFIXLANG . "_" . $module_data . "_hit b WHERE a.id=b.cid AND a.status=1" . $sqlTopic . " ORDER BY a.id DESC LIMIT " . ( ( $pgnum - 1 ) * $configMods['otherClipsNum'] ) . "," . $configMods['otherClipsNum'];
+$sql = "SELECT SQL_CALC_FOUND_ROWS a.*,b.view FROM " . NV_PREFIXLANG . "_" . $module_data . "_clip a, 
+" . NV_PREFIXLANG . "_" . $module_data . "_hit b 
+WHERE a.id=b.cid AND a.status=1" . $sqlTopic . " 
+ORDER BY a.id DESC 
+LIMIT " . ( ( $pgnum - 1 ) * $configMods['otherClipsNum'] ) . "," . $configMods['otherClipsNum'];
 
 $xtpl = new XTemplate( "main.tpl", NV_ROOTDIR . "/themes/" . $module_info['template'] . "/modules/" . $module_file );
 $xtpl->assign( 'LANG', $lang_module );

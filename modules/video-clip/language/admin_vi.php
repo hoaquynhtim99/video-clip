@@ -76,6 +76,8 @@ $lang_module['BrowseServer'] = "Duyệt trên máy chủ";
 $lang_module['folderStructureEnable'] = "Kích hoạt cấu trúc thư mục uploads";
 $lang_module['titleLength'] = "Số ký tự tiêu đề trang chủ";
 
+$lang_module['cfg_aspectratio'] = "Tỉ lệ phát video";
+
 $lang_module['error1'] = "Lỗi! Vui lòng điền nội dung vào ô Tiêu đề";
 $lang_module['error2'] = "Lỗi! Thể loại mà bạn chọn không tồn tại!";
 $lang_module['error3'] = "Lỗi! Tiêu đề đã được sử dụng. Vui lòng chọn một tiêu đề khác";

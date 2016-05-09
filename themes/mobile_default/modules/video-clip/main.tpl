@@ -8,7 +8,9 @@
 <h1 class="mvc-title">{DETAILCONTENT.title}</h1>
 <div class="message" id="mesHide"></div>
 <div class="mb10">
-	<div id="clip-content">&nbsp;</div>
+    <div id="clip-content-wrap" style="padding-bottom:{MODULECONFIG.aspectratioPadding}%">
+    	<div id="clip-content">&nbsp;</div>
+    </div>
 </div>
 <div class="clearfix"></div>
 <script type="text/javascript">
@@ -16,7 +18,7 @@ $(document).ready(function(){
     jwplayer("clip-content").setup({
         file: "{DETAILCONTENT.filepath}",
         width: '100%',
-        aspectratio: "16:9",
+        aspectratio: "{MODULECONFIG.aspectratio}",
 		autostart: {MODULECONFIG.playerAutostart},
     });
 });

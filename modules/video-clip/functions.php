@@ -101,6 +101,7 @@ $configMods = array();
 $configMods['otherClipsNum'] = 16; //So video-clip hien thi tren trang chu hoac trang The loai
 $configMods['playerAutostart'] = 0; //Co tu dong phat video hay khong
 $configMods['playerSkin'] = ""; //Skin cua player
+$configMods['aspectratio'] = "16:9"; // Ti le phat video
 $configMods['titleLength'] = 20; // So ky tu cua tieu de
 
 if( file_exists( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php" ) )
@@ -112,6 +113,8 @@ if( ! empty( $configMods['playerSkin'] ) )
 {
 	$configMods['playerSkin'] = ",skin:\"" . NV_BASE_SITEURL . "images/jwplayer/skin/" . $configMods['playerSkin'] . ".zip\"";
 }
+
+$configMods['aspectratioPadding'] = $configMods['aspectratio'] == "16:9" ? "56" : ($configMods['aspectratio'] == "4:3" ? "75" : "42");
 
 // Tieu de, meta tag
 $page_title = $module_info['custom_title'];

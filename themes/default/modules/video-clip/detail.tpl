@@ -2,7 +2,7 @@
 <div class="message" id="mesHide"></div>
 <div class="detailContent clearfix">
     <div class="videoTitle" id="videoTitle">{DETAILCONTENT.title}</div>
-    <div class="videoplayer">
+    <div class="videoplayer" style="padding-bottom:{MODULECONFIG.aspectratioPadding}%">
         <div class="cont"><div id="videoCont"></div></div>
     </div>
     <div class="clearfix"></div>
@@ -12,7 +12,7 @@ $(document).ready(function(){
     jwplayer("videoCont").setup({
         file: "{DETAILCONTENT.filepath}",
         width: "100%",
-        aspectratio: "16:9",
+        aspectratio: "{MODULECONFIG.aspectratio}",
 		autostart: {MODULECONFIG.playerAutostart},
     });
 	<!-- BEGIN: scrollPlayer -->$("html,body").animate({scrollTop:$(".detailContent").offset().top}, 500)<!-- END: scrollPlayer -->
