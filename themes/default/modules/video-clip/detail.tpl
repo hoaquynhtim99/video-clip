@@ -35,7 +35,7 @@ $(document).ready(function(){
                         <!-- END: isAdmin -->
                         {LANG.viewHits}: <span>{DETAILCONTENT.view}</span><!-- BEGIN: ifComm -->,&nbsp;{LANG.commHits}: <span id="commHits">{DETAILCONTENT.comment}</span><!-- END: ifComm -->
                     </div>
-                    <div style="float:right;">
+                    <div style="float:right;" id="likeDetailWrap">
                         <div class="image image0"><img id="imglike" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/images/pix.gif" alt="" width="1" /></div>
                         <div class="likeDetail">
                             <div class="likeLeft">{LANG.like}: <span class="strong" id="ilikehit">{DETAILCONTENT.likehit}</span><br /><span id="plike"></span></div>

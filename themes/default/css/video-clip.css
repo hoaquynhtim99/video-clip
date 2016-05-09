@@ -65,6 +65,18 @@
 .videoInfo .hide{display:none}
 #videoCont_wrapper{margin: 0 auto;}
 
+@media (max-width: 569px){
+#likeDetailWrap{display:none;}
+.videoInfo div.viewcount{padding-top: 30px;}
+}
+@media (max-width: 400px){
+#likeDetailWrap{display:none;}
+.videoInfo div.viewcount{padding-top: 0;}
+}
+@media (max-width: 350px){
+.videoInfo a.likeButton span{display:none}
+}
+
 /* Comment */
 .commentList{position:relative}
 .commentList .cont{position:relative;padding:4px 0}
