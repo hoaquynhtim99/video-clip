@@ -54,7 +54,6 @@ $lang_module['delConfirm'] = "Bạn thực sự muốn xóa? Nếu đồng ý, b
 $lang_module['notop'] = "Tất cả";
 $lang_module['internalpath'] = "Tập tin nội bộ";
 $lang_module['externalpath'] = "Tập tin bên ngoài";
-$lang_module['embedMaxWidth'] = "Chiều rộng tối đa của player";
 $lang_module['homeImg'] = "Hình minh họa";
 $lang_module['hometext'] = "Mô tả ngắn gọn";
 $lang_module['bodytext'] = "Mô tả chi tiết";

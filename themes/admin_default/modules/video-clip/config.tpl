@@ -34,12 +34,6 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="playerMaxWidth" class="control-label col-sm-8">{LANG.embedMaxWidth}:</label>
-			<div class="col-sm-16 col-lg-6">
-	            <input class="form-control required" type="text" name="playerMaxWidth" id="playerMaxWidth" value="{CONFIGMODULE.playerMaxWidth}"/>
-			</div>
-		</div>
-		<div class="form-group">
 			<div class="col-sm-offset-8 col-sm-16 col-lg-6">
 				<div class="checkbox">
 					<label>

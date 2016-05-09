@@ -13,13 +13,10 @@
 <div class="clearfix"></div>
 <script type="text/javascript">
 $(document).ready(function(){
-	var playerWidth = $('#clip-content').width();
-	var playerHeight = Math.ceil(45 * playerWidth / 80) + 4;
-	
     jwplayer("clip-content").setup({
         file: "{DETAILCONTENT.filepath}",
         width: '100%',
-        height: playerHeight,
+        aspectratio: "16:9",
 		autostart: {MODULECONFIG.playerAutostart},
     });
 });

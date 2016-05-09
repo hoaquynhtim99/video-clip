@@ -101,7 +101,6 @@ $configMods = array();
 $configMods['otherClipsNum'] = 16; //So video-clip hien thi tren trang chu hoac trang The loai
 $configMods['playerAutostart'] = 0; //Co tu dong phat video hay khong
 $configMods['playerSkin'] = ""; //Skin cua player
-$configMods['playerMaxWidth'] = 798; //Chieu rong toi da cua player
 $configMods['titleLength'] = 20; // So ky tu cua tieu de
 
 if( file_exists( NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php" ) )

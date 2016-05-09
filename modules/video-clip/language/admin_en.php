@@ -54,7 +54,6 @@ $lang_module['delConfirm'] = "You really want to delete? If you agree, you will 
 $lang_module['notop'] = "No topic";
 $lang_module['internalpath'] = "Internal file";
 $lang_module['externalpath'] = "External file";
-$lang_module['embedMaxWidth'] = "Maximum width of the video player";
 $lang_module['homeImg'] = "Picture";
 $lang_module['hometext'] = "Description";
 $lang_module['bodytext'] = "Detailed description";
