@@ -64,7 +64,9 @@ $(function(){
                 }
             }
         }
-        $('#VideoPageData').load($(this).attr('rel'));
+        $('#VideoPageData').load($(this).attr('rel'), function(){
+            responsiveVideoGird()
+        });
         $('.col1.open').removeClass('open');
     });
 });

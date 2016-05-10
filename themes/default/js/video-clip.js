@@ -6,6 +6,14 @@
  * @Createdate Dec 01, 2014, 04:33:14 AM
  */
 
+function clipUrldecodeAjax(my_url, containerid) {
+    my_url = rawurldecode(my_url);
+    $("#" + containerid).load(my_url, function(){
+        responsiveVideoGird()
+    });
+    return;
+}
+
 function responsiveVideoGird() {
     if ($('.videoMain').length) {
         var main = $('.videoMain'),

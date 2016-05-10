@@ -103,7 +103,7 @@ if ($all_page) {
         $xtpl->parse('main.otherClips.otherClipsContent');
     }
 
-    $generate_page = nv_generate_page($base_url, $all_page, $configMods['otherClipsNum'], $pgnum, true, true, 'nv_urldecode_ajax', 'VideoPageData');
+    $generate_page = nv_generate_page($base_url, $all_page, $configMods['otherClipsNum'], $pgnum, true, true, 'clipUrldecodeAjax', 'VideoPageData');
     if (!empty($generate_page)) {
         $xtpl->assign('NV_GENERATE_PAGE', $generate_page);
         $xtpl->parse('main.otherClips.nv_generate_page');
