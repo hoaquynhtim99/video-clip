@@ -6,7 +6,7 @@
  */
 
 .video-break{float: left;height: 1px;width: 100%;}
-.message{position:absolute;left:-1000px;top:-1000px;display:none;z-index:-1;width:150px;border:1px #51A8FF solid;background:#C4E1FF;padding:6px}
+#mesHide{position:absolute;left:50%;top:50%;display:none;z-index:-1;width:150px;border:1px #51A8FF solid;background:#C4E1FF;padding:6px;margin-left: -75px;margin-top: -30px;}
 .marginbottom10{margin-bottom:10px}
 .marginbottom15{margin-bottom:15px}
 
@@ -19,10 +19,11 @@
 .otherTopic .otherTopicCont{padding:8px;background:#f1f1f1}
 
 /* List video */
-.otherClips{position:relative;width:100%}
-.otherClips .otherClipsContent{position:relative;width:33%;float:left;margin-bottom:15px}
-.otherClips .ctn1{background:#fff;border:1px #d6d6d6 solid;padding:1px;position:relative;width:124px;margin:0 auto}
-.otherClips .ctn2{background:#f1f1f1;padding:2px;position:relative;min-height:130px}
+.otherClips{margin-left: -5px;margin-right: -5px;}
+.otherClips .otherClipsContent{width:25%;float:left;margin-bottom:15px;padding-left: 5px;padding-right: 5px;}
+.otherClips .ctn1{padding-bottom: 100%;position: relative;}
+.otherClips .ctn2{position: absolute;top: 0;left: 0;width: 100%;height: 100%;background:#fff;border:1px #d6d6d6 solid;padding:1px}
+.otherClips .ctn3{background:#f1f1f1;padding:2px;position:relative;width: 100%;height: 100%;}
 .otherClips .vtitle{text-align:center;font:700 11px/1.1 Tahoma;padding:6px 0 2px}
 .otherClips .vtitle a{text-decoration:none}
 .otherClips .viewHits{text-align:center;font:400 11px Tahoma;color:#666}

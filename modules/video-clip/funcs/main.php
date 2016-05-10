@@ -107,11 +107,6 @@ if( $all_page )
 		$row['sortTitle'] = nv_clean60( $row['title'], $configMods['titleLength'] );
 		$xtpl->assign( 'OTHERCLIPSCONTENT', $row );
 		
-		if( $i ++ % 3 == 0 )
-		{
-			$xtpl->parse( 'main.otherClips.otherClipsContent.clear' );
-		}
-		
 		$xtpl->parse( 'main.otherClips.otherClipsContent' );
 	}
 
