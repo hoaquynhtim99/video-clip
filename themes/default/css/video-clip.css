@@ -5,18 +5,10 @@
  * @Createdate Dec 08, 2013, 09:57:59 PM
  */
 
-.video-break{float: left;height: 1px;width: 100%;}
+.clipBreakLine{clear: both;}
 #mesHide{position:absolute;left:50%;top:50%;display:none;z-index:-1;width:150px;border:1px #51A8FF solid;background:#C4E1FF;padding:6px;margin-left: -75px;margin-top: -30px;}
 .marginbottom10{margin-bottom:10px}
 .marginbottom15{margin-bottom:15px}
-
-/* List topic */
-.otherTopic{background:#fff;margin-top:0;border:1px #d6d6d6 solid;padding:1px;position:relative;color:#464646;font:normal 12px/26px Arial}
-.otherTopic a{text-decoration:underline}
-.otherTopic strong{font-weight:700}
-.otherTopic img{width:24px;height:24px;vertical-align:middle;margin-right:2px}
-.otherTopic span{color:#f26d00}
-.otherTopic .otherTopicCont{padding:8px;background:#f1f1f1}
 
 /* List video */
 .otherClips{margin-left: -5px;margin-right: -5px;}
@@ -24,48 +16,50 @@
 .otherClips.cThree .otherClipsContent{width:33.3333333333333%;}
 .otherClips.cTwo .otherClipsContent{width:50%;}
 .otherClips.cOne .otherClipsContent{width:100%;}
-.otherClips .ctn1{padding-bottom: 100%;position: relative;}
-.otherClips .ctn2{position: absolute;top: 0;left: 0;width: 100%;height: 100%;background:#fff;border:1px #d6d6d6 solid;padding:1px}
-.otherClips .ctn3{background:#f1f1f1;padding:2px;position:relative;width: 100%;height: 100%;}
-.otherClips .vtitle{text-align:center;font:700 11px/1.1 Tahoma;padding:6px 0 2px}
+.otherClips .ctn1{}
+.otherClips .ctn2{}
+.otherClips .ctn3{font-size: 0.85em;}
+.otherClips .ctn3 img{width: 100%;}
+.otherClips .vImg{position: relative;display: block;}
+.otherClips .play{position:absolute;left:50%;top:50%;height:32px;width: 32px;background:transparent url(../images/video-clip/play.png) no-repeat center center;text-align:center;margin-left: -16px;margin-top: -16px;}
+.otherClips .vtitle{font-weight: 700;line-height: 16px;margin-top: 5px;max-height: 32px;overflow: hidden;}
 .otherClips .vtitle a{text-decoration:none}
-.otherClips .viewHits{text-align:center;font:400 11px Tahoma;color:#666}
+.otherClips .viewHits{color:#666}
 .otherClips .viewHits span{font-weight:700}
-.otherClips .play{position:absolute;left:0;top:24px;width:100%;height:32px;background:transparent url(../images/video-clip/play.png) no-repeat center center;text-align:center}
 .otherClips .generate_page{text-align:center;border:1px #d6d6d6 solid;padding:1px;background:#fff;margin-top:15px}
-.otherClips .generate_page .ctn3{background:#f1f1f1;padding:4px;font:400 12px/1.5 Arial}
+.otherClips .generate_page .ctn3{background:#f1f1f1;padding:4px;}
 .detailContent{position:relative}
 .detailContent .videoplayer{background:#3f3f3f;position:relative}
 .detailContent .videoplayer .cont{background:#000 url(../images/video-clip/wait.gif) no-repeat center center;position:absolute;left: 0;top: 0;width: 100%;height: 100%;}
-.detailContent .videoTitle{font:700 20px Arial;margin-bottom:10px}
+.detailContent .videoTitle{margin-bottom:10px}
 
 /* Detail video */
 .videoInfo{background:#fff;position:relative;border:1px #d6d6d6 solid;padding:1px}
 .videoInfo .cont{background:#f1f1f1;position:relative;padding:2px}
-.videoInfo .cont .cont2{height:56px}
+.videoInfo .cont .cont2{height:56px;font-size: 0.75em;}
 .videoInfo .cont .fCont{position:relative}
 .videoInfo .cont .fl{position:absolute;top:4px;left:4px}
 .videoInfo .cont .fr{position:absolute;top:4px;right:4px;text-align:right}
-.videoInfo .shareFeelings{font:normal 11px Tahoma;margin-bottom:8px;height:12px}
-.videoInfo a.likeButton{display:inline-block;background:#E1E1E1;font:700 12px/30px Arial;border:1px #d6d6d6 solid;padding:0 10px;text-decoration:none;color:#5B5B5B;margin-right:2px}
+.videoInfo .shareFeelings{margin-bottom:8px;height:12px}
+.videoInfo a.likeButton{display:inline-block;background:#E1E1E1;border:1px #d6d6d6 solid;padding:5px 10px;text-decoration:none;color:#5B5B5B;margin-right:2px;}
 .videoInfo a.likeButton img.likehit{background:transparent url(../images/video-clip/like.png) no-repeat left top;width:15px;height:14px;margin-right:4px}
 .videoInfo a.likeButton img.unlikehit{background:transparent url(../images/video-clip/like.png) no-repeat left -14px;width:15px;height:14px;margin-right:4px;vertical-align:middle}
 .videoInfo a.likeButton img.broken{background:transparent url(../images/video-clip/like.png) no-repeat left -28px;width:15px;height:14px;margin-right:4px;vertical-align:middle}
 .videoInfo a.likeButton:hover{background:#f3f3f3;text-decoration:none}
-.videoInfo div.viewcount{position:relative;font:normal 11px Tahoma;color:#5B5B5B;text-align:right;margin-bottom:8px}
+.videoInfo div.viewcount{position:relative;color:#5B5B5B;text-align:right;margin-bottom:8px}
 .videoInfo div.viewcount span{font-weight:700}
-.videoInfo div.image{width:220px;position:relative;font:normal 3px/3px Tahoma;text-align:left;margin-bottom:2px;height:3px;line-height:3px}
+.videoInfo div.image{width:220px;position:relative;text-align:left;margin-bottom:2px;height:3px;line-height:3px}
 .videoInfo div.image0{background:#ccc}
 .videoInfo div.imageunlike{background:#4491b2}
-.videoInfo div.image img.like{height:3px;background:#ed3056}
-.videoInfo div.likeDetail{width:220px;font:normal 11px/11px Tahoma;color:#5B5B5B;position:relative}
+.videoInfo div.image img.like{height:3px;background:#ed3056;position: relative;top:-1px}
+.videoInfo div.likeDetail{width:220px;color:#5B5B5B;position:relative}
 .videoInfo .likeLeft{float:left}
 .videoInfo .likeRight{float:right}
 .videoInfo .strong{font-weight:700}
 .videoInfo .hometext{position:relative;padding:6px}
 .videoInfo .bodytext{position:relative;margin-top:10px}
-.videoInfo div.bodybutton{position:relative;margin-top:10px;text-align:center}
-.videoInfo a.bodybutton{display:inline-block;background:#E1E1E1;font:700 12px Arial;border:1px #d6d6d6 solid;padding:3px;text-decoration:none;color:#5B5B5B}
+.videoInfo div.bodybutton{position:relative;margin-top:10px;text-align:center;font-size: 0.75em;}
+.videoInfo a.bodybutton{display:inline-block;background:#E1E1E1;border:1px #d6d6d6 solid;padding:3px;text-decoration:none;color:#5B5B5B}
 .videoInfo .hide{display:none}
 #videoCont_wrapper{margin: 0 auto;}
 
@@ -80,29 +74,6 @@
 @media (max-width: 350px){
 .videoInfo a.likeButton span{display:none}
 }
-
-/* Comment */
-.commentList{position:relative}
-.commentList .cont{position:relative;padding:4px 0}
-.commentList .commTitle{font:700 11px/2 Tahoma}
-.commentList .commentForm{position:relative;overflow:hidden;background:#E1E1E1;text-align:center;padding:6px}
-.commentList .commentForm .commTextarea{float:left;width:100%;position:relative}
-.commentList .commentForm .commSubmit{float:right;width:50px;height:30px;position:absolute;right:6px;bottom:6px}
-.commentList .commentForm button{outline:none;-moz-appearance:none;-webkit-appearance:none;border:1px #ccc solid;width:100%;height:30px;cursor:pointer;background:#E1E1E1;color:#333;font:700 10px Arial}
-.commentList .commentForm textarea{float:left;background:#f3f3f3;outline:none;-moz-appearance:none;-webkit-appearance:none;border:1px #ccc solid;width:99%;height:20px;padding:4px;margin:0;font:normal 12px Arial}
-.commentList .contentLength{float:left;position:absolute;left:10px;bottom:10px;font:normal 11px Arial;color:#666;display:none}
-.commentList .contentLength .l50{color:#f26d00}
-.commentList .contentLength .num{font-weight:700}
-.commentList .listComm{position:relative;min-height:55px;border-top:1px #d6d6d6 solid}
-.commentList .userPhoto{position:absolute;left:0;top:0;width:60px;min-height:55px}
-.commentList .userComm{position:relative;padding-left:60px}
-.commentList .userComm .top{background:#f1f1f1;position:relative;font:normal 12px/2 Arial;border-bottom:1px #e6e6e6 solid;height:24px}
-.commentList .userName{float:left}
-.commentList .posttime{float:right;color:#666}
-.commentList .commContent{position:relative;padding-top:5px;font:normal 13px/1.4 Arial}
-.commentList .next{position:relative;text-align:center}
-.commentList .brokenIcon{background:transparent url(../images/video-clip/icons.png) no-repeat left -28px;width:14px;height:14px;vertical-align:middle;margin-left:5px}
-.commentList .delcommIcon{background:transparent url(../images/video-clip/icons.png) no-repeat left -14px;width:14px;height:14px;vertical-align:middle}
 
 /* Main */
 .videoMain{position: relative;}

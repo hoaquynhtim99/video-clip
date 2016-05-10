@@ -87,11 +87,19 @@ if (!nv_function_exists('nv_box_video')) {
         $i = 1;
         foreach ($list as $row) {
             if (!empty($row['img'])) {
-                $imageinfo = nv_ImageInfo(NV_ROOTDIR . '/' . $row['img'], 230, true, NV_ROOTDIR . '/' . NV_FILES_DIR . '/' . $module);
-                $row['img'] = $imageinfo['src'];
-            } else {
-                $row['img'] = NV_BASE_SITEURL . "themes/default/images/" . $file . "/video.png";
+                $row['img'] = substr($row['img'], strlen(NV_UPLOADS_DIR));
+                if (file_exists(NV_ROOTDIR . '/' . NV_ASSETS_DIR . $row['img'])) {
+                    $row['img'] = NV_BASE_SITEURL . NV_ASSETS_DIR . $row['img'];
+                } elseif (file_exists(NV_UPLOADS_REAL_DIR . $row['img'])) {
+                    $row['img'] = NV_BASE_SITEURL . NV_UPLOADS_DIR . $row['img'];
+                } else {
+                    $row['img'] = '';
+                }
             }
+            if (empty($row['img'])) {
+                $row['img'] = NV_BASE_SITEURL . "themes/" . $block_theme . "/images/" . $file . "/video.png";
+            }
+
             $row['href'] = NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module . "&amp;" . NV_OP_VARIABLE . "=" . $row['alias'] . $global_config['rewrite_exturl'];
 
             $xtpl->assign('ROW', $row);

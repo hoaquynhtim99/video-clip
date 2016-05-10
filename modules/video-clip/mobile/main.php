@@ -48,11 +48,19 @@ if ($all_page) {
     $i = 1;
     while ($row = $result->fetch()) {
         if (!empty($row['img'])) {
-            $imageinfo = nv_ImageInfo(NV_ROOTDIR . '/' . $row['img'], 120, true, NV_ROOTDIR . '/' . NV_FILES_DIR . '/' . $module_name);
-            $row['img'] = $imageinfo['src'];
-        } else {
+            $row['img'] = substr($row['img'], strlen(NV_UPLOADS_DIR));
+            if (file_exists(NV_ROOTDIR . '/' . NV_ASSETS_DIR . $row['img'])) {
+                $row['img'] = NV_BASE_SITEURL . NV_ASSETS_DIR . $row['img'];
+            } elseif (file_exists(NV_UPLOADS_REAL_DIR . $row['img'])) {
+                $row['img'] = NV_BASE_SITEURL . NV_UPLOADS_DIR . $row['img'];
+            } else {
+                $row['img'] = '';
+            }
+        }
+        if (empty($row['img'])) {
             $row['img'] = NV_BASE_SITEURL . "themes/" . $module_info['template'] . "/images/" . $module_file . "/video.png";
         }
+        
         $row['href'] = NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $row['alias'] . $global_config['rewrite_exturl'];
         $row['topicTitle'] = $topicList[$row['tid']]['title'];
         $row['topicLink'] = NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $topicList[$row['tid']]['alias'];

@@ -1,6 +1,6 @@
 <!-- BEGIN: main -->
 <div class="detailContent clearfix">
-    <div class="videoTitle" id="videoTitle">{DETAILCONTENT.title}</div>
+    <div class="videoTitle" id="videoTitle"><h1>{DETAILCONTENT.title}</h1></div>
     <div class="videoplayer" style="padding-bottom:{MODULECONFIG.aspectratioPadding}%">
         <div class="message" id="mesHide"></div>
         <div class="cont"><div id="videoCont"></div></div>
@@ -107,32 +107,5 @@ $(document).ready(function(){
         return !1
     });
     </script>
-
-    <!-- BEGIN: otherClips -->
-    <div class="otherClips marginbottom15 clearfix">
-    <!-- BEGIN: otherClipsContent -->
-    <div class="otherClipsContent">
-        <div class="ctn1">
-            <div class="ctn2">
-                <div style="background:transparent url({OTHERCLIPSCONTENT.img}) no-repeat center center">
-                    <a class="otcl" href="{OTHERCLIPSCONTENT.href}" title="{OTHERCLIPSCONTENT.title}">
-                    <img src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/images/pix.gif" alt="{OTHERCLIPSCONTENT.title}" width="120" height="80" /></a>
-                </div>
-                <div class="vtitle"><a class="otcl" href="{OTHERCLIPSCONTENT.href}" title="{OTHERCLIPSCONTENT.title}">{OTHERCLIPSCONTENT.sortTitle}</a></div>
-                <div class="viewHits">{LANG.viewHits} <span>{OTHERCLIPSCONTENT.view}</span></div>
-                <div class="play">
-                    <a class="otcl" href="{OTHERCLIPSCONTENT.href}" title="{OTHERCLIPSCONTENT.title}">
-                    <img src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/images/pix.gif" alt="{OTHERCLIPSCONTENT.title}" width="120" height="32" /></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- BEGIN: clearfix --><div class="clearfix"></div><!-- END: clearfix -->
-    <!-- END: otherClipsContent -->
-    </div>
-    <script type="text/javascript">
-    $("a.otcl").click(function(){var b=$(this).attr("href");return $.ajax({type:"POST",url:b,data:"aj=1",success:function(a){if("access forbidden"==a)return alert("{LANG.accessForbidden}"),!1;$("#videoDetail").html(a)}}),!1});
-    </script>
-    <!-- END: otherClips -->
 </div>
 <!-- END: main -->

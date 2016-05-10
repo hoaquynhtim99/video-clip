@@ -25,11 +25,20 @@ if ($module_info['rss']) {
     $result = $db->query($sql);
     while (list($id, $publtime, $title, $alias, $hometext, $homeimgfile) = $result->fetch(3)) {
         if (!empty($homeimgfile)) {
-            $imageinfo = nv_ImageInfo(NV_ROOTDIR . '/' . $homeimgfile, 120, true, NV_ROOTDIR . '/' . NV_FILES_DIR . '/' . $module_name);
-            $homeimgfile = $imageinfo['src'];
+            $homeimgfile = substr($homeimgfile, strlen(NV_UPLOADS_DIR));
+            if (file_exists(NV_ROOTDIR . '/' . NV_ASSETS_DIR . $homeimgfile)) {
+                $homeimgfile = NV_BASE_SITEURL . NV_ASSETS_DIR . $homeimgfile;
+            } elseif (file_exists(NV_UPLOADS_REAL_DIR . $homeimgfile)) {
+                $homeimgfile = NV_BASE_SITEURL . NV_UPLOADS_DIR . $homeimgfile;
+            } else {
+                $homeimgfile = '';
+            }
+        }
+        if (empty($homeimgfile)) {
+            $homeimgfile = NV_BASE_SITEURL . "themes/" . $module_info['template'] . "/images/" . $module_file . "/video.png";
         }
 
-        $rimages = (!empty($homeimgfile)) ? "<img src=\"" . NV_MY_DOMAIN . NV_BASE_SITEURL . $homeimgfile . "\" width=\"100\" border=\"0\" align=\"left\">" : "";
+        $rimages = (!empty($homeimgfile)) ? "<img src=\"" . NV_MY_DOMAIN . $homeimgfile . "\" width=\"100\" border=\"0\" align=\"left\">" : "";
         $items[] = array(
             'title' => $title,
             'link' => NV_MY_DOMAIN . NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $alias . $global_config['rewrite_exturl'],

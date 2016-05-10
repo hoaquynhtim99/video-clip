@@ -19,8 +19,11 @@ function responsiveVideoGird() {
     }
     
     if ($('#VideoPageData').length) {
+        $('#VideoPageData').find('.clipBreakLine').remove()
         var gird = $('#VideoPageData'),
-            girdW = gird.innerWidth()
+            girdW = gird.innerWidth(),
+            i = 1,
+            numOnLine = 0
         if (girdW < 310) {
             gird.removeClass('cThree')
             gird.removeClass('cTwo')
@@ -29,14 +32,24 @@ function responsiveVideoGird() {
             gird.removeClass('cOne')
             gird.removeClass('cThree')
             gird.addClass('cTwo')
+            numOnLine = 2
         } else if (girdW < 620) {
             gird.removeClass('cOne')
             gird.removeClass('cTwo')
             gird.addClass('cThree')
+            numOnLine = 3
         } else {
             gird.removeClass('cOne')
             gird.removeClass('cTwo')
             gird.removeClass('cThree')
+            numOnLine = 4
+        }
+        if (numOnLine) {
+            $('.otherClipsContent', gird).each(function(){
+                if(!(i++ % numOnLine)) {
+                    $('<div class="clipBreakLine"></div>').insertAfter($(this))
+                }
+            })
         }
     }
 }
