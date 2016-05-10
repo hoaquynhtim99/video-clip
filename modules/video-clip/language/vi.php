@@ -9,7 +9,8 @@
  * @Createdate Dec 01, 2014, 04:33:14 AM
  */
 
-if( ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
+if (!defined('NV_MAINFILE'))
+    die('Stop!!!');
 
 $lang_translator['author'] = "VINADES.,JSC (contact@vinades.vn)";
 $lang_translator['createdate'] = "20/09/2012, 04:05";
@@ -50,6 +51,7 @@ $lang_module['reportBadContent'] = "Báo cáo nội dung xấu";
 $lang_module['deleteComm'] = "Xóa nhận xét";
 $lang_module['pleaseLogin'] = "Bạn cần <a href=\"%1\$s\">đăng nhập</a> để viết bình luận. Nếu chưa phải là thành viên, xin vui lòng <a href=\"%2\$s\">đăng ký</a>.";
 $lang_module['isdeletedComm'] = "Bình luận đã được xóa";
+$lang_module['showTopic'] = "Hiển thị thể loại";
 
 $lang_module['error1'] = "Vui lòng điền nội dung";
 $lang_module['error2'] = "Bạn vừa mới gửi bình luận xong. Xin vui lòng chờ một vài phút để thêm bình luận mới";

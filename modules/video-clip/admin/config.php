@@ -75,7 +75,10 @@ foreach ($skins as $skin) {
     $xtpl->parse('main.playerSkin');
 }
 
-$array_aspectratio = array('4:3', '16:9', '24:10');
+$array_aspectratio = array(
+    '4:3',
+    '16:9',
+    '24:10');
 
 foreach ($array_aspectratio as $aspectratio) {
     $sel = $aspectratio == $configMods['aspectratio'] ? " selected=\"selected\"" : "";

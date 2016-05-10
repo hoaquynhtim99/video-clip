@@ -8,6 +8,7 @@
  * @Createdate Dec 01, 2014, 04:33:14 AM
  */
 
-if( ! defined( 'NV_IS_MOD_RSS' ) ) die( 'Stop!!!' );
+if (!defined('NV_IS_MOD_RSS'))
+    die('Stop!!!');
 
 $rssarray = array();

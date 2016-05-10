@@ -1,5 +1,6 @@
 <!-- BEGIN: main -->
-<div class="videoMain">
+<div class="videoMain clearfix">
+    <a href="#" class="toggleNav" id="toggleVideoNav">{LANG.showTopic}</a>
     <div class="col1">
         <!-- BEGIN: topicList -->
         <!-- BEGIN: loop -->
@@ -69,6 +70,7 @@ $(function(){
             }
         }
         $('#VideoPageData').load($(this).attr('rel'));
+        $('.col1.open').removeClass('open');
     });
 });
 $(window).load(function(){

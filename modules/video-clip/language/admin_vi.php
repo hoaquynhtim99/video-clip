@@ -9,7 +9,8 @@
  * @Createdate Dec 01, 2014, 04:33:14 AM
  */
 
-if( ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
+if (!defined('NV_MAINFILE'))
+    die('Stop!!!');
 
 $lang_translator['author'] = "VINADES.,JSC (contact@vinades.vn)";
 $lang_translator['createdate'] = "20/09/2012, 04:05";

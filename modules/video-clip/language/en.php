@@ -9,7 +9,8 @@
  * @Createdate Dec 01, 2014, 04:33:14 AM
  */
 
-if( ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
+if (!defined('NV_MAINFILE'))
+    die('Stop!!!');
 
 $lang_translator['author'] = "VINADES.,JSC (contact@vinades.vn)";
 $lang_translator['createdate'] = "20/09/2012, 04:05";
@@ -50,6 +51,7 @@ $lang_module['reportBadContent'] = "Report Bad Content";
 $lang_module['deleteComm'] = "Delete comment";
 $lang_module['pleaseLogin'] = "You must be <a href=\"%1\$s\">logged in</a> to write a comment. If you're not a registered member, please <a href=\"%2\$s\">sign up</a>.";
 $lang_module['isdeletedComm'] = "Comment has been deleted";
+$lang_module['showTopic'] = "Show Topics";
 
 $lang_module['error1'] = "Please fill out the content";
 $lang_module['error2'] = "You recently left comment. Please wait a few minutes to add a new comment";

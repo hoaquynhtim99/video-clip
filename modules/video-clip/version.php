@@ -8,24 +8,23 @@
  * @Createdate Dec 01, 2014, 04:33:14 AM
  */
 
-if( ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
+if (!defined('NV_MAINFILE'))
+    die('Stop!!!');
 
 $module_version = array(
-	"name" => "Videoclips",
-	"modfuncs" => "main",
-	"submenu" => "main",
-	"is_sysmod" => 0,
-	"virtual" => 1,
-	"version" => "4.0.22",
-	"date" => "Mon, 01 Dec 2014 00:00:00 GMT",
-	"author" => "PHAN TAN DUNG (phantandung92@gmail.com)",
-	"uploads_dir" => array( $module_name ),
-	"note" => "Module playback of video-clips",
-	"uploads_dir" => array(
-		$module_name,
-		$module_name . "/icons",
-		$module_name . "/images",
-		$module_name . "/video"
-	),
-	"files_dir" => array( $module_name ) 
-);
+    "name" => "Videoclips",
+    "modfuncs" => "main",
+    "submenu" => "main",
+    "is_sysmod" => 0,
+    "virtual" => 1,
+    "version" => "4.0.22",
+    "date" => "Mon, 01 Dec 2014 00:00:00 GMT",
+    "author" => "PHAN TAN DUNG (phantandung92@gmail.com)",
+    "uploads_dir" => array($module_name),
+    "note" => "Module playback of video-clips",
+    "uploads_dir" => array(
+        $module_name,
+        $module_name . "/icons",
+        $module_name . "/images",
+        $module_name . "/video"),
+    "files_dir" => array($module_name));
