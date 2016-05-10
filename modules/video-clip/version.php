@@ -17,7 +17,7 @@ $module_version = array(
     "submenu" => "main",
     "is_sysmod" => 0,
     "virtual" => 1,
-    "version" => "4.0.22",
+    "version" => "4.0.23",
     "date" => "Mon, 01 Dec 2014 00:00:00 GMT",
     "author" => "PHAN TAN DUNG (phantandung92@gmail.com)",
     "uploads_dir" => array($module_name),
@@ -27,4 +27,5 @@ $module_version = array(
         $module_name . "/icons",
         $module_name . "/images",
         $module_name . "/video"),
-    "files_dir" => array($module_name));
+    "files_dir" => array($module_name)
+);
