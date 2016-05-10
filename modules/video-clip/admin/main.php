@@ -203,7 +203,7 @@ if ($nv_Request->isset_request('add', 'get') or $nv_Request->isset_request('edit
             nv_insert_logs(NV_LANG_DATA, $module_name, $lang_module['addClip'], "Id: " . $_id, $admin_info['userid']);
         }
 
-        nv_del_moduleCache($module_name);
+        $nv_Cache->delMod($module_name);
 
         if ($post['redirect']) {
             $redirect = NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $alias;
@@ -297,7 +297,7 @@ if ($nv_Request->isset_request('changeStatus', 'post')) {
     $query = "UPDATE " . NV_PREFIXLANG . "_" . $module_data . "_clip SET status=" . $newStatus . " WHERE id=" . $id;
     $db->query($query);
 
-    nv_del_moduleCache($module_name);
+    $nv_Cache->delMod($module_name);
     nv_insert_logs(NV_LANG_DATA, $module_name, $lang_module['cstatus'], "Id: " . $id, $admin_info['userid']);
 
     $alt = $newStatus ? $lang_module['status1'] : $lang_module['status0'];
@@ -311,7 +311,7 @@ if ($nv_Request->isset_request('del', 'post')) {
     $db->query($query);
     $query = "DELETE FROM " . NV_PREFIXLANG . "_" . $module_data . "_clip WHERE id = " . $id;
     $db->query($query);
-    nv_del_moduleCache($module_name);
+    $nv_Cache->delMod($module_name);
     nv_insert_logs(NV_LANG_DATA, $module_name, $lang_module['delClip'], "Id: " . $id, $admin_info['userid']);
     die('OK');
 }

@@ -40,3 +40,5 @@
 !/themes/mobile_default/images/video-clip/*
 !/themes/mobile_default/modules/video-clip
 !/themes/mobile_default/modules/video-clip/*
+/vendor
+/composer.json

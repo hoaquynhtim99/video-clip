@@ -21,8 +21,8 @@ $sql_create_module = $sql_drop_module;
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_clip (
   id mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   tid mediumint(8) unsigned NOT NULL DEFAULT '0',
-  title varchar(255) NOT NULL DEFAULT '',
-  alias varchar(255) NOT NULL DEFAULT '',
+  title varchar(250) NOT NULL DEFAULT '',
+  alias varchar(250) NOT NULL DEFAULT '',
   hometext mediumtext NOT NULL,
   bodytext mediumtext NOT NULL,
   keywords mediumtext NOT NULL,
@@ -54,8 +54,8 @@ $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_topic (
   id mediumint(8) unsigned NOT NULL auto_increment,
   parentid mediumint(8) unsigned NOT NULL,
-  title varchar(255) NOT NULL,
-  alias varchar(255) NOT NULL,
+  title varchar(250) NOT NULL,
+  alias varchar(250) NOT NULL,
   description mediumtext NOT NULL,
   weight smallint(4) unsigned NOT NULL default '0',
   img varchar(255) NOT NULL,

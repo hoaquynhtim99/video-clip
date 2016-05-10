@@ -211,7 +211,7 @@ if ($nv_Request->isset_request('add', 'get') or $nv_Request->isset_request('edit
             nv_insert_logs(NV_LANG_DATA, $module_name, $lang_module['addtopic_titlebox'], "ID " . $tid, $admin_info['userid']);
         }
 
-        nv_del_moduleCache($module_name);
+        $nv_Cache->delMod($module_name);
 
         $redirect = NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $op;
         $ajaxRespon->setSuccess()->setMessage($lang_module['successfullySaved'])->setRedirect($redirect)->respon();
@@ -280,7 +280,7 @@ if ($nv_Request->isset_request('del', 'post')) {
     nv_del_topic($tid);
     nv_FixWeightTopic($parentid);
 
-    nv_del_moduleCache($module_name);
+    $nv_Cache->delMod($module_name);
 
     die('OK');
 }
@@ -316,7 +316,7 @@ if ($nv_Request->isset_request('changeweight', 'post')) {
     $sql = "UPDATE " . NV_PREFIXLANG . "_" . $module_data . "_topic SET weight=" . $new . " WHERE id=" . $tid;
     $db->query($sql);
 
-    nv_del_moduleCache($module_name);
+    $nv_Cache->delMod($module_name);
 
     die('OK');
 }
@@ -343,7 +343,7 @@ if ($nv_Request->isset_request('changestatus', 'post')) {
     $sql = "UPDATE " . NV_PREFIXLANG . "_" . $module_data . "_topic SET status=" . $status . " WHERE id=" . $tid;
     $db->query($sql);
 
-    nv_del_moduleCache($module_name);
+    $nv_Cache->delMod($module_name);
 
     die('OK');
 }

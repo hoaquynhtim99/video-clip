@@ -63,7 +63,7 @@ if (!nv_function_exists('nv_box_video')) {
      */
     function nv_box_video($block_config)
     {
-        global $module_info, $module_name, $db, $my_head, $site_mods, $global_config;
+        global $module_info, $module_name, $db, $my_head, $site_mods, $global_config, $nv_Cache;
 
         $module = $block_config['module'];
         $data = $site_mods[$module]['module_data'];
@@ -82,7 +82,7 @@ if (!nv_function_exists('nv_box_video')) {
         $xtpl = new XTemplate("block.box_video.tpl", NV_ROOTDIR . "/themes/" . $block_theme . "/modules/" . $file);
 
         $sql = "SELECT * FROM " . NV_PREFIXLANG . "_" . $data . "_clip WHERE status=1 ORDER BY id DESC LIMIT 0," . $block_config['num_videos'];
-        $list = nv_db_cache($sql, '', $module);
+        $list = $nv_Cache->db($sql, '', $module);
 
         $i = 1;
         foreach ($list as $row) {
@@ -117,7 +117,7 @@ if (!nv_function_exists('nv_box_video')) {
 
         // Xuat topic
         $sql = "SELECT * FROM " . NV_PREFIXLANG . "_" . $data . "_topic WHERE parentid=0 ORDER BY weight ASC";
-        $list = nv_db_cache($sql, '', $module);
+        $list = $nv_Cache->db($sql, '', $module);
 
         $i = 1;
         foreach ($list as $cat) {
