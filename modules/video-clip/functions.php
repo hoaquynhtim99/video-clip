@@ -253,17 +253,6 @@ if ($isDetail === true) {
 
     unset($ogImage);
 
-    // Kiem tra quyen truy cap
-    if (!nv_user_in_groups($VideoData['groups_view'])) {
-        if ($nv_Request->isset_request('aj', 'post'))
-            die("access forbidden");
-
-        include NV_ROOTDIR . '/includes/header.php';
-        echo nv_site_theme($lang_module['accessForbidden']);
-        include NV_ROOTDIR . '/includes/footer.php';
-        die();
-    }
-
     // Nut like, unlike, broken
     if ($nv_Request->isset_request('aj', 'post')) {
         $aj = $nv_Request->get_title('aj', 'post', '', 1);
