@@ -117,9 +117,9 @@ if (!empty($topicList)) {
 
 // Chi tiet video
 if (!empty($VideoData)) {
-    if (!nv_user_in_groups($VideoData['groups_view'])) {
-        $xtpl->parse('main.clipForbidden');
-    } else {
+    //if (!nv_user_in_groups($VideoData['groups_view'])) {
+    //    $xtpl->parse('main.clipForbidden');
+    //} else {
         $my_head .= "<script type=\"text/javascript\" src=\"" . NV_BASE_SITEURL . "modules/" . $module_file . "/js/jquery.autoresize.js\"></script>\n";
         $my_head .= "<script type=\"text/javascript\" src=\"" . NV_BASE_SITEURL . "modules/" . $module_file . "/js/jwplayer.js\"></script>\n";
 
@@ -132,7 +132,7 @@ if (!empty($VideoData)) {
             $xtpl->parse('main.clipDetail.bodytext');
         }
         $xtpl->parse('main.clipDetail');
-    }
+    //}
 }
 
 $xtpl->parse('main');
