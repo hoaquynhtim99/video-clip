@@ -14,6 +14,9 @@ $(document).ready(function(){
         width: "100%",
         aspectratio: "{MODULECONFIG.aspectratio}",
         autostart: {MODULECONFIG.playerAutostart},
+        skin: {
+            name: "bekle"
+        }
     });
     <!-- BEGIN: scrollPlayer -->$("html,body").animate({scrollTop:$(".detailContent").offset().top}, 500)<!-- END: scrollPlayer -->
 });

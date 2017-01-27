@@ -70,7 +70,7 @@ $(function(){
         $('.col1.open').removeClass('open');
     });
 });
-$(window).load(function(){
+$(window).on('load', function(){
     var ele = $('.videoMain .col1').find('.current');
     ele.trigger('click');
 });
