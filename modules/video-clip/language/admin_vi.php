@@ -61,6 +61,7 @@ $lang_module['bodytext'] = "Mô tả chi tiết";
 $lang_module['commAllow'] = "Cho phép nhận xét";
 $lang_module['NumberOfLinks'] = "Số liên kết";
 $lang_module['NumberOfLinks1'] = "Số lượng các liên kết đến các video clip, xuất hiện trên trang chủ hoặc trang category";
+$lang_module['NumberOfLinksCom'] = "Số lượng các bình luận trên một trang, xuất hiện khi xem chi tiết video nếu video có bật bình luận";
 $lang_module['playerAutostart'] = "Tự động phát video-clip";
 $lang_module['playerSkin'] = "Skin của player";
 $lang_module['successfullySaved'] = "Dữ liệu mới được lưu thành công";
@@ -76,6 +77,7 @@ $lang_module['Remove'] = "Loại khỏi danh sách";
 $lang_module['BrowseServer'] = "Duyệt trên máy chủ";
 $lang_module['folderStructureEnable'] = "Kích hoạt cấu trúc thư mục uploads";
 $lang_module['titleLength'] = "Số ký tự tiêu đề trang chủ";
+$lang_module['showcover'] = "Dùng ảnh đại diện làm ảnh cover Video (Không có tác dụng nếu không có ảnh đại diện)";
 
 $lang_module['cfg_aspectratio'] = "Tỉ lệ phát video";
 

@@ -17,9 +17,11 @@
 $(document).ready(function(){
     jwplayer("clip-content").setup({
         file: "{DETAILCONTENT.filepath}",
+        <!-- BEGIN: showcover -->image: "{COVER_IMAGE}",<!-- END: showcover -->
         width: '100%',
         aspectratio: "{MODULECONFIG.aspectratio}",
         autostart: {MODULECONFIG.playerAutostart},
+        <!-- BEGIN: playerSkin -->skin: {name: "{MODULECONFIG.playerSkin}"},<!-- END: playerSkin -->
     });
 });
 </script>

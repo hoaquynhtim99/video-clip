@@ -13,24 +13,27 @@ if (!defined('NV_IS_FILE_ADMIN'))
 
 $page_title = $lang_module['config'];
 
-$skins = array();
+$skins = array('beelden', 'bekle', 'five', 'glow', 'roundster', 'seven', 'six', 'stormtrooper', 'vapor');
+$array_aspectratio = array('4:3', '16:9', '24:10');
 
 $array_config = array();
 if ($nv_Request->isset_request('submit', 'post')) {
     $array_config['otherClipsNum'] = $nv_Request->get_int('otherClipsNum', 'post', 0);
+    $array_config['commNum'] = $nv_Request->get_int('commNum', 'post', 0);
     $array_config['playerAutostart'] = $nv_Request->get_int('playerAutostart', 'post', 0);
     $array_config['playerSkin'] = $nv_Request->get_title('playerSkin', 'post', '', 1);
     $array_config['aspectratio'] = $nv_Request->get_title('aspectratio', 'post', '', 0);
     $array_config['folderStructureEnable'] = $nv_Request->get_int('folderStructureEnable', 'post', 0) ? 1 : 0;
     $array_config['titleLength'] = $nv_Request->get_int('titleLength', 'post', 0);
 
-    if (!in_array($array_config['playerSkin'] . ".zip", $skins))
+    if (!in_array($array_config['playerSkin'], $skins))
         $array_config['playerSkin'] = "";
 
     $content_config = "<?php\n\n";
     $content_config .= NV_FILEHEAD . "\n\n";
     $content_config .= "if(!defined('NV_MAINFILE'))\n    die('Stop!!!');\n\n";
     $content_config .= "\$configMods['otherClipsNum'] = " . $array_config['otherClipsNum'] . ";\n";
+    $content_config .= "\$configMods['commNum'] = " . $array_config['commNum'] . ";\n";
     $content_config .= "\$configMods['playerAutostart'] = " . $array_config['playerAutostart'] . ";\n";
     $content_config .= "\$configMods['playerSkin'] = \"" . nv_htmlspecialchars($array_config['playerSkin']) . "\";\n";
     $content_config .= "\$configMods['aspectratio'] = \"" . $array_config['aspectratio'] . "\";\n";
@@ -44,6 +47,7 @@ if ($nv_Request->isset_request('submit', 'post')) {
 
 $configMods = array();
 $configMods['otherClipsNum'] = 15; //So video-clip hien thi tren trang chu hoac trang The loai
+$configMods['commNum'] = 10; // Số bình luận trên một trang
 $configMods['playerAutostart'] = 0; //Co tu dong phat video hay khong
 $configMods['playerSkin'] = ""; //Skin cua player
 $configMods['aspectratio'] = "16:9"; //Skin cua player
@@ -68,17 +72,18 @@ for ($i = 0; $i <= 60; ++$i) {
     $xtpl->parse('main.otherClipsNum');
 }
 
+for ($i = 0; $i <= 60; ++$i) {
+    $sel = $i == $configMods['commNum'] ? " selected=\"selected\"" : "";
+    $xtpl->assign('NUMS', array('value' => $i, 'select' => $sel));
+    $xtpl->parse('main.commNum');
+}
+
 foreach ($skins as $skin) {
-    $skin = substr($skin, 0, -4);
+    //$skin = substr($skin, 0, -4); // Loại bỏ .zip
     $sel = $skin == $configMods['playerSkin'] ? " selected=\"selected\"" : "";
     $xtpl->assign('SKIN', array('value' => $skin, 'select' => $sel));
     $xtpl->parse('main.playerSkin');
 }
-
-$array_aspectratio = array(
-    '4:3',
-    '16:9',
-    '24:10');
 
 foreach ($array_aspectratio as $aspectratio) {
     $sel = $aspectratio == $configMods['aspectratio'] ? " selected=\"selected\"" : "";

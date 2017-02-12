@@ -17,8 +17,8 @@ $module_version = array(
     "submenu" => "main",
     "is_sysmod" => 0,
     "virtual" => 1,
-    "version" => "4.0.29",
-    "date" => "Wed, 18 May 2016 17:00:00 GMT",
+    "version" => "4.1.00",
+    "date" => "Sun, 12 Feb 2017 22:02:42 GMT",
     "author" => "PHAN TAN DUNG (phantandung92@gmail.com)",
     "uploads_dir" => array($module_name),
     "note" => "Module playback of video-clips",
@@ -26,6 +26,7 @@ $module_version = array(
         $module_name,
         $module_name . "/icons",
         $module_name . "/images",
-        $module_name . "/video"),
+        $module_name . "/video"
+    ),
     "files_dir" => array($module_name)
 );

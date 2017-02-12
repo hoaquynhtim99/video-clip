@@ -132,6 +132,15 @@ $("input[name=ok2]").click(function(){var a=$("select[name=tList]").val();window
             </div>
         </div>
         <div class="form-group">
+            <div class="col-sm-offset-8 col-sm-16 col-lg-6">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="showcover" id="showcover" value="1"{POST.showcover} /> {LANG.showcover}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-xs-24">
                 <div class="ckeditor required">
                     <label class="control-label">{LANG.bodytext} <i class="fa fa-asterisk"></i></label>
