@@ -54,7 +54,8 @@ function nv_list_topics()
             'parentid' => (int)$row['parentid'],
             'img' => $row['img'],
             'subcats' => array(),
-            'keywords' => $row['keywords']);
+            'keywords' => $row['keywords']
+        );
     }
 
     $list2 = array();
