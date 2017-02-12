@@ -41,7 +41,7 @@ if (!empty($topicList)) {
         'href' => NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;ajax=1",
         'title' => $lang_module['all'],
         'current' => $topicID ? "" : " current",
-        ));
+    ));
     $xtpl->parse('main.topicList.loop');
 
     foreach ($topicList as $topic) {
@@ -50,7 +50,7 @@ if (!empty($topicList)) {
                 'href' => NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $topic['alias'] . "&amp;ajax=1",
                 'title' => $topic['title'],
                 'current' => $topicID == $topic['id'] ? " current" : "",
-                ));
+            ));
 
             // Xuat cap 2
             if (!empty($topic['subcats'])) {
@@ -60,7 +60,7 @@ if (!empty($topicList)) {
                             'href' => NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $subtopic['alias'] . "&amp;ajax=1",
                             'title' => $subtopic['title'],
                             'current' => $topicID == $subtopic['id'] ? " current" : "",
-                            ));
+                        ));
 
                         $xtpl->parse('main.topicList.loop.sub.loop');
                     }

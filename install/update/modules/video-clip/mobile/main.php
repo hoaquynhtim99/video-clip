@@ -120,8 +120,9 @@ if (!empty($VideoData)) {
     //if (!nv_user_in_groups($VideoData['groups_view'])) {
     //    $xtpl->parse('main.clipForbidden');
     //} else {
-        $my_head .= "<script type=\"text/javascript\" src=\"" . NV_BASE_SITEURL . "modules/" . $module_file . "/js/jquery.autoresize.js\"></script>\n";
-        $my_head .= "<script type=\"text/javascript\" src=\"" . NV_BASE_SITEURL . "modules/" . $module_file . "/js/jwplayer.js\"></script>\n";
+        $my_head .= "<script type=\"text/javascript\" src=\"" . NV_BASE_SITEURL . "themes/default/images/" . $module_file . "/jquery/jquery.autoresize.js\"></script>\n";
+        $my_head .= "<script type=\"text/javascript\" src=\"" . NV_BASE_SITEURL . "themes/default/images/" . $module_file . "/jwplayer/jwplayer.js\"></script>\n";
+        $my_head .= "<script type=\"text/javascript\">jwplayer.key=\"KzcW0VrDegOG/Vl8Wb9X3JLUql+72MdP1coaag==\";</script>\n";
 
         $xtpl->assign('DETAILCONTENT', $VideoData);
 
@@ -130,6 +131,16 @@ if (!empty($VideoData)) {
         }
         if (!empty($VideoData['bodytext'])) {
             $xtpl->parse('main.clipDetail.bodytext');
+        }
+        if (!empty($configMods['playerSkin'])) {
+            $xtpl->parse('main.clipDetail.playerSkin');
+        }
+        if (!empty($VideoData['showcover']) and !empty($VideoData['img'])) {
+            $cover_image = substr($VideoData['img'], strlen(NV_UPLOADS_DIR));
+            if (file_exists(NV_UPLOADS_REAL_DIR . $cover_image)) {
+                $xtpl->assign('COVER_IMAGE', NV_BASE_SITEURL . NV_UPLOADS_DIR . $cover_image);
+                $xtpl->parse('main.clipDetail.showcover');
+            }
         }
         $xtpl->parse('main.clipDetail');
     //}

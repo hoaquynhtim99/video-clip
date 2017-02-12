@@ -31,6 +31,7 @@ $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_
   externalpath mediumtext NOT NULL,
   groups_view varchar(255) NOT NULL,
   comm tinyint(1) unsigned NOT NULL DEFAULT '1',
+  showcover tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'Hiển thị/Ẩn ảnh mình họa làm ảnh bìa video',
   status tinyint(1) unsigned NOT NULL DEFAULT '0',
   addtime int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (id),

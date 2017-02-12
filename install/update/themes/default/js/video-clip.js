@@ -80,7 +80,7 @@ $(function(){
     })
 })
 
-$(window).load(function(){
+$(window).on('load', function(){
     VideoGirdTimer = setTimeout(function(){
         responsiveVideoGird()
     }, 100)

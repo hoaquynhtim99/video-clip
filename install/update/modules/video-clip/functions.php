@@ -54,7 +54,8 @@ function nv_list_topics()
             'parentid' => (int)$row['parentid'],
             'img' => $row['img'],
             'subcats' => array(),
-            'keywords' => $row['keywords']);
+            'keywords' => $row['keywords']
+        );
     }
 
     $list2 = array();
@@ -100,14 +101,15 @@ $configMods['playerAutostart'] = 0; //Co tu dong phat video hay khong
 $configMods['playerSkin'] = ""; //Skin cua player
 $configMods['aspectratio'] = "16:9"; // Ti le phat video
 $configMods['titleLength'] = 20; // So ky tu cua tieu de
+$configMods['commNum'] = 10; // Số comment trên một trang
 
 if (file_exists(NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php")) {
     require (NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data . ".php");
 }
 
-if (!empty($configMods['playerSkin'])) {
-    $configMods['playerSkin'] = ",skin:\"" . NV_BASE_SITEURL . "images/jwplayer/skin/" . $configMods['playerSkin'] . ".zip\"";
-}
+//if (!empty($configMods['playerSkin'])) {
+//    $configMods['playerSkin'] = ",skin:\"" . NV_BASE_SITEURL . "images/jwplayer/skin/" . $configMods['playerSkin'] . ".zip\"";
+//}
 
 $configMods['aspectratioPadding'] = $configMods['aspectratio'] == "16:9" ? "56" : ($configMods['aspectratio'] == "4:3" ? "75" : "42");
 
@@ -257,10 +259,7 @@ if ($isDetail === true) {
     if ($nv_Request->isset_request('aj', 'post')) {
         $aj = $nv_Request->get_title('aj', 'post', '', 1);
 
-        if (in_array($aj, array(
-            'likehit',
-            'unlikehit',
-            'broken'))) {
+        if (in_array($aj, array('likehit', 'unlikehit', 'broken'))) {
             $sessionName = $aj == "broken" ? "broken" : "like";
             $listLike = isset($_SESSION[$module_data . '_' . $sessionName]) ? $_SESSION[$module_data . '_' . $sessionName] : "";
             $listLike = !empty($listLike) ? explode(",", $listLike) : array();

@@ -11,9 +11,11 @@
 $(document).ready(function(){    
     jwplayer("videoCont").setup({
         file: "{DETAILCONTENT.filepath}",
+        <!-- BEGIN: showcover -->image: "{COVER_IMAGE}",<!-- END: showcover -->
         width: "100%",
         aspectratio: "{MODULECONFIG.aspectratio}",
         autostart: {MODULECONFIG.playerAutostart},
+        <!-- BEGIN: playerSkin -->skin: {name: "{MODULECONFIG.playerSkin}"},<!-- END: playerSkin -->
     });
     <!-- BEGIN: scrollPlayer -->$("html,body").animate({scrollTop:$(".detailContent").offset().top}, 500)<!-- END: scrollPlayer -->
 });

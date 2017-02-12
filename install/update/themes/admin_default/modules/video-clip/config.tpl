@@ -14,6 +14,17 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="commNum" class="control-label col-sm-8">{LANG.NumberOfLinks}:</label>
+            <div class="col-sm-16 col-lg-6">
+                <select name="commNum" id="commNum" class="form-control">
+                    <!-- BEGIN: commNum -->
+                    <option value="{NUMS.value}"{NUMS.select}>{NUMS.value}</option>
+                    <!-- END: commNum -->
+                </select>
+                <i class="help-block">{LANG.NumberOfLinksCom}</i>    
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-sm-offset-8 col-sm-16 col-lg-6">
                 <div class="checkbox">
                     <label>

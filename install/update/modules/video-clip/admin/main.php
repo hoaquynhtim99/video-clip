@@ -105,6 +105,7 @@ if ($nv_Request->isset_request('add', 'get') or $nv_Request->isset_request('edit
         $post['externalpath'] = $nv_Request->get_title('externalpath', 'post');
         $post['groups_view'] = $nv_Request->get_array('groups_view', 'post', array());
         $post['comm'] = $nv_Request->get_int('comm', 'post', 0);
+        $post['showcover'] = $nv_Request->get_int('showcover', 'post', 0);
         $post['redirect'] = $nv_Request->get_int('redirect', 'post', 0);
 
         $post['groups_view'] = !empty($post['groups_view']) ? implode(',', nv_groups_post(array_intersect($post['groups_view'], array_keys($groups_list)))) : '';
@@ -178,8 +179,9 @@ if ($nv_Request->isset_request('add', 'get') or $nv_Request->isset_request('edit
                 keywords=" . $db->quote($post['keywords']) . ", 
                 internalpath=" . $db->quote($post['internalpath']) . ",
                 externalpath=" . $db->quote($post['externalpath']) . ", 
-                groups_view=" . $db->quote($post['groups_view']) . ",
-                 comm=" . $post['comm'] . " 
+                groups_view=" . $db->quote($post['groups_view']) . ", 
+                comm=" . $post['comm'] . ", 
+                showcover=" . $post['showcover'] . " 
             WHERE id=" . $post['id'];
 
             $db->query($query);
@@ -193,7 +195,7 @@ if ($nv_Request->isset_request('add', 'get') or $nv_Request->isset_request('edit
             " . $db->quote($post['hometext']) . ", " . $db->quote($post['bodytext']) . ", 
             " . $db->quote($post['keywords']) . ", " . $db->quote($post['img']) . ", 
             " . $db->quote($post['internalpath']) . ", " . $db->quote($post['externalpath']) . ", 
-            " . $db->quote($post['groups_view']) . ", " . $post['comm'] . ", 
+            " . $db->quote($post['groups_view']) . ", " . $post['comm'] . ", " . $post['showcover'] . ", 
             1, " . NV_CURRENTTIME . ");";
             $_id = $db->insert_id($query);
 
@@ -223,6 +225,7 @@ if ($nv_Request->isset_request('add', 'get') or $nv_Request->isset_request('edit
         $post['title'] = $post['hometext'] = $post['bodytext'] = $post['img'] = $post['keywords'] = $post['internalpath'] = $post['externalpath'] = "";
         $post['tid'] = $post['redirect'] = 0;
         $post['comm'] = 1;
+        $post['showcover'] = 1;
         $post['groups_view'] = '6';
     }
 
@@ -235,6 +238,7 @@ if ($nv_Request->isset_request('add', 'get') or $nv_Request->isset_request('edit
     if (!empty($post['internalpath']))
         $post['internalpath'] = NV_BASE_SITEURL . $post['internalpath'];
     $post['comm'] = $post['comm'] ? "  checked=\"checked\"" : "";
+    $post['showcover'] = $post['showcover'] ? "  checked=\"checked\"" : "";
 
     $xtpl->assign('ERROR_INFO', $info);
 
