@@ -1,6 +1,9 @@
 ## Changelogs
 
 ### V4.1.01:
+- Chạy trên NukeViet 4.1 Beta 2 (4.1.01)
+
+### V4.1.00:
 - Cập nhật jwplayer 7.8.7.
 - Sửa lỗi Youtube Flash API down.
 - Thêm cấu hình skin của player.

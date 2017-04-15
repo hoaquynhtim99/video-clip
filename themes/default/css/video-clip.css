@@ -5,7 +5,7 @@
  * @Createdate Dec 08, 2013, 09:57:59 PM
  */
 
-.clipBreakLine{clear: both;}
+.clipBreakLine{}
 #mesHide{position:absolute;left:50%;top:50%;display:none;z-index:-1;width:150px;border:1px #51A8FF solid;background:#C4E1FF;padding:6px;margin-left: -75px;margin-top: -30px;}
 .marginbottom10{margin-bottom:10px}
 .marginbottom15{margin-bottom:15px}

@@ -51,7 +51,7 @@ if ($VideoData['comm']) {
     }
 }
 
-$xtpl = new XTemplate("detail.tpl", NV_ROOTDIR . "/themes/" . $module_info['template'] . "/modules/" . $module_file);
+$xtpl = new XTemplate("detail.tpl", NV_ROOTDIR . "/themes/" . $module_info['template'] . "/modules/" . $module_info['module_theme']);
 $xtpl->assign('LANG', $lang_module);
 $xtpl->assign('NV_BASE_SITEURL', NV_BASE_SITEURL);
 $xtpl->assign('MODULECONFIG', $configMods);

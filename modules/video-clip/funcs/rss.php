@@ -35,7 +35,7 @@ if ($module_info['rss']) {
             }
         }
         if (empty($homeimgfile)) {
-            $homeimgfile = NV_BASE_SITEURL . "themes/" . $module_info['template'] . "/images/" . $module_file . "/video.png";
+            $homeimgfile = NV_BASE_SITEURL . "themes/" . $module_info['template'] . "/images/" . $module_info['module_theme'] . "/video.png";
         }
 
         $rimages = (!empty($homeimgfile)) ? "<img src=\"" . NV_MY_DOMAIN . $homeimgfile . "\" width=\"100\" border=\"0\" align=\"left\">" : "";

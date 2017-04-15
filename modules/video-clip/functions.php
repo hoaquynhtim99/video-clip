@@ -114,7 +114,7 @@ if (file_exists(NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_data
 $configMods['aspectratioPadding'] = $configMods['aspectratio'] == "16:9" ? "56" : ($configMods['aspectratio'] == "4:3" ? "75" : "42");
 
 // Tieu de, meta tag
-$page_title = $module_info['custom_title'];
+$page_title = $module_info['site_title'];
 $key_words = $module_info['keywords'];
 if (isset($module_info['description'])) {
     $description = $module_info['description'];
@@ -242,7 +242,7 @@ if ($isDetail === true) {
         $canonicalUrl = $base_url_rewrite;
     }
 
-    $ogImage = NV_MY_DOMAIN . NV_BASE_SITEURL . "themes/" . $module_info['template'] . "/images/" . $module_file . "/video.png";
+    $ogImage = NV_MY_DOMAIN . NV_BASE_SITEURL . "themes/" . $module_info['template'] . "/images/" . $module_info['module_theme'] . "/video.png";
     if (!empty($VideoData['img'])) {
         $ogImage = NV_MY_DOMAIN . NV_BASE_SITEURL . $VideoData['img'];
     }
