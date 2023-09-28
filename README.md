@@ -1,6 +1,8 @@
 video-clip
 ==========
 
+> Hiện tại module này đã dừng phát triển. Bạn nên sử dụng module này thay thế https://github.com/nukeviet/module-videoclips
+
 Module Video Clips cho NukeViet, Module đơn giản, hỗ trợ tốt cho SEO.
 
 ----------------
